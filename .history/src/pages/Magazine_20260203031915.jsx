@@ -30,12 +30,10 @@ export default function Magazine() {
           <h1 className={style.conceptTitle}>Design Concept</h1>
           <p className={style.conceptText}>
             This magazine-style brochure shows a G.Adventures tour that starts
-            in Athens and ends in Istanbul.
-            <br />
-            The layout and photos guide readers through the journey in a clear
-            order. Maps, images, and text are used in a simple and balanced way.
-            The design focuses on the travel route and the overall experience
-            without visual clutter.
+            in Athens and ends in Istanbul. The layout and photos guide readers
+            through the journey in a clear order. Maps, images, and text are
+            used in a simple and balanced way. The design focuses on the travel
+            route and the overall experience without visual clutter.
           </p>
           <div className={style.tools}>
             <span className={style.toolsTitle}>Tools</span>
