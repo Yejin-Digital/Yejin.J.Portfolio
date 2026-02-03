@@ -1,0 +1,217 @@
+.page {
+  background: linear-gradient(180deg, #fff 0%, #f3f7fd 26.91%, #88b2ec 100%);
+  min-height: 100vh;
+  font-family: Satoshi, sans-serif;
+  padding: 64px 150px 0 150px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 180px;
+}
+
+.fullWidthImageWrap {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  overflow: hidden;
+}
+
+.fullWidthImageWrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  gap: 48px;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0;
+  flex-wrap: wrap;
+}
+
+/* ========== Label Section (Left) ========== */
+.labelSection {
+  flex: 0 1 680px;
+}
+
+.fruitImageWrap {
+  margin-top: 8px;
+}
+
+.fruitImage {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
+}
+
+/* ========== Info Section (Right) ========== */
+.infoSection {
+  flex: 1 1 320px;
+  min-width: 280px;
+  align-content: center;
+  justify-content: center;
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.conceptTitle {
+  color: #000;
+  font-family: Manrope;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+
+.conceptText {
+  color: #000;
+  font-family: Manrope;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.dieline {
+  color: #000;
+  font-family: Manrope;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 30px;
+}
+
+.dielineItems {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.toolIcons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.toolsTitle {
+  color: #000;
+  font-family: Manrope;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.toolIcon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+@media (max-width: 900px) {
+  .page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 64px 40px 40px;
+    gap: 800px;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .labelSection {
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .infoSection {
+    flex: 1 1 100%;
+    width: 100%;
+    min-width: 100%;
+    padding-top: 0;
+  }
+
+  .conceptTitle {
+    font-size: 28px;
+  }
+
+  .conceptText {
+    font-size: 15px;
+  }
+
+  .dieline {
+    flex-direction: column;
+    gap: 12px;
+    padding: 0;
+    align-items: flex-start;
+  }
+
+  .dielineItems {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .tools {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .fruitImageWrap {
+    margin-top: 0;
+    margin-bottom: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 48px 24px 32px;
+    gap: 80px;
+  }
+
+  .content {
+    gap: 32px;
+  }
+
+  .conceptTitle {
+    font-size: 24px;
+  }
+
+  .conceptText {
+    font-size: 14px;
+  }
+
+  .dieline {
+    font-size: 18px;
+  }
+
+  .toolsTitle {
+    font-size: 18px;
+  }
+}

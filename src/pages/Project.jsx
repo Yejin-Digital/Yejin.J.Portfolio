@@ -2,15 +2,15 @@ import style from '../styles/Project.module.css';
 import ProjectSelection from '../components/ProjectSelection.jsx';
 import { useMemo, useState } from 'react';
 import montroImg from '../assets/montro_image1.jpg';
-import scaffoldImg from '../assets/scaffold_image1.jpg';
+import scaffoldImg from '../assets/scaffold_image1.png';
 import posterImg from '../assets/poster_image1.jpg';
-import canImg from '../assets/can_image1.jpg';
+import canImg from '../assets/can_mockup2.jpg';
 import Footer from '../components/Footer.jsx';
-import magazineImg from '../assets/magazine1.jpg';
+import magazineImg from '../assets/magazine2.jpg';
 
 export default function Project() {
   const [activeFilter, setActiveFilter] = useState('All');
-  const buttons = useMemo(() => ['All', 'UI/UX', 'graphic', 'motion'], []);
+  const buttons = useMemo(() => ['All', 'UI/UX', 'Graphic', 'Motion'], []);
 
   const projects = useMemo(
     () => [
@@ -19,14 +19,14 @@ export default function Project() {
         category: 'Graphic design',
         img: posterImg,
         to: '/poster',
-        keyword: 'graphic',
+        keyword: 'Graphic',
       },
       {
         name: 'StoneVine',
         category: 'Graphic/Packaging',
         img: canImg,
         to: '/packaging',
-        keyword: 'graphic',
+        keyword: 'Graphic',
       },
       {
         name: 'Montro',
@@ -39,7 +39,7 @@ export default function Project() {
         category: 'graphic design',
         img: magazineImg,
         to: '/magazine',
-        keyword: 'graphic',
+        keyword: 'Graphic',
       },
       {
         name: 'Scaffold',
@@ -48,7 +48,7 @@ export default function Project() {
         keyword: 'UI/UX',
       },
     ],
-    [],
+    []
   );
 
   const visibleProjects = useMemo(() => {

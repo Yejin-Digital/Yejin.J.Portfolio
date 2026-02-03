@@ -1,15 +1,30 @@
+import { useState } from 'react';
 import NavigationBar from '../components/NavigationBar.jsx';
 import Footer from '../components/Footer.jsx';
 import style from '../styles/Packaging.module.css';
-import packagingImg from '../assets/packaging1.png';
+import packagingImg from '../assets/packaging1.jpg';
 import Mockup from '../components/Mockup.jsx';
 import canMockup1 from '../assets/can_mockup1.jpg';
 import canMockup2 from '../assets/can_mockup2.jpg';
 import mangoImg from '../assets/mango.png';
+import peachImg from '../assets/peach.png';
+import grapeImg from '../assets/grape.png';
 import photoshopSvg from '../assets/photoshop.svg';
 import illustratorSvg from '../assets/illustrator.svg';
 
 export default function Packaging() {
+  const [selectedFruit, setSelectedFruit] = useState('Mango');
+
+  const fruitImages = {
+    Mango: mangoImg,
+    Peach: peachImg,
+    'Green Grape': grapeImg,
+  };
+
+  const handleFruitClick = (fruit) => {
+    setSelectedFruit(fruit);
+  };
+
   return (
     <div className={style.page}>
       <NavigationBar />
@@ -20,14 +35,35 @@ export default function Packaging() {
         {/* Left: Product Label */}
         <section className={style.labelSection}>
           <div className={style.fruitImageWrap}>
-            <img src={mangoImg} alt="Mango" className={style.fruitImage} />
+            <img
+              src={fruitImages[selectedFruit]}
+              alt={selectedFruit}
+              className={style.fruitImage}
+            />
           </div>
           <div className={style.dieline}>
             <p>Dieline</p>
             <div className={style.dielineItems}>
-              <span>Mango</span>
-              <span>Peach</span>
-              <span>Green Grape</span>
+              <span
+                className={selectedFruit === 'Mango' ? style.selected : ''}
+                onClick={() => handleFruitClick('Mango')}
+              >
+                Mango
+              </span>
+              <span
+                className={selectedFruit === 'Peach' ? style.selected : ''}
+                onClick={() => handleFruitClick('Peach')}
+              >
+                Peach
+              </span>
+              <span
+                className={
+                  selectedFruit === 'Green Grape' ? style.selected : ''
+                }
+                onClick={() => handleFruitClick('Green Grape')}
+              >
+                Green Grape
+              </span>
             </div>
           </div>
         </section>
