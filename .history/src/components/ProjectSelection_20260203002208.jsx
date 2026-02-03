@@ -1,0 +1,30 @@
+import { Link } from 'react-router-dom';
+import style from '../styles/ProjectSelection.module.css';
+
+/**
+ * ProjectSelection(props)
+ * props: { name, category, img, to, keyword }
+ * - name: string
+ * - category: string
+ * - img: imported image or URL string
+ * - to: optional route string to wrap the item with a Link
+ * - keyword: one of 'All' | 'UI/UX' | 'graphic' | 'motion'
+ */
+export default function ProjectSelection({ name, category, img, to, keyword }) {
+  const Container = to ? Link : 'div';
+  const containerProps = to
+    ? { to, className: style.projectframe, 'data-keyword': keyword }
+    : { className: style.projectflame, 'data-keyword': keyword };
+
+  return (
+    <Container {...containerProps}>
+      <div className={style.projectImg}>
+        <img src={img} alt={name} />
+      </div>
+      <div className={style.projectName}>
+        <p>{name}</p>
+        <p>{category}</p>
+      </div>
+    </Container>
+  );
+}

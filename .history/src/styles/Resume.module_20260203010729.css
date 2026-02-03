@@ -1,0 +1,100 @@
+.page {
+  background: linear-gradient(180deg, #fff 0%, #f3f7fd 26.91%, #88b2ec 100%);
+  min-height: 100vh;
+  font-family: Satoshi, sans-serif;
+  padding: 120px 200px 60px 200px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+h1 {
+  font-size: 50px;
+  font-weight: 800;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  flex: 1;
+}
+
+.title {
+  color: var(--Foundation-Blue-Normal, #234485);
+  font-family: Satoshi;
+  font-size: 75px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 99.468%;
+  margin: 0;
+}
+
+.pdfContainer {
+  width: 100%;
+  height: calc(100vh - 300px);
+  min-height: 600px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  background: #f5f5f5;
+}
+
+.pdfContent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.pdfCanvas {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: #234485;
+  font-family: Satoshi, sans-serif;
+  font-size: 18px;
+}
+
+.error {
+  text-align: center;
+  padding: 40px;
+  color: #d32f2f;
+  font-family: Satoshi, sans-serif;
+  font-size: 18px;
+}
+
+@media (max-width: 1024px) {
+  .page {
+    padding: 80px 60px 40px 60px;
+  }
+  .title {
+    font-size: 60px;
+  }
+  .pdfContainer {
+    height: calc(100vh - 250px);
+    min-height: 500px;
+  }
+}
+
+@media (max-width: 720px) {
+  .page {
+    padding: 60px 32px 32px 32px;
+  }
+  .title {
+    font-size: 48px;
+  }
+  .pdfContainer {
+    height: calc(100vh - 200px);
+    min-height: 400px;
+  }
+}
