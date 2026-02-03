@@ -1,0 +1,10 @@
+.navButtons {
+  display: flex;
+  gap: 30px;
+  margin: 20px;
+}
+
+.navButton {
+  background-color: none;
+  border: none;
+}

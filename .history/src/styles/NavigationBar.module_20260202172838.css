@@ -1,0 +1,19 @@
+.logo {
+  width: 90px;
+  height: 66px;
+  flex-shrink: 0;
+}
+
+.navLayout {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  justify-content: space-between;
+  margin: 30px;
+}
+
+.designName {
+  font-weight: 700;
+  color: #234485;
+  font-family: Satoshi;
+}

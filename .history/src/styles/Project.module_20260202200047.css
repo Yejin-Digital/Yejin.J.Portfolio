@@ -1,0 +1,27 @@
+.page {
+  background: linear-gradient(180deg, #fff 0%, #f3f7fd 26.91%, #88b2ec 100%);
+  min-height: 100vh;
+  font-family: satoshi;
+}
+
+h1 {
+  color: var(--Foundation-Blue-Normal, #234485);
+  font-family: Satoshi;
+  font-size: 96px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 99.468%; /* 95.489px */
+  width: 435px;
+}
+
+.button1,
+.button2,
+.button3,
+.button4 {
+  width: 204px;
+  height: 77px;
+  padding: 17px 82px;
+  gap: 10px;
+  border-radius: 8px;
+  border: 2px solid var(--Foundation-Blue-Normal, #234485);
+}

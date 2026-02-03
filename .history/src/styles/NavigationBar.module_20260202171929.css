@@ -1,0 +1,11 @@
+.logo {
+  width: 90px;
+  height: 66px;
+  flex-shrink: 0;
+}
+
+.navigationBar {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}

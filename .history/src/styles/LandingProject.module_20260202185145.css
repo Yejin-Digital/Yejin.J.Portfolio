@@ -1,0 +1,30 @@
+.landingProject {
+  font-family: Satoshi;
+}
+
+.projectLayoutLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-bottom: 40px;
+}
+
+.image1 {
+  width: 608px;
+  height: auto;
+}
+
+.image2 {
+  width: 373px;
+  height: auto;
+}
+
+.projectLeft {
+  color: var(--foundation-blue-normal-active, #1c366a);
+  text-align: right;
+  font-family: Inter;
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 116%; /* 74.24px */
+}

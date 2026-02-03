@@ -1,0 +1,35 @@
+.projectName {
+  color: #000;
+  text-align: right;
+  font-family: Manrope;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.projectflame {
+  height: auto;
+  width: 100%;
+  gap: 5px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.projectImg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.projectImg img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain; /* ensure the entire image is visible (no cropping) */
+  object-position: center;
+}

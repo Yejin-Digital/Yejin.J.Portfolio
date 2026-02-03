@@ -1,0 +1,33 @@
+.footer {
+  width: 100%;
+  background: #88b2ec;
+  padding: 24px 16px;
+  font-family: Satoshi;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.copy {
+  color: #feffe6;
+  font-family: Manrope;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.contact {
+  color: #feffe6;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+}

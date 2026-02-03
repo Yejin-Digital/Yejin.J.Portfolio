@@ -1,0 +1,68 @@
+.landingProject {
+  font-family: Satoshi;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 100px;
+}
+
+.contents {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.projectLayoutLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 40px;
+  align-items: flex-end;
+}
+
+.image1 {
+  width: auto;
+  height: auto;
+}
+
+.image2 {
+  width: auto;
+  height: auto;
+}
+
+.projectLeft {
+  color: var(--foundation-blue-normal-active, #1c366a);
+  text-align: right;
+  font-family: Inter;
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 95%; /* 74.24px */
+}
+
+.projectLayoutRight {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-bottom: 40px;
+  align-items: flex-start;
+}
+
+.image3 {
+  width: auto;
+  height: auto;
+}
+
+.image4 {
+  width: auto;
+  height: auto;
+}
+
+.projectRight {
+  color: var(--foundation-blue-normal-active, #1c366a);
+  font-family: Inter;
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 98.246%; /* 62.878px */
+}

@@ -1,0 +1,55 @@
+.navButtons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  width: auto;
+}
+
+.navButton {
+  position: relative;
+  display: inline-block;     /* ensure width is measured reliably for ::after */
+  background: none;
+  border: none;
+  color: #234485;
+  text-align: center;
+  text-decoration: none;     /* remove browser default underline */
+  font-family: Satoshi;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  cursor: pointer;
+  padding-bottom: 6px; /* space for underline */
+  transition: color 160ms ease;
+}
+
+/* ensure visited links don't show decoration */
+.navButton:link,
+.navButton:visited {
+  text-decoration: none;
+}
+
+/* underline pseudo-element: scales from center to edges */
+.navButton::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  bottom: 0;
+  background: #234485;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 220ms cubic-bezier(.2,.9,.2,1);
+}
+
+.navButton:hover::after,
+.navButton:focus-visible::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navButton::after {
+    transition: none;
+  }
+}

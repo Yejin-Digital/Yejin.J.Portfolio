@@ -1,0 +1,5 @@
+.page {
+  background: linear-gradient(180deg, #fff 0%, #f3f7fd 26.91%, #88b2ec 100%);
+  min-height: 100vh;
+  font-family: satoshi;
+}

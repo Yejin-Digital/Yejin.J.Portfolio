@@ -1,0 +1,10 @@
+.landingProject {
+  font-family: Satoshi;
+}
+
+.projectLayoutLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 40px;
+}

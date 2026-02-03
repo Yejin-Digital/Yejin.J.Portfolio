@@ -1,0 +1,18 @@
+.projectName {
+  color: #000;
+  text-align: right;
+  font-family: Manrope;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.projectflame {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(160px, 1fr)); /* two columns */
+  gap: 10px 10px;
+}
