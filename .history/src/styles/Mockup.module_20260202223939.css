@@ -1,0 +1,11 @@
+.mockup {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+..moreMockup {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}

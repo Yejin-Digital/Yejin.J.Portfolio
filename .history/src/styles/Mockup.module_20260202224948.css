@@ -1,0 +1,39 @@
+.mockup {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.image1 {
+  width: 50%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  flex-shrink: 0;
+  justify-content: flex-start;
+}
+
+.moreMockup {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  width: 50%;
+  flex-shrink: 0;
+}
+
+.image2 {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.moreMockup p {
+  margin: 0;
+  font-family: Satoshi, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #234485;
+}

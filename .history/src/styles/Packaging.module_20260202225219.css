@@ -1,0 +1,22 @@
+.page {
+  background: linear-gradient(180deg, #fff 0%, #f3f7fd 26.91%, #88b2ec 100%);
+  min-height: 100vh;
+  font-family: Satoshi, sans-serif;
+  padding: 64px 200px 0 200px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 1800px;
+}
+
+.fullWidthImageWrap {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  overflow: hidden;
+}
+
+.fullWidthImageWrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+}

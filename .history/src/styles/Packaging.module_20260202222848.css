@@ -1,0 +1,20 @@
+.page {
+  background: linear-gradient(180deg, #fff 0%, #f3f7fd 26.91%, #88b2ec 100%);
+  min-height: 100vh;
+  font-family: Satoshi, sans-serif;
+  padding: 46px 214px 0 214px;
+  box-sizing: border-box;
+}
+
+/* 패딩 영향 없이 뷰포트 너비에 꽉 차게 */
+.fullWidthImageWrap {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  overflow: hidden;
+}
+
+.fullWidthImageWrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
