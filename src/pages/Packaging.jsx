@@ -72,11 +72,11 @@ export default function Packaging() {
         <section className={style.infoSection}>
           <h1 className={style.conceptTitle}>Design Concept</h1>
           <p className={style.conceptText}>
-            StoneVine is 100% organic sparkling fruit juice with three different
-            flavors. Marketing to young children, overall design is. In order to
-            appeal to young customers, the use of round and bubbly fonts and
-            fruit photographs in the center of the designs allow easy
-            identification of the flavors.
+            StoneVine is 100% organic sparkling fruit juice, available in three
+            different flavors. Marketing to young children, the overall design
+            is. To appeal to young customers, the use of round and bubbly fonts,
+            along with fruit photographs at the center of the designs,
+            facilitates easy identification of the flavors.
           </p>
           <div className={style.tools}>
             <span className={style.toolsTitle}>Tools</span>

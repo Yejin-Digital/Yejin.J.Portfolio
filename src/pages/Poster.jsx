@@ -32,13 +32,13 @@ export default function Poster() {
         <section className={style.infoSection}>
           <h1 className={style.conceptTitle}>Design Concept</h1>
           <p className={style.conceptText}>
-            This advertising poster series showcases skateboard sneakers from
-            three distinct brands, capturing the raw, active vibe, and liberated
-            energy of street culture. While maintaining a consistent layout, the
-            design embraces visual diversity through experimental typography.
-            Each brand’s unique identity comes to life with vibrant textures and
-            custom typefaces tailored to the specific aesthetics of each shoe
-            model.
+            This magazine-style brochure showcases a G Adventures tour from
+            Athens to Istanbul. The layout and photos guide readers through the
+            journey, while maps, images, and text remain simple and balanced.
+            The design emphasizes the travel route and experience without
+            unnecessary clutter. The cover uses collage techniques to capture
+            the journey's highlights, inviting readers to experience them at a
+            glance.
           </p>
           <div className={style.tools}>
             <span className={style.toolsTitle}>Tools</span>

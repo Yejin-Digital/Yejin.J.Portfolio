@@ -1,6 +1,6 @@
 import style from '../styles/LandingProject.module.css';
 import image1 from '../assets/poster_image1.jpg';
-import image2 from '../assets/magazine2.jpg';
+import image2 from '../assets/magazine1.jpg';
 import image3 from '../assets/can_mockup2.jpg';
 import image4 from '../assets/montro_image1.jpg';
 import { Link } from 'react-router-dom';

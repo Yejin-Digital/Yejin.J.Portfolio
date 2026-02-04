@@ -7,19 +7,19 @@
 
 .navButton {
   position: relative;
-  display: inline-block;     /* ensure width is measured reliably for ::after */
+  display: inline-block; /* ensure width is measured reliably for ::after */
   background: none;
   border: none;
   color: #234485;
   text-align: center;
-  text-decoration: none;     /* remove browser default underline */
+  text-decoration: none; /* remove browser default underline */
   font-family: Satoshi;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
   cursor: pointer;
-  padding-bottom: 6px; /* space for underline */
+  padding-bottom: 5px; /* space for underline */
   transition: color 160ms ease;
 }
 
@@ -40,7 +40,7 @@
   background: #234485;
   transform: scaleX(0);
   transform-origin: center;
-  transition: transform 220ms cubic-bezier(.2,.9,.2,1);
+  transition: transform 220ms cubic-bezier(0.2, 0.9, 0.2, 1);
 }
 
 .navButton:hover::after,

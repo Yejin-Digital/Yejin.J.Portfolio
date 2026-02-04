@@ -2,7 +2,7 @@ import NavigationBar from '../components/NavigationBar.jsx';
 import Footer from '../components/Footer.jsx';
 import style from '../styles/Magazine.module.css';
 import Mockup from '../components/Mockup.jsx';
-import magazineImg from '../assets/magazine1.jpg';
+import magazineImg from '../assets/magazine2.jpg';
 import magazineMockup1 from '../assets/magazine_mockup1.jpg';
 import magazineMockup2 from '../assets/magazine_mockup3.jpg';
 import magazineMockup3 from '../assets/magazine_mockup2.jpg';

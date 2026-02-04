@@ -6,7 +6,7 @@ import scaffoldImg from '../assets/scaffold_image1.png';
 import posterImg from '../assets/poster_image1.jpg';
 import canImg from '../assets/can_mockup2.jpg';
 import Footer from '../components/Footer.jsx';
-import magazineImg from '../assets/magazine2.jpg';
+import magazineImg from '../assets/magazine1.jpg';
 
 export default function Project() {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -37,7 +37,7 @@ export default function Project() {
       },
       {
         name: 'G.Adventures',
-        category: 'graphic design',
+        category: 'Graphic design',
         img: magazineImg,
         to: '/magazine',
         keyword: 'Graphic',
