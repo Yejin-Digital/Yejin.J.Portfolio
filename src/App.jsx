@@ -18,7 +18,6 @@ function Home() {
         <img src={image} alt="Landing" loading="eager" />
       </div>
       <LandingProject />
-      <Footer />
     </div>
   );
 }
@@ -29,14 +28,17 @@ function App() {
       <div className="app">
         <ScrollToTop />
         <NavigationBar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/projects" element={<Project />} />
-          <Route path="/packaging" element={<Packaging />} />
-          <Route path="/poster" element={<Poster />} />
-          <Route path="/resume" element={<Resume />} />
-          <Route path="/magazine" element={<Magazine />} />
-        </Routes>
+        <main className="app-main">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/projects" element={<Project />} />
+            <Route path="/packaging" element={<Packaging />} />
+            <Route path="/poster" element={<Poster />} />
+            <Route path="/resume" element={<Resume />} />
+            <Route path="/magazine" element={<Magazine />} />
+          </Routes>
+        </main>
+        <Footer />
       </div>
     </BrowserRouter>
   );

@@ -1,0 +1,104 @@
+.projectName {
+  color: #000;
+  font-family: 'Roboto Condensed';
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border-top: 3px solid #000;
+  padding: 12px 10px;
+  text-decoration: none;
+  border-bottom: none;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.contactAnchor {
+  text-decoration: none;
+  border-bottom: none;
+}
+
+.contactAnchor:hover,
+.contactAnchor:focus {
+  text-decoration: none;
+}
+
+.projectFrame {
+  background-color: #fff;
+  border-radius: 15px;
+  border: 3px solid #000;
+  height: auto;
+  width: 100%;
+  filter: drop-shadow(3px 4px 0 #000);
+
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: inherit;
+  gap: 5px;
+}
+
+.projectImgContainer {
+  padding: 12px 12px;
+}
+
+.projectImg {
+  width: 100%;
+  aspect-ratio: 6 / 4;
+  border-radius: 10px;
+  border: 2px solid #000;
+  display: block;
+  overflow: hidden;
+  position: relative;
+}
+
+.projectImg img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover; /* crop to fill the frame */
+  object-position: center;
+  transition: transform 0.3s ease;
+}
+
+.overlay {
+  position: absolute;
+  border-radius: 10px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  border-bottom: none;
+}
+
+.viewText {
+  color: white;
+  font-family: 'Roboto Condensed';
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+
+.projectframe:hover .overlay,
+.projectflame:hover .overlay {
+  opacity: 1;
+  text-decoration: none;
+}
+
+.projectframe:hover .projectImg img,
+.projectflame:hover .projectImg img {
+  transform: scale(1.05);
+  text-decoration: none;
+}

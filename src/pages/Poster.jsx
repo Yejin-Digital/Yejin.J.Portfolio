@@ -1,5 +1,3 @@
-import NavigationBar from '../components/NavigationBar.jsx';
-import Footer from '../components/Footer.jsx';
 import style from '../styles/Poster.module.css';
 import Mockup from '../components/Mockup.jsx';
 import posterImg from '../assets/poster1.jpg';
@@ -14,7 +12,6 @@ import poster3 from '../assets/poster3.jpg';
 export default function Poster() {
   return (
     <div className={style.page}>
-      <NavigationBar />
       <div className={style.fullWidthImageWrap}>
         <img src={posterImg} alt="Poster" />
       </div>
@@ -63,7 +60,6 @@ export default function Poster() {
         name1="poster mockup 1"
         name2="poster mockup 2"
       />
-      <Footer />
     </div>
   );
 }

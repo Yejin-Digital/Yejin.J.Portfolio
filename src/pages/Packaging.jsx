@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import NavigationBar from '../components/NavigationBar.jsx';
-import Footer from '../components/Footer.jsx';
 import style from '../styles/Packaging.module.css';
 import packagingImg from '../assets/packaging1.jpg';
 import Mockup from '../components/Mockup.jsx';
@@ -27,7 +25,6 @@ export default function Packaging() {
 
   return (
     <div className={style.page}>
-      <NavigationBar />
       <div className={style.fullWidthImageWrap}>
         <img src={packagingImg} alt="Packaging" />
       </div>
@@ -100,7 +97,6 @@ export default function Packaging() {
         name1="can mockup 1"
         name2="can mockup 2"
       />
-      <Footer />
     </div>
   );
 }

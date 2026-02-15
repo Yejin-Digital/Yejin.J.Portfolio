@@ -1,0 +1,7 @@
+.navLayoutButtons {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 15px;
+  box-sizing: border-box;
+  padding: 20px 40px;
+}

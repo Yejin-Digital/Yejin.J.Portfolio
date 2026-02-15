@@ -16,6 +16,7 @@ export default function ProjectSelection({
   category,
   img,
   to,
+  icon,
   keyword,
   overlayText = 'View',
 }) {
@@ -26,15 +27,22 @@ export default function ProjectSelection({
 
   return (
     <Container {...containerProps}>
-      <div className={style.projectImg}>
-        <img src={img} alt={name} />
-        <div className={style.overlay}>
-          <span className={style.viewText}>{overlayText}</span>
+      <div className={style.projectFrame}>
+        <div className={style.projectImgContainer}>
+          <div className={style.projectImgWrapper}>
+            <img src={img} alt={name} className={style.projectImg} />
+            <div className={style.overlay}>
+              <span className={style.viewText}>{overlayText}</span>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className={style.projectName}>
-        <p>{name}</p>
-        <p>{category}</p>
+        <div className={style.projectName}>
+          <div className={style.projectNameText}>
+            {icon}
+            {name}
+          </div>
+          <p>{category}</p>
+        </div>
       </div>
     </Container>
   );

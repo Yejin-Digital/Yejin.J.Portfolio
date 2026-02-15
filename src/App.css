@@ -1,9 +1,18 @@
 .app {
-  background: linear-gradient(180deg, #feffe6 0%, #88b2ec 100%);
+  background: var(--Background, #fff9f3);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* 고정 네비 아래 콘텐츠 영역 (padding-top으로 네비 높이 확보) */
+.app-main {
+  flex: 1;
+  padding-top: 64px;
 }
 
 .home-page {
-  padding-top: 64px; /* account for fixed navbar height */
+  padding-top: 0;
 }
 
 .landing-image {

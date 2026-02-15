@@ -1,0 +1,125 @@
+.footer {
+  position: relative; /* allow spanning full viewport */
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw; /* pull to screen left edge */
+  margin-right: -50vw; /* pull to screen right edge */
+  width: 100vw; /* full viewport width, ignoring parent padding */
+  background: none;
+  padding: 24px 16px;
+  font-family: Satoshi;
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 70px;
+}
+
+.copy {
+  color: var(--Foundation-Blue-Darker, #0c182f);
+  font-family: 'Roboto Condensed';
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.contact {
+  color: var(--Foundation-Blue-Darker, #0c182f);
+  font-family: 'Alfa Slab One';
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.contactLink {
+  color: #feffe6;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.contactAnchor {
+  border-bottom: none;
+}
+
+@media (max-width: 900px) {
+  .footer {
+    padding: 10px 16px;
+    width: 100%;
+    left: 0;
+    right: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+  }
+
+  .contact {
+    margin: 40px 30px 0 30px;
+    font-size: 36px;
+    flex-direction: row;
+    gap: 140px;
+    align-items: flex-start;
+  }
+
+  .contactLink {
+    font-size: 20px;
+  }
+
+  .copy {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer {
+    width: 100%;
+    left: 0;
+    right: 0;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 12px 12px;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .contact {
+    margin: 30px 20px 0 20px;
+    font-size: 28px;
+    gap: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .contactLink {
+    font-size: 18px;
+  }
+
+  .copy {
+    font-size: 12px;
+  }
+}

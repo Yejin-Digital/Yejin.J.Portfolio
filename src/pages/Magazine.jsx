@@ -1,5 +1,3 @@
-import NavigationBar from '../components/NavigationBar.jsx';
-import Footer from '../components/Footer.jsx';
 import style from '../styles/Magazine.module.css';
 import Mockup from '../components/Mockup.jsx';
 import magazineImg from '../assets/magazine2.jpg';
@@ -13,7 +11,6 @@ import indesignSvg from '../assets/indesign.svg';
 export default function Magazine() {
   return (
     <div className={style.page}>
-      <NavigationBar />
       <div className={style.fullWidthImageWrap}>
         <img src={magazineImg} alt="Magazine" />
       </div>
@@ -65,7 +62,6 @@ export default function Magazine() {
         name1="magazine mockup 2"
         name2="magazine mockup 3"
       />
-      <Footer />
     </div>
   );
 }
