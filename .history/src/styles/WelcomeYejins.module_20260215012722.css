@@ -1,0 +1,254 @@
+.section {
+  background: var(--Background, #fff9f3);
+  padding: 150px 30px 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 40vh;
+  position: relative;
+}
+
+.lineBlock {
+  position: relative;
+  width: 100%;
+}
+
+.cursorHint {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 10px;
+  margin-bottom: 50px;
+  color: var(--Black, #0f0f0e);
+  font-family: 'Roboto Condensed';
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.cursorArrow {
+  font-size: 18px;
+  transform: scaleY(0.6);
+  display: inline-block;
+  line-height: 1;
+  transform: rotate(-45deg);
+}
+
+.line {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.staticText {
+  font-family: 'Alfa Slab One', serif;
+  font-size: 36px;
+  font-weight: 600;
+  color: #0f0f0e;
+}
+
+.letters {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.letterGroup {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.apostrophe {
+  font-family: 'Alfa Slab One', serif;
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 700;
+  color: #0f0f0e;
+}
+
+.letterWrapper {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 기본/눌린 상태 공통: 70x103 영역, 그림자 + 박스 + 글자 레이어 */
+.letterBoxContainer {
+  position: relative;
+  width: 70px;
+  height: 103px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.letterShadow {
+  position: absolute;
+  left: 0;
+  top: 20px;
+  width: 73px;
+  height: 83px;
+  background: #0f0f0e;
+  border-radius: 15px;
+}
+
+.letterBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 70px;
+  height: 83px;
+  background: #fff;
+  border-radius: 15px;
+  border: 1.5px solid #0f0f0e;
+  transition:
+    background-color 0.25s ease,
+    top 0.2s ease;
+}
+
+.letterBoxContainerActive .letterBox {
+  top: 10px;
+}
+
+.letterBoxActive {
+  background: var(--letter-color);
+}
+
+.letterChar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 70px;
+  height: 83px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Alfa Slab One', serif;
+  color: #0f0f0e;
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 1;
+  transition: top 0.2s ease;
+}
+
+.letterBoxContainerActive .letterChar {
+  top: 20px;
+}
+
+.bubble {
+  position: absolute;
+  top: -180px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /*width: 700px;
+  height: 130px;
+  border-radius: 40px;*/
+  z-index: 3;
+}
+
+.bubble::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 2px solid #0f0f0e;
+  background: var(--bubble-color, #f4f4f4);
+  z-index: 1;
+}
+
+.bubbleText {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #0f0f0e;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.description {
+  margin-top: 80px;
+  text-align: center;
+  color: var(--Black, #0f0f0e);
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  min-height: 2.6em;
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.descriptionVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.description strong {
+  color: var(--description-strong-color, #333);
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 40px 16px 60px;
+    min-height: 35vh;
+  }
+
+  .line {
+    gap: 4px 6px;
+  }
+
+  .letterBoxContainer {
+    width: 56px;
+    height: 82px;
+  }
+
+  .letterShadow {
+    width: 56px;
+    height: 82px;
+  }
+
+  .letterBox {
+    width: 56px;
+    height: 66px;
+  }
+
+  .letterChar {
+    width: 56px;
+    height: 66px;
+    font-size: 56px;
+  }
+
+  .letterBoxContainerActive .letterBox,
+  .letterBoxContainerActive .letterChar {
+    top: 16px;
+  }
+
+  .bubbleText {
+    font-size: 14px;
+  }
+
+  .description {
+    font-size: 18px;
+    padding: 0 12px;
+  }
+}

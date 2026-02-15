@@ -1,0 +1,116 @@
+.page {
+  background: var(--Background, #fff9f3);
+  min-height: 100vh;
+  font-family: satoshi;
+  padding: 120px 200px 150px;
+  box-sizing: border-box;
+}
+
+h1 {
+  color: #000;
+  font-family: 'Alfa Slab One';
+  font-size: 70px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%;
+}
+
+.section1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+/* 2x2 grid for buttons */
+.buttons {
+  display: flex;
+  gap: 10px;
+  height: 50px;
+  align-items: bottom;
+}
+
+.section2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(240px, 1fr)); /* responsive columns */
+  gap: 20px;
+  width: 100%;
+
+  margin-top: 60px;
+}
+
+/* ensure grid items shrink to fit padding */
+.section2 > * {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* responsive: single column on narrow screens */
+@media (max-width: 1000px) {
+  .page {
+    padding: 110px 150px 60px;
+    display: flex;
+    gap: 50px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .section1 {
+    flex-direction: column;
+    gap: 32px;
+    align-items: flex-start;
+  }
+
+  h1 {
+    font-size: 60px;
+    width: auto;
+  }
+
+  .buttons {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .section2 {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 70px 40px 32px;
+    gap: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  h1 {
+    font-size: 48px;
+  }
+
+  .filterButton {
+    font-size: 18px;
+    padding: 14px 0;
+  }
+
+  .section2 {
+    gap: 20px;
+    margin-top: 32px;
+  }
+}
+
+@media (max-width: 420px) {
+  .buttons {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+  .filterButton {
+    font-size: 16px;
+    height: 56px;
+  }
+}

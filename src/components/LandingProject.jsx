@@ -5,40 +5,66 @@ import image3 from '../assets/can_mockup2.jpg';
 import image4 from '../assets/montro_image1.jpg';
 import { Link } from 'react-router-dom';
 import Buttons from './Buttons.jsx';
+import Label from './Label.jsx';
+
+const CARDS = [
+  {
+    id: 'uiux',
+    src: image4,
+    alt: 'Montro UI/UX project',
+    to: '/projects',
+
+    gridClass: style.cellTopLeft,
+  },
+  {
+    id: 'packaging',
+    src: image3,
+    alt: 'Can Packaging design project',
+    to: '/packaging',
+
+    gridClass: style.cellTopRight,
+  },
+  {
+    id: 'graphic',
+    src: image1,
+    alt: 'Poster design project',
+    to: '/poster',
+
+    gridClass: style.cellBottomLeft,
+  },
+  {
+    id: 'editorial',
+    src: image2,
+    alt: 'Magazine design project',
+    to: '/magazine',
+    gridClass: style.cellBottomRight,
+  },
+];
 
 export default function LandingProject() {
   return (
     <div className={style.landingProject}>
       <h3>Featured Project</h3>
-      <div className={style.contents}>
-        <div className={style.projectLayoutLeft}>
-          <Link to="/poster" className={style.imageWrapper}>
-            <img
-              className={style.image1}
-              src={image1}
-              alt="Poster design project"
-            />
-          </Link>
-          <Link to="/magazine" className={style.imageWrapper}>
-            <img
-              className={style.image2}
-              src={image2}
-              alt="Magazine design project"
-            />
-          </Link>
-        </div>
-        <div className={style.projectLayoutRight}>
-          <Link to="/packaging" className={style.imageWrapper}>
-            <img
-              className={style.image3}
-              src={image3}
-              alt="Can Packaging design project"
-            />
-          </Link>
-          <div className={style.imageWrapper}>
-            <img className={style.image4} src={image4} alt="Montro project" />
+      <div className={style.grid}>
+        <Label text="UI/UX Design" color="#FFC567" className={style.label1} />
+        <Label
+          text="Packaging Design"
+          color="#FD5A46"
+          className={style.label2}
+        />
+        <Label text="Graphic Design" color="#FB7DA8" className={style.label3} />
+        {CARDS.map((card) => (
+          <div key={card.id} className={`${style.cardWrap} ${card.gridClass}`}>
+            <span className={`${style.cardLabel} ${card.labelClass}`}>
+              {card.label}
+            </span>
+            <Link to={card.to} className={style.card}>
+              <span className={style.cardImgFrame}>
+                <img src={card.src} alt={card.alt} />
+              </span>
+            </Link>
           </div>
-        </div>
+        ))}
       </div>
       <Link to="/projects" className={style.viewAll}>
         <Buttons
@@ -56,9 +82,9 @@ export default function LandingProject() {
                 d="M20.7188 3L35.3438 12L20.7188 21L20.7188 16.5L7.3125 16.5C6.98927 16.5 6.67927 16.421 6.45071 16.2803C6.22215 16.1397 6.09375 15.9489 6.09375 15.75L6.09375 8.25C6.09375 8.05109 6.22215 7.86032 6.45071 7.71967C6.67927 7.57902 6.98927 7.5 7.3125 7.5L20.7188 7.5L20.7188 3Z"
                 fill="#0F0F0E"
                 stroke="#0F0F0E"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           }

@@ -1,0 +1,36 @@
+.app {
+  background: var(--Background, #fff9f3);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* 고정 네비 아래 콘텐츠 영역 (padding-top으로 네비 높이 확보) */
+.app-main {
+  flex: 1;
+  padding-top: 64px;
+}
+
+.home-page {
+  padding-top: 0;
+}
+
+.landing-image {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100vh; /* full viewport height */
+  overflow: hidden; /* hide cropped parts */
+}
+
+.landing-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* ensure the entire image is visible (no cropping) */
+  object-position: center;
+  display: block; /* remove inline whitespace */
+}
+
+.arrowContainer {
+  align-items: center;
+}
