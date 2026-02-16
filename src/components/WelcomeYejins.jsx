@@ -187,6 +187,13 @@ export default function WelcomeYejins() {
       >
         {activeData?.description}
       </div>
+
+      {/* Decorative Shapes - Left */}
+      <div className={style.decorativeShapesLeft}>
+        <div className={style.dashedSquare}></div>
+        <div className={style.greenSquare}></div>
+        <div className={style.orangeCircle}></div>
+      </div>
     </section>
   );
 }

@@ -41,6 +41,7 @@
   font-weight: 400;
   line-height: normal;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .navButton:hover {
@@ -94,10 +95,12 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
+  text-decoration: none;
 }
 
 .buttonLabel {
   flex-shrink: 0;
+  text-decoration: none;
 }
 
 .buttonIcon {
