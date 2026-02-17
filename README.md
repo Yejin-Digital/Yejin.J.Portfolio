@@ -1,16 +1,30 @@
-# React + Vite
+# Punch-up! proposal
+I plan to highlight animation in my portfolio and incorporate interactive elements.
+My primary goal is to add subtle animations to portfolio text and components. When the screen loads, all elements are initially hidden, and each letter and component appears smoothly in sequence.
+Additionally, I plan to add interactive features to the small figures in my portfolio. These figures will rotate or move in response to user clicks or drags. 
+If time permits, I would also like to add a logo animation to the portfolio's initial screen as a final enhancement.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+## Mockup design and explain concept
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+#### Portfolio mockup design Figma link
+https://www.figma.com/design/DJLcenUruPXuDxjCwtYssK/Portfolio?node-id=339-1226&t=oWfSFzm1ocJyHDKl-1
+#### Concept explanation link
+https://www.figma.com/design/DJLcenUruPXuDxjCwtYssK/Portfolio?node-id=711-225&t=oWfSFzm1ocJyHDKl-1
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
+## Resources I want to use
+#### Contents and Component Animation&Interaction Resources
+https://animejs.com/documentation/easings
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+https://animista.net/play/basic/slide-bck
+
+I plan to implement click, drag, and scroll-down interactions, using simple ease-in and ease-out animations for the text and components from the linked resources.
+
+#### Logo Animation
+https://demos.gsap.com/demo/draw-a-path
+
+My logo design includes a stroke, and I would like to apply the draw path animation from the linked resource.
+
+
