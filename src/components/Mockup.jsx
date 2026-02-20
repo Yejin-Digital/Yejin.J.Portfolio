@@ -29,11 +29,35 @@ export default function Mockup({
         <div className={style.dashedLineTopLeft}></div>
       </div>
 
-      {/* 이미지들 */}
-      <img className={style.image1} src={image1} alt={name1} />
-      <img className={style.image2} src={image2} alt={name2} />
-      <img className={style.image3} src={image3} alt={name3} />
-      <img className={style.image4} src={image4} alt={name4} />
+      {/* 이미지들 - 스크롤 시 로드되도록 지연 로딩 */}
+      <img
+        className={style.image1}
+        src={image1}
+        alt={name1}
+        loading="lazy"
+        decoding="async"
+      />
+      <img
+        className={style.image2}
+        src={image2}
+        alt={name2}
+        loading="lazy"
+        decoding="async"
+      />
+      <img
+        className={style.image3}
+        src={image3}
+        alt={name3}
+        loading="lazy"
+        decoding="async"
+      />
+      <img
+        className={style.image4}
+        src={image4}
+        alt={name4}
+        loading="lazy"
+        decoding="async"
+      />
 
       {/* 아래쪽 오른쪽 그래픽 */}
       <div className={style.graphicBottomRight}>

@@ -159,7 +159,12 @@ export default function LandingProject() {
 
             <Link to={card.to} className={style.card}>
               <span className={style.cardImgFrame}>
-                <img src={card.src} alt={card.alt} />
+                <img
+                  src={card.src}
+                  alt={card.alt}
+                  loading="lazy"
+                  decoding="async"
+                />
               </span>
             </Link>
           </div>

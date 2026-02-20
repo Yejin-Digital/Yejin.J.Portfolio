@@ -48,7 +48,12 @@ export default function Packaging() {
           </div>
         </div>
         <div className={style.imageSection}>
-          <img src={packagingImg} alt="Packaging" />
+          <img
+            src={packagingImg}
+            alt="Packaging"
+            fetchPriority="high"
+            decoding="async"
+          />
 
           {/* 왼쪽 도형들 */}
           <div className={style.graphicLeft}>
@@ -176,6 +181,8 @@ export default function Packaging() {
               alt={selectedFruit}
               className={style.fruitImage}
               onClick={handleImageClick}
+              loading="lazy"
+              decoding="async"
             />
           </div>
           <div className={style.dielineItems}>
@@ -295,6 +302,8 @@ export default function Packaging() {
               src={fruitImages[selectedFruit]}
               alt={selectedFruit}
               className={style.modalImage}
+              loading="lazy"
+              decoding="async"
             />
             <div className={style.modalDielineItems}>
               <span

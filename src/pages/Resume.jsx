@@ -13,11 +13,15 @@ export default function Resume() {
               src={resumeImg1}
               alt="Resume Page 1"
               className={style.resumeImage}
+              fetchPriority="high"
+              decoding="async"
             />
             <img
               src={resumeImg2}
               alt="Resume Page 2"
               className={style.resumeImage}
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </div>

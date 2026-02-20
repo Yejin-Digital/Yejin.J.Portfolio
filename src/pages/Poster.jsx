@@ -54,9 +54,27 @@ export default function Poster() {
           </div>
         </div>
         <div className={style.imageSection}>
-          <img className={style.image1} src={posterImg1} alt="Poster" />
-          <img className={style.image2} src={posterImg2} alt="Poster" />
-          <img className={style.image3} src={posterImg3} alt="Poster" />
+          <img
+            className={style.image1}
+            src={posterImg1}
+            alt="Poster"
+            fetchPriority="high"
+            decoding="async"
+          />
+          <img
+            className={style.image2}
+            src={posterImg2}
+            alt="Poster"
+            loading="lazy"
+            decoding="async"
+          />
+          <img
+            className={style.image3}
+            src={posterImg3}
+            alt="Poster"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
       </div>
       <div className={style.content}>
@@ -139,6 +157,8 @@ export default function Poster() {
                 alt={`Poster ${currentImageIndex + 1}`}
                 className={style.carouselImage}
                 onClick={handleImageClick}
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <button
@@ -393,6 +413,8 @@ export default function Poster() {
                   src={posterImages[currentImageIndex]}
                   alt={`Poster ${currentImageIndex + 1}`}
                   className={style.modalCarouselImage}
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <button

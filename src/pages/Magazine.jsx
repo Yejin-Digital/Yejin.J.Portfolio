@@ -62,7 +62,13 @@ export default function Magazine() {
           Brochure <br /> Design
         </h1>
         <div className={style.imageSection}>
-          <img className={style.image} src={magazineImg1} alt="Magazine" />
+          <img
+            className={style.image}
+            src={magazineImg1}
+            alt="Magazine"
+            fetchPriority="high"
+            decoding="async"
+          />
         </div>
         <div className={style.subTitle}>
           <div className={style.subtitleLogo}>
@@ -151,6 +157,8 @@ export default function Magazine() {
                 alt={`Magazine ${currentImageIndex + 1}`}
                 className={style.carouselImage}
                 onClick={handleImageClick}
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <button
@@ -414,6 +422,8 @@ export default function Magazine() {
                   src={magazineImages[currentImageIndex]}
                   alt={`Magazine ${currentImageIndex + 1}`}
                   className={style.modalCarouselImage}
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <button

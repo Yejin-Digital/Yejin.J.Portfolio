@@ -30,7 +30,13 @@ export default function ProjectSelection({
       <div className={style.projectFrame}>
         <div className={style.projectImgContainer}>
           <div className={style.projectImgWrapper}>
-            <img src={img} alt={name} className={style.projectImg} />
+            <img
+            src={img}
+            alt={name}
+            className={style.projectImg}
+            loading="lazy"
+            decoding="async"
+          />
             <div className={style.overlay}>
               <span className={style.viewText}>{overlayText}</span>
             </div>
