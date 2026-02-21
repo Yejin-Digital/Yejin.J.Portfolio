@@ -1,3 +1,14 @@
+/* 1512px 가로 기준: 화면이 더 넓어지면 콘텐츠는 고정, 좌우 패딩만 늘어남 */
+:root {
+  --viewport-base: 1512px;
+  --content-max-w-80: 1352px;   /* 1512 - 80*2 */
+  --content-max-w-200: 1112px; /* 1512 - 200*2 */
+  --content-max-w-30: 1452px;   /* 1512 - 30*2 */
+  --page-padding-x-80: max(80px, calc((100vw - var(--content-max-w-80)) / 2));
+  --page-padding-x-200: max(200px, calc((100vw - var(--content-max-w-200)) / 2));
+  --page-padding-x-30: max(30px, calc((100vw - var(--content-max-w-30)) / 2));
+}
+
 * {
   margin: 0;
   padding: 0;

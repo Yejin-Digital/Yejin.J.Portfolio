@@ -79,7 +79,7 @@
 
 .imageSection .image3 {
   top: var(--image3-top, 55%);
-  left: var(--image3-left, 76%);
+  left: var(--image3-left, 69%);
   right: var(--image3-right, auto);
   bottom: var(--image3-bottom, auto);
   transform: translate(-50%, -50%) scale(var(--image3-scale, 0.9));

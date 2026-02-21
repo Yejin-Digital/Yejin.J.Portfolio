@@ -37,13 +37,13 @@
   flex-shrink: 0;
 }
 
-/* 화면 넓이에 따라 선 길이 증가, 2370px 이후로는 고정 */
+/* 화면이 넓어지면 선도 같이 늘어나되, vw보다 덜 길어지게 (70vw) */
 .dashedLineTopLeft {
   position: absolute;
   top: 24px;
   left: 60px;
-  width: 100vw;
-  max-width: 1450px;
+  width: 70vw;
+  max-width: 2370px;
   border-top: 2.5px dashed #000;
 }
 
@@ -67,13 +67,12 @@
   flex-direction: row-reverse;
 }
 
-/* 화면 넓이에 따라 선 길이 증가, 2370px 이후로는 고정 */
+/* 화면이 넓어지면 선도 같이 늘어나되, vw보다 덜 길어지게 (70vw) */
 .dashedLineBottomRight {
   position: absolute;
   bottom: 23px;
   right: 60px;
-  width: 100vw;
-  max-width: 1450px;
+  width: 70vw;
   border-top: 2.5px dashed #000;
 }
 

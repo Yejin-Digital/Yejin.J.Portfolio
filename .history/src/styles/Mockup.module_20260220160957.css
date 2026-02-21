@@ -37,13 +37,16 @@
   flex-shrink: 0;
 }
 
-/* 화면 넓이에 따라 선 길이 증가, 2370px 이후로는 고정 */
+/* 화면에 비례해 늘었다 줄었다 하되, 화면을 넘지 않도록 제한 */
 .dashedLineTopLeft {
   position: absolute;
   top: 24px;
   left: 60px;
-  width: 100vw;
-  max-width: 1450px;
+  width: min(
+    81.35vw,
+    calc(100vw - 220px)
+  ); /* 시작점·여백 반영해 뷰포트 안으로 */
+
   border-top: 2.5px dashed #000;
 }
 
@@ -67,13 +70,16 @@
   flex-direction: row-reverse;
 }
 
-/* 화면 넓이에 따라 선 길이 증가, 2370px 이후로는 고정 */
+/* 화면에 비례해 늘었다 줄었다 하되, 화면을 넘지 않도록 제한 */
 .dashedLineBottomRight {
   position: absolute;
   bottom: 23px;
   right: 60px;
-  width: 100vw;
-  max-width: 1450px;
+  width: min(
+    81.35vw,
+    calc(100vw - 220px)
+  ); /* 시작점·여백 반영해 뷰포트 안으로 */
+
   border-top: 2.5px dashed #000;
 }
 

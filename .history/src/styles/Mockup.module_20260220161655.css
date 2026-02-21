@@ -42,8 +42,8 @@
   position: absolute;
   top: 24px;
   left: 60px;
-  width: 100vw;
-  max-width: 1450px;
+  width: 70vw;
+  max-width: 2310px;
   border-top: 2.5px dashed #000;
 }
 
@@ -72,8 +72,8 @@
   position: absolute;
   bottom: 23px;
   right: 60px;
-  width: 100vw;
-  max-width: 1450px;
+  width: 70vw;
+  max-width: 2310px;
   border-top: 2.5px dashed #000;
 }
 

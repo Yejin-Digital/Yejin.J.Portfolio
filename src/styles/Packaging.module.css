@@ -1,7 +1,7 @@
 .page {
   background: var(--Background, #fff9f3);
   min-height: 100vh;
-  padding: 64px 80px 0 80px;
+  padding: 64px var(--page-padding-x-80) 0 var(--page-padding-x-80);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;

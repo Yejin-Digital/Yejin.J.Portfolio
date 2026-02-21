@@ -41,7 +41,7 @@
 
 .imageSection {
   position: relative;
-  width: 1350px;
+  width: 1400px;
   height: 546px;
   overflow: visible;
   margin: 0 auto;
@@ -61,7 +61,7 @@
 
 .imageSection .image1 {
   top: var(--image1-top, 50%);
-  left: var(--image1-left, 17%);
+  left: var(--image1-left, 15%);
   right: var(--image1-right, auto);
   bottom: var(--image1-bottom, auto);
   transform: translate(-50%, -50%) scale(var(--image1-scale, 0.95));
@@ -70,7 +70,7 @@
 
 .imageSection .image2 {
   top: var(--image2-top, 50%);
-  left: var(--image2-left, 50%);
+  left: var(--image2-left, 46%);
   right: var(--image2-right, auto);
   bottom: var(--image2-bottom, auto);
   transform: translate(-50%, -50%) scale(var(--image2-scale, 1.1));
@@ -79,7 +79,7 @@
 
 .imageSection .image3 {
   top: var(--image3-top, 55%);
-  left: var(--image3-left, 76%);
+  left: var(--image3-left, 69%);
   right: var(--image3-right, auto);
   bottom: var(--image3-bottom, auto);
   transform: translate(-50%, -50%) scale(var(--image3-scale, 0.9));
