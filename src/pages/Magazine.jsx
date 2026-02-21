@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import style from '../styles/Magazine.module.css';
+import { preloadImage } from '../utils/preloadImage.js';
 import Mockup from '../components/Mockup.jsx';
 import magazineImg1 from '../assets/magazine_preview.png';
 import magazine1 from '../assets/magazine1.jpg';
@@ -55,6 +56,10 @@ export default function Magazine() {
     setIsImageModalOpen(false);
   };
 
+  useEffect(() => {
+    preloadImage(magazineImg1);
+  }, []);
+
   return (
     <div className={style.page}>
       <div className={style.titleSection}>
@@ -67,6 +72,7 @@ export default function Magazine() {
             src={magazineImg1}
             alt="Magazine"
             fetchPriority="high"
+            loading="eager"
             decoding="async"
           />
         </div>

@@ -6,6 +6,9 @@ import scaffoldImg from '../assets/scaffold_image1.png';
 import posterImg from '../assets/poster_image1.jpg';
 import canImg from '../assets/can_mockup2.jpg';
 import magazineImg from '../assets/magazine_mockup4.jpg';
+import heroPackaging from '../assets/packaging1.png';
+import heroPoster from '../assets/poster_preview1.png';
+import heroMagazine from '../assets/magazine_preview.png';
 import Buttons from '../components/Buttons.jsx';
 
 export default function Project() {
@@ -27,6 +30,7 @@ export default function Project() {
         category: 'Graphic/Packaging',
         img: canImg,
         to: '/packaging',
+        heroImg: heroPackaging,
         keyword: 'Graphic',
         icon: (
           <svg
@@ -49,6 +53,7 @@ export default function Project() {
         category: 'Graphic design',
         img: posterImg,
         to: '/poster',
+        heroImg: heroPoster,
         keyword: 'Graphic',
         icon: (
           <svg
@@ -70,8 +75,9 @@ export default function Project() {
         name: 'Scaffold',
         category: 'UI/UX design',
         img: scaffoldImg,
-        keyword: 'UI/UX',
         to: '/scaffold',
+        heroImg: scaffoldImg,
+        keyword: 'UI/UX',
         icon: (
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -93,6 +99,7 @@ export default function Project() {
         category: 'Graphic design',
         img: magazineImg,
         to: '/magazine',
+        heroImg: heroMagazine,
         keyword: 'Graphic',
         icon: (
           <svg
@@ -175,6 +182,7 @@ export default function Project() {
             category={p.category}
             img={p.img}
             to={p.to}
+            heroImg={p.heroImg}
             keyword={p.keyword}
             overlayText={p.overlayText}
             icon={p.icon}

@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import style from '../styles/Packaging.module.css';
+import { preloadImage } from '../utils/preloadImage.js';
 import packagingImg from '../assets/packaging1.png';
 import Mockup from '../components/Mockup.jsx';
 import canMockup1 from '../assets/can_mockup1.jpg';
@@ -35,6 +36,10 @@ export default function Packaging() {
     setIsImageModalOpen(false);
   };
 
+  useEffect(() => {
+    preloadImage(packagingImg);
+  }, []);
+
   return (
     <div className={style.page}>
       <div className={style.projectPreview}>
@@ -52,6 +57,7 @@ export default function Packaging() {
             src={packagingImg}
             alt="Packaging"
             fetchPriority="high"
+            loading="eager"
             decoding="async"
           />
 

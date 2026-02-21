@@ -3,9 +3,14 @@ import image1 from '../assets/poster_image1.jpg';
 import image2 from '../assets/magazine_mockup4.jpg';
 import image3 from '../assets/can_mockup2.jpg';
 import image4 from '../assets/scaffold_image1.jpg';
+import heroScaffold from '../assets/scaffold_image1.png';
+import heroPackaging from '../assets/packaging1.png';
+import heroPoster from '../assets/poster_preview1.png';
+import heroMagazine from '../assets/magazine_preview.png';
 import { Link } from 'react-router-dom';
 import Buttons from './Buttons.jsx';
 import Label from './Label.jsx';
+import { preloadImage } from '../utils/preloadImage.js';
 
 const CARDS = [
   {
@@ -13,7 +18,7 @@ const CARDS = [
     src: image4,
     alt: 'Scaffold UI/UX project',
     to: '/scaffold',
-
+    heroSrc: heroScaffold,
     gridClass: style.cellTopLeft,
   },
   {
@@ -21,7 +26,7 @@ const CARDS = [
     src: image3,
     alt: 'Can Packaging design project',
     to: '/packaging',
-
+    heroSrc: heroPackaging,
     gridClass: style.cellTopRight,
   },
   {
@@ -29,7 +34,7 @@ const CARDS = [
     src: image1,
     alt: 'Poster design project',
     to: '/poster',
-
+    heroSrc: heroPoster,
     gridClass: style.cellBottomLeft,
   },
   {
@@ -37,6 +42,7 @@ const CARDS = [
     src: image2,
     alt: 'Magazine design project',
     to: '/magazine',
+    heroSrc: heroMagazine,
     gridClass: style.cellBottomRight,
   },
 ];
@@ -157,7 +163,12 @@ export default function LandingProject() {
               </div>
             )}
 
-            <Link to={card.to} className={style.card}>
+            <Link
+              to={card.to}
+              className={style.card}
+              onMouseEnter={() => card.heroSrc && preloadImage(card.heroSrc)}
+              onFocus={() => card.heroSrc && preloadImage(card.heroSrc)}
+            >
               <span className={style.cardImgFrame}>
                 <img
                   src={card.src}

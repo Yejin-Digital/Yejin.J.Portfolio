@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import style from '../styles/Poster.module.css';
+import { preloadImage } from '../utils/preloadImage.js';
 import Mockup from '../components/Mockup.jsx';
 import posterMockup1 from '../assets/poster_mockup.jpg';
 import posterMockup2 from '../assets/poster_mockup2.jpg';
@@ -40,6 +41,10 @@ export default function Poster() {
     setIsImageModalOpen(false);
   };
 
+  useEffect(() => {
+    preloadImage(posterImg1);
+  }, []);
+
   return (
     <div className={style.page}>
       <div className={style.projectPreview}>
@@ -59,6 +64,7 @@ export default function Poster() {
             src={posterImg1}
             alt="Poster"
             fetchPriority="high"
+            loading="eager"
             decoding="async"
           />
           <img
