@@ -25,6 +25,8 @@ import { Link } from 'react-router-dom';
 export default function Magazine() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+  const [carouselImageLoaded, setCarouselImageLoaded] = useState(false);
+  const [modalImageLoaded, setModalImageLoaded] = useState(false);
   const magazineImages = [
     magazine1,
     magazine2,
@@ -58,7 +60,17 @@ export default function Magazine() {
 
   useEffect(() => {
     preloadImage(magazineImg1);
+    magazineImages.forEach(preloadImage);
   }, []);
+
+  useEffect(() => {
+    setCarouselImageLoaded(false);
+    if (isImageModalOpen) setModalImageLoaded(false);
+  }, [currentImageIndex]);
+
+  useEffect(() => {
+    if (isImageModalOpen) setModalImageLoaded(false);
+  }, [isImageModalOpen]);
 
   return (
     <div className={style.page}>
@@ -157,14 +169,16 @@ export default function Magazine() {
                 </defs>
               </svg>
             </button>
-            <div className={style.fruitImageWrap}>
+            <div className={`${style.fruitImageWrap} ${style.imagePlaceholderWrap}`}>
               <img
                 src={magazineImages[currentImageIndex]}
                 alt={`Magazine ${currentImageIndex + 1}`}
                 className={style.carouselImage}
                 onClick={handleImageClick}
-                loading="lazy"
+                loading={currentImageIndex === 0 ? 'eager' : 'lazy'}
                 decoding="async"
+                onLoad={() => setCarouselImageLoaded(true)}
+                style={{ opacity: carouselImageLoaded ? 1 : 0 }}
               />
             </div>
             <button
@@ -423,13 +437,15 @@ export default function Magazine() {
                   </defs>
                 </svg>
               </button>
-              <div className={style.modalFruitImageWrap}>
+              <div className={`${style.modalFruitImageWrap} ${style.imagePlaceholderWrap}`}>
                 <img
                   src={magazineImages[currentImageIndex]}
                   alt={`Magazine ${currentImageIndex + 1}`}
                   className={style.modalCarouselImage}
-                  loading="lazy"
+                  loading="eager"
                   decoding="async"
+                  onLoad={() => setModalImageLoaded(true)}
+                  style={{ opacity: modalImageLoaded ? 1 : 0 }}
                 />
               </div>
               <button

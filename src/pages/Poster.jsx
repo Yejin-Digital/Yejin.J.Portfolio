@@ -19,6 +19,8 @@ import posterImg3 from '../assets/poster_preview3.png';
 export default function Poster() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+  const [carouselImageLoaded, setCarouselImageLoaded] = useState(false);
+  const [modalImageLoaded, setModalImageLoaded] = useState(false);
   const posterImages = [poster1, poster2, poster3];
 
   const handlePrev = () => {
@@ -43,7 +45,17 @@ export default function Poster() {
 
   useEffect(() => {
     preloadImage(posterImg1);
+    posterImages.forEach(preloadImage);
   }, []);
+
+  useEffect(() => {
+    setCarouselImageLoaded(false);
+    if (isImageModalOpen) setModalImageLoaded(false);
+  }, [currentImageIndex]);
+
+  useEffect(() => {
+    if (isImageModalOpen) setModalImageLoaded(false);
+  }, [isImageModalOpen]);
 
   return (
     <div className={style.page}>
@@ -157,14 +169,16 @@ export default function Poster() {
                 </defs>
               </svg>
             </button>
-            <div className={style.fruitImageWrap}>
+            <div className={`${style.fruitImageWrap} ${style.imagePlaceholderWrap}`}>
               <img
                 src={posterImages[currentImageIndex]}
                 alt={`Poster ${currentImageIndex + 1}`}
                 className={style.carouselImage}
                 onClick={handleImageClick}
-                loading="lazy"
+                loading={currentImageIndex === 0 ? 'eager' : 'lazy'}
                 decoding="async"
+                onLoad={() => setCarouselImageLoaded(true)}
+                style={{ opacity: carouselImageLoaded ? 1 : 0 }}
               />
             </div>
             <button
@@ -414,13 +428,15 @@ export default function Poster() {
                   </defs>
                 </svg>
               </button>
-              <div className={style.modalFruitImageWrap}>
+              <div className={`${style.modalFruitImageWrap} ${style.imagePlaceholderWrap}`}>
                 <img
                   src={posterImages[currentImageIndex]}
                   alt={`Poster ${currentImageIndex + 1}`}
                   className={style.modalCarouselImage}
-                  loading="lazy"
+                  loading="eager"
                   decoding="async"
+                  onLoad={() => setModalImageLoaded(true)}
+                  style={{ opacity: modalImageLoaded ? 1 : 0 }}
                 />
               </div>
               <button
