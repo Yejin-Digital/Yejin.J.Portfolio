@@ -169,7 +169,15 @@ export default function Magazine() {
                 </defs>
               </svg>
             </button>
-            <div className={`${style.fruitImageWrap} ${style.imagePlaceholderWrap}`}>
+            <div className={style.fruitImageWrap}>
+              <div
+                className={style.imagePlaceholder}
+                style={{
+                  opacity: carouselImageLoaded ? 0 : 1,
+                  pointerEvents: carouselImageLoaded ? 'none' : 'auto',
+                }}
+                aria-hidden={carouselImageLoaded}
+              />
               <img
                 src={magazineImages[currentImageIndex]}
                 alt={`Magazine ${currentImageIndex + 1}`}
@@ -437,7 +445,15 @@ export default function Magazine() {
                   </defs>
                 </svg>
               </button>
-              <div className={`${style.modalFruitImageWrap} ${style.imagePlaceholderWrap}`}>
+              <div className={style.modalFruitImageWrap}>
+                <div
+                  className={style.imagePlaceholder}
+                  style={{
+                    opacity: modalImageLoaded ? 0 : 1,
+                    pointerEvents: modalImageLoaded ? 'none' : 'auto',
+                  }}
+                  aria-hidden={modalImageLoaded}
+                />
                 <img
                   src={magazineImages[currentImageIndex]}
                   alt={`Magazine ${currentImageIndex + 1}`}
