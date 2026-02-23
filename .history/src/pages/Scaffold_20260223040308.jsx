@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import style from '../styles/Scaffold.module.css';
 import { Link } from 'react-router-dom';
 import Buttons from '../components/Buttons.jsx';
-import FloatingButton from '../components/FloatingButton.jsx';
+import Summary from '../components/Summary.jsx';
 import scaffoldPreview1 from '../assets/scaffold_preview1.png';
 import scaffoldPreview2 from '../assets/scaffold_preview2.png';
 import scaffoldGraph from '../assets/scaffold_graph.png';
@@ -13,9 +13,6 @@ import scaffoldMockup1 from '../assets/scaffold_mockup1.png';
 import scaffoldMockup2 from '../assets/scaffold_mockup2.png';
 import scaffoldMockup3 from '../assets/scaffold_mockup3.png';
 import scaffoldMockup4 from '../assets/scaffold_mockup4.png';
-import brochureImg from '../assets/Brochure.jpg';
-import businessCardImg from '../assets/BusinessCard.jpg';
-import stickerImg from '../assets/Sticker.jpg';
 
 function StarIcon() {
   return (
@@ -39,7 +36,6 @@ function StarIcon() {
 }
 
 const SUMMARY_ITEMS = [
-  'Summary',
   'Background',
   'User Research',
   'User Persona',
@@ -53,83 +49,20 @@ const SUMMARY_ITEMS = [
   'Promotional Materials',
   'Promotional Video',
 ];
-const PROMO_MATERIALS = {
-  Brochure: brochureImg,
-  'Business card': businessCardImg,
-  Stickers: stickerImg,
-};
-
 export default function Scaffold() {
   const summarySectionRef = useRef(null);
-  const [activeSection, setActiveSection] = useState(null);
-  const [selectedPromoMaterial, setSelectedPromoMaterial] =
-    useState('Brochure');
-  const [isPromoModalOpen, setIsPromoModalOpen] = useState(false);
-
-  const sectionRefs = {
-    summary: summarySectionRef,
-    background: useRef(null),
-    'user-research': useRef(null),
-    'user-persona': useRef(null),
-    'user-flow': useRef(null),
-    'style-guide': useRef(null),
-    'lo-fi-wireframe': useRef(null),
-    'hi-fi-wireframe': useRef(null),
-    'final-design': useRef(null),
-    'app-features': useRef(null),
-    challenges: useRef(null),
-    'promotional-materials': useRef(null),
-    'promotional-video': useRef(null),
-  };
-
-  const handlePromoMaterialClick = (material) => {
-    setSelectedPromoMaterial(material);
-  };
-
-  const handlePromoImageClick = () => {
-    setIsPromoModalOpen(true);
-  };
-
-  const handleClosePromoModal = () => {
-    setIsPromoModalOpen(false);
-  };
+  const [isSummaryNavActive, setIsSummaryNavActive] = useState(false);
 
   useEffect(() => {
-    const intersecting = new Map();
+    const section = summarySectionRef.current;
+    if (!section) return;
 
-    const updateActive = () => {
-      const visible = [];
-      intersecting.forEach((isIn, id) => {
-        if (!isIn) return;
-        const ref = sectionRefs[id];
-        if (!ref?.current) return;
-        const top = ref.current.getBoundingClientRect().top;
-        visible.push({ id, top });
-      });
-      if (visible.length === 0) return;
-      visible.sort((a, b) => Math.abs(a.top) - Math.abs(b.top));
-      setActiveSection(visible[0].id);
-    };
-
-    const observerOpts = { threshold: [0, 0.1, 0.3, 0.5, 1], rootMargin: '-15% 0px -55% 0px' };
-    const observers = Object.entries(sectionRefs).map(([id, ref]) => {
-      if (!ref.current) return null;
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          intersecting.set(id, entry.isIntersecting);
-          updateActive();
-        },
-        observerOpts,
-      );
-      observer.observe(ref.current);
-      return { id, observer };
-    });
-
-    return () => {
-      observers.forEach((item) => {
-        if (item) item.observer.disconnect();
-      });
-    };
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsSummaryNavActive(entry.isIntersecting),
+      { threshold: 0, rootMargin: '0px' },
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -171,18 +104,13 @@ export default function Scaffold() {
         </div>
       </div>
       <div className={style.contentBelowTitle}>
-        <FloatingButton
+        <Summary
           items={SUMMARY_ITEMS}
+          title="Summary"
           fixedNav
-          active={true}
-          activeSection={activeSection}
-          onSectionClick={setActiveSection}
+          active={isSummaryNavActive}
         />
-        <section
-          id="summary"
-          ref={sectionRefs.summary}
-          className={style.contentSection}
-        >
+        <section ref={summarySectionRef} className={style.summarySection}>
           <div className={style.projectOverview}>
             <div className={style.projectOverviewContent}>
               <div className={style.demoVideo}></div>
@@ -230,11 +158,7 @@ export default function Scaffold() {
             </div>
           </div>
         </section>
-        <section
-          id="background"
-          ref={sectionRefs.background}
-          className={style.contentSection}
-        >
+        <section id="background" className={style.contentSection}>
           <h2 className={style.backgroundTitle}>Background</h2>
           <div className={style.backgroundCard}>
             <div className={style.backgroundCardTop}>
@@ -284,16 +208,8 @@ export default function Scaffold() {
             </div>
           </div>
         </section>
-        <section
-          id="user-research"
-          ref={sectionRefs['user-research']}
-          className={style.contentSection}
-        />
-        <section
-          id="user-persona"
-          ref={sectionRefs['user-persona']}
-          className={style.contentSection}
-        >
+        <section id="user-research" className={style.contentSection} />
+        <section id="user-persona" className={style.contentSection}>
           <h2 className={style.personaTitle}>User Personas</h2>
           <div className={style.personaCard}>
             <p className={style.personaDescription}>
@@ -318,11 +234,7 @@ export default function Scaffold() {
             </div>
           </div>
         </section>
-        <section
-          id="user-flow"
-          ref={sectionRefs['user-flow']}
-          className={style.contentSection}
-        >
+        <section id="user-flow" className={style.contentSection}>
           <h2 className={style.userFlowTitle}>User Flow</h2>
           <div className={style.userFlowCard}>
             <div className={style.userFlowContent}>
@@ -350,11 +262,7 @@ export default function Scaffold() {
             </div>
           </div>
         </section>
-        <section
-          id="style-guide"
-          ref={sectionRefs['style-guide']}
-          className={style.contentSection}
-        >
+        <section id="style-guide" className={style.contentSection}>
           <h2 className={style.styleGuideTitle}>Style Guide</h2>
           <div className={style.styleGuideCard}>
             <div className={style.styleGuideImage}>
@@ -362,11 +270,7 @@ export default function Scaffold() {
             </div>
           </div>
         </section>
-        <section
-          id="lo-fi-wireframe"
-          ref={sectionRefs['lo-fi-wireframe']}
-          className={style.contentSection}
-        >
+        <section id="lo-fi-wireframe" className={style.contentSection}>
           <h2 className={style.lofiTitle}>Lo-fi Wireframe</h2>
           <div className={style.lofiCard}>
             <div className={style.lofiContent}>
@@ -415,11 +319,7 @@ export default function Scaffold() {
             </div>
           </div>
         </section>
-        <section
-          id="hi-fi-wireframe"
-          ref={sectionRefs['hi-fi-wireframe']}
-          className={style.contentSection}
-        >
+        <section id="hi-fi-wireframe" className={style.contentSection}>
           <h2 className={style.lofiTitle}>Hi-fi Wireframe</h2>
           <div className={style.lofiCard}>
             <div className={style.lofiContent}>
@@ -444,11 +344,7 @@ export default function Scaffold() {
             </div>
           </div>
         </section>
-        <section
-          id="final-design"
-          ref={sectionRefs['final-design']}
-          className={style.contentSection}
-        >
+        <section id="final-design" className={style.contentSection}>
           <h2 className={style.finalDesignTitle}>Final design</h2>
           <div className={style.finalDesignCard}>
             <div className={style.finalDesignMockups}>
@@ -495,11 +391,7 @@ export default function Scaffold() {
             </div>
           </div>
         </section>
-        <section
-          id="app-features"
-          ref={sectionRefs['app-features']}
-          className={style.contentSection}
-        >
+        <section id="app-features" className={style.contentSection}>
           <h2 className={style.appFeaturesTitle}>App Features</h2>
           <div className={style.appFeaturesList}>
             <div className={style.appFeatureBlock}>
@@ -575,11 +467,7 @@ export default function Scaffold() {
             </div>
           </div>
         </section>
-        <section
-          id="challenges"
-          ref={sectionRefs.challenges}
-          className={style.contentSection}
-        >
+        <section id="challenges" className={style.contentSection}>
           <h2 className={style.challengesTitle}>Challenges</h2>
           <div className={style.challengesCard}>
             <div className={style.challengesContent}>
@@ -611,156 +499,8 @@ export default function Scaffold() {
             </div>
           </div>
         </section>
-        <section
-          id="promotional-materials"
-          ref={sectionRefs['promotional-materials']}
-          className={style.contentSection}
-        >
-          <h2 className={style.promoTitle}>Promotional Materials</h2>
-          <div className={style.promoLabelSection}>
-            <div className={style.promoImageWrap}>
-              <img
-                src={PROMO_MATERIALS[selectedPromoMaterial]}
-                alt={selectedPromoMaterial}
-                className={style.promoImage}
-                onClick={handlePromoImageClick}
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <div className={style.promoMaterialItems}>
-              <span
-                className={
-                  selectedPromoMaterial === 'Brochure'
-                    ? style.promoSelectedBrochure
-                    : ''
-                }
-                onClick={() => handlePromoMaterialClick('Brochure')}
-              >
-                Brochure
-              </span>
-              <span
-                className={
-                  selectedPromoMaterial === 'Business card'
-                    ? style.promoSelectedBusinessCard
-                    : ''
-                }
-                onClick={() => handlePromoMaterialClick('Business card')}
-              >
-                Business card
-              </span>
-              <span
-                className={
-                  selectedPromoMaterial === 'Stickers'
-                    ? style.promoSelectedSticker
-                    : ''
-                }
-                onClick={() => handlePromoMaterialClick('Stickers')}
-              >
-                Stickers
-              </span>
-            </div>
-          </div>
-          {isPromoModalOpen && (
-            <div
-              className={style.promoModalOverlay}
-              onClick={handleClosePromoModal}
-            >
-              <div
-                className={style.promoModalContent}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <button
-                  type="button"
-                  className={style.promoModalCloseButton}
-                  onClick={handleClosePromoModal}
-                  aria-label="Close"
-                >
-                  <svg
-                    width="30"
-                    height="30"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M18 6L6 18M6 6L18 18"
-                      stroke="#0F0F0E"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
-                <img
-                  src={PROMO_MATERIALS[selectedPromoMaterial]}
-                  alt={selectedPromoMaterial}
-                  className={style.promoModalImage}
-                />
-                <div className={style.promoModalMaterialItems}>
-                  <span
-                    className={
-                      selectedPromoMaterial === 'Brochure'
-                        ? style.promoSelectedBrochure
-                        : ''
-                    }
-                    onClick={() => handlePromoMaterialClick('Brochure')}
-                  >
-                    Brochure
-                  </span>
-                  <span
-                    className={
-                      selectedPromoMaterial === 'Business card'
-                        ? style.promoSelectedBusinessCard
-                        : ''
-                    }
-                    onClick={() => handlePromoMaterialClick('Business card')}
-                  >
-                    Business card
-                  </span>
-                  <span
-                    className={
-                      selectedPromoMaterial === 'Stickers'
-                        ? style.promoSelectedSticker
-                        : ''
-                    }
-                    onClick={() => handlePromoMaterialClick('Stickers')}
-                  >
-                    Stickers
-                  </span>
-                </div>
-              </div>
-            </div>
-          )}
-        </section>
-        <section
-          id="promotional-video"
-          ref={sectionRefs['promotional-video']}
-          className={style.contentSection}
-        >
-          <h2 className={style.promoVideoTitle}>Promotional Video</h2>
-          <div className={style.promoVideoCard}>
-            <div className={style.promoVideoContent}>
-              <div className={style.promoVideoPlaceholder} aria-hidden="true" />
-              <div className={style.promoVideoText}>
-                <p>
-                  This promotional video shows the emotional story of a woman in
-                  the trades who is stressed about money and has little support.
-                  The story compares a stressful, hopeless situation with a
-                  supportive, hopeful one made possible by Scaffold. At first,
-                  cold blue colors and close-up shots show her stress, unpaid
-                  bills, and being turned down because she is missing
-                  certificates. When she finds Scaffold, the colors become
-                  warmer and the lighting softer, showing her relief and new
-                  chances. Close-ups show her change from feeling tense and
-                  alone to feeling confident and hopeful. Scaffold is shown as
-                  the link between these two worlds, giving her clear help,
-                  support, and a new beginning.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+        <section id="promotional-materials" className={style.contentSection} />
+        <section id="promotional-video" className={style.contentSection} />
         <Link to="/magazine" className={style.nextProjectLink}>
           <div className={style.nextProjectButton}>
             <Buttons

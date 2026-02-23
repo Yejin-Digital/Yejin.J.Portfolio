@@ -1,0 +1,210 @@
+.page {
+  background: var(--Background, #fff9f3);
+  min-height: 100vh;
+  padding: 64px var(--page-padding-x-80) 0 var(--page-padding-x-80);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
+  margin-bottom: 100px;
+}
+
+.title h1 {
+  color: #000;
+  font-family: 'Alfa Slab One';
+  font-size: 70px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%; /* 80px */
+}
+
+.title h3 {
+  color: #000;
+  text-align: right;
+  font-family: 'Alfa Slab One';
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 100%; /* 50px */
+  margin-bottom: 300px;
+}
+
+.demoButtons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 15px;
+  margin-left: 40px;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  align-items: flex-start;
+}
+
+.titleSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.subTitle h2 {
+  color: var(--Foundation-Blue-Normal, #000);
+  text-align: right;
+  font-family: 'Akira Expanded';
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 99.468%; /* 47.745px */
+}
+
+.subTitle p {
+  color: #000;
+  text-align: right;
+  font-family: 'Roboto Condensed';
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 99.468%; /* 23.872px */
+  margin: 0;
+}
+
+.subTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+/*Summary Section*/
+
+.summarySection {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  gap: 65px;
+}
+
+.projectOverviewContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.projectOverviewText {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.demoVideo {
+  width: 1000px;
+  height: auto;
+  background: #848484;
+  border-radius: 15px;
+  aspect-ratio: 4 / 3;
+}
+
+.projectOverview {
+  flex: 1;
+  background: #fff;
+  padding: 20px 20px;
+  border-radius: 20px;
+  border: 2px solid #000;
+  box-shadow: 8px 6px 5px 0 rgba(0, 0, 0, 0.31);
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  font-family: 'Roboto Flex';
+}
+
+.projectTitleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.projectLabel {
+  font-weight: 700;
+  font-size: 24px;
+  color: #000;
+}
+
+.projectName {
+  font-size: 24px;
+  font-weight: 400;
+  color: #000;
+  margin: 0;
+}
+
+.summaryBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.summaryHeading {
+  font-size: 24px;
+  font-weight: 700;
+  color: #000;
+}
+
+.summaryText {
+  font-size: 20px;
+  line-height: 1.5;
+  color: #333;
+  margin: 0;
+}
+
+.projectMeta {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 17px 16px;
+}
+
+.metaItem {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.metaLabel {
+  font-size: 20px;
+  font-weight: 700;
+  color: #000;
+}
+
+.metaValue {
+  font-size: 1rem;
+  color: #333;
+}
+
+.metaDivider {
+  width: 1px;
+  min-height: 42px;
+  background: #000;
+  flex-shrink: 0;
+}
+
+.nextProjectLink:link,
+.nextProjectLink:visited,
+.nextProjectLink:hover,
+.nextProjectLink:active {
+  text-decoration: none !important;
+}
+
+.nextProjectLink * {
+  text-decoration: none !important;
+}
+
+.nextProjectButton {
+  margin: 90px 0 0 0;
+}

@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import style from '../styles/Scaffold.module.css';
 import { Link } from 'react-router-dom';
 import Buttons from '../components/Buttons.jsx';
-import FloatingButton from '../components/FloatingButton.jsx';
+import Summary from '../components/Summary.jsx';
 import scaffoldPreview1 from '../assets/scaffold_preview1.png';
 import scaffoldPreview2 from '../assets/scaffold_preview2.png';
 import scaffoldGraph from '../assets/scaffold_graph.png';
@@ -39,7 +39,6 @@ function StarIcon() {
 }
 
 const SUMMARY_ITEMS = [
-  'Summary',
   'Background',
   'User Research',
   'User Persona',
@@ -95,31 +94,16 @@ export default function Scaffold() {
   };
 
   useEffect(() => {
-    const intersecting = new Map();
-
-    const updateActive = () => {
-      const visible = [];
-      intersecting.forEach((isIn, id) => {
-        if (!isIn) return;
-        const ref = sectionRefs[id];
-        if (!ref?.current) return;
-        const top = ref.current.getBoundingClientRect().top;
-        visible.push({ id, top });
-      });
-      if (visible.length === 0) return;
-      visible.sort((a, b) => Math.abs(a.top) - Math.abs(b.top));
-      setActiveSection(visible[0].id);
-    };
-
-    const observerOpts = { threshold: [0, 0.1, 0.3, 0.5, 1], rootMargin: '-15% 0px -55% 0px' };
     const observers = Object.entries(sectionRefs).map(([id, ref]) => {
       if (!ref.current) return null;
+
       const observer = new IntersectionObserver(
         ([entry]) => {
-          intersecting.set(id, entry.isIntersecting);
-          updateActive();
+          if (entry.isIntersecting) {
+            setActiveSection(id);
+          }
         },
-        observerOpts,
+        { threshold: 0.3, rootMargin: '-20% 0px -60% 0px' },
       );
       observer.observe(ref.current);
       return { id, observer };
@@ -171,18 +155,7 @@ export default function Scaffold() {
         </div>
       </div>
       <div className={style.contentBelowTitle}>
-        <FloatingButton
-          items={SUMMARY_ITEMS}
-          fixedNav
-          active={true}
-          activeSection={activeSection}
-          onSectionClick={setActiveSection}
-        />
-        <section
-          id="summary"
-          ref={sectionRefs.summary}
-          className={style.contentSection}
-        >
+        <section id="summary" ref={summarySectionRef} className={style.summarySection}>
           <div className={style.projectOverview}>
             <div className={style.projectOverviewContent}>
               <div className={style.demoVideo}></div>
@@ -230,6 +203,13 @@ export default function Scaffold() {
             </div>
           </div>
         </section>
+        <Summary
+          items={SUMMARY_ITEMS}
+          title="Summary"
+          fixedNav
+          active={true}
+          activeSection={activeSection}
+        />
         <section
           id="background"
           ref={sectionRefs.background}
@@ -752,10 +732,10 @@ export default function Scaffold() {
                   bills, and being turned down because she is missing
                   certificates. When she finds Scaffold, the colors become
                   warmer and the lighting softer, showing her relief and new
-                  chances. Close-ups show her change from feeling tense and
-                  alone to feeling confident and hopeful. Scaffold is shown as
-                  the link between these two worlds, giving her clear help,
-                  support, and a new beginning.
+                  chances. Close-ups show her change from feeling tense and alone
+                  to feeling confident and hopeful. Scaffold is shown as the link
+                  between these two worlds, giving her clear help, support, and a
+                  new beginning.
                 </p>
               </div>
             </div>

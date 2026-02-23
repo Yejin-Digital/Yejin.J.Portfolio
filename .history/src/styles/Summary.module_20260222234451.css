@@ -1,0 +1,30 @@
+.summary {
+  background: var(--Background, #fff9f3);
+  padding: 1rem 0;
+}
+
+.title {
+  color: #000;
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  margin: 0 0 0.75rem 0;
+  border-bottom: 1px solid #000;
+  padding-bottom: 1rem;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.listItem {
+  color: #6b6b6b;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}

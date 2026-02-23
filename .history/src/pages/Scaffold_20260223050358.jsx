@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import style from '../styles/Scaffold.module.css';
 import { Link } from 'react-router-dom';
 import Buttons from '../components/Buttons.jsx';
-import FloatingButton from '../components/FloatingButton.jsx';
+import Summary from '../components/Summary.jsx';
 import scaffoldPreview1 from '../assets/scaffold_preview1.png';
 import scaffoldPreview2 from '../assets/scaffold_preview2.png';
 import scaffoldGraph from '../assets/scaffold_graph.png';
@@ -95,31 +95,16 @@ export default function Scaffold() {
   };
 
   useEffect(() => {
-    const intersecting = new Map();
-
-    const updateActive = () => {
-      const visible = [];
-      intersecting.forEach((isIn, id) => {
-        if (!isIn) return;
-        const ref = sectionRefs[id];
-        if (!ref?.current) return;
-        const top = ref.current.getBoundingClientRect().top;
-        visible.push({ id, top });
-      });
-      if (visible.length === 0) return;
-      visible.sort((a, b) => Math.abs(a.top) - Math.abs(b.top));
-      setActiveSection(visible[0].id);
-    };
-
-    const observerOpts = { threshold: [0, 0.1, 0.3, 0.5, 1], rootMargin: '-15% 0px -55% 0px' };
     const observers = Object.entries(sectionRefs).map(([id, ref]) => {
       if (!ref.current) return null;
+
       const observer = new IntersectionObserver(
         ([entry]) => {
-          intersecting.set(id, entry.isIntersecting);
-          updateActive();
+          if (entry.isIntersecting) {
+            setActiveSection(id);
+          }
         },
-        observerOpts,
+        { threshold: 0.3, rootMargin: '-20% 0px -60% 0px' },
       );
       observer.observe(ref.current);
       return { id, observer };
@@ -171,17 +156,16 @@ export default function Scaffold() {
         </div>
       </div>
       <div className={style.contentBelowTitle}>
-        <FloatingButton
+        <Summary
           items={SUMMARY_ITEMS}
           fixedNav
           active={true}
           activeSection={activeSection}
-          onSectionClick={setActiveSection}
         />
         <section
           id="summary"
-          ref={sectionRefs.summary}
-          className={style.contentSection}
+          ref={summarySectionRef}
+          className={style.summarySection}
         >
           <div className={style.projectOverview}>
             <div className={style.projectOverviewContent}>

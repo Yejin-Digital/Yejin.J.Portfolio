@@ -698,8 +698,12 @@
 .appFeatureBlock {
   display: flex;
   flex-direction: row;
-  gap: 80px;
+  gap: 40px;
   align-items: center;
+}
+
+.appFeatureBlockReverse {
+  flex-direction: row-reverse;
 }
 
 .appFeaturePhone {
@@ -726,27 +730,23 @@
 .appFeatureCard {
   flex: 1;
   min-width: 0;
-  height: 380px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
+  height: 448px;
   background: #fff;
   border: 2px solid #000;
   border-radius: 20px;
-  padding: 43px 50px;
+  padding: 28px 32px;
   box-shadow: 8px 6px 5px 0 rgba(0, 0, 0, 0.15);
 }
 
 .appFeatureCardTitle {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
   font-family: 'Roboto Flex', sans-serif;
-  font-size: 24px;
+  font-size: 1.25rem;
   font-weight: 700;
   color: #000;
-  margin: 0 0 50px 0;
+  margin: 0 0 16px 0;
 }
 
 .appFeatureCardTitle .backgroundStarIcon {
@@ -761,292 +761,4 @@
   letter-spacing: -0.4px;
   color: #000;
   margin: 0;
-}
-
-/* Challenges section */
-.challengesTitle {
-  font-family: 'Roboto Flex', sans-serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #000;
-  text-align: center;
-  margin: 0 0 45px 0;
-}
-
-.challengesCard {
-  background: #fff;
-  border: 2px solid #000;
-  border-radius: 20px;
-  padding: 32px 32px;
-  box-shadow: 8px 6px 5px 0 rgba(0, 0, 0, 0.15);
-}
-
-.challengesContent {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  align-items: flex-start;
-}
-
-.challengesProblem {
-  font-family: 'Roboto Flex', sans-serif;
-  font-size: 20px;
-  line-height: 132%;
-  font-weight: 400;
-  letter-spacing: -0.4px;
-  color: #000;
-  text-align: left;
-  margin: 0;
-  padding: 0 70px;
-}
-
-.challengesBrowser {
-  width: 47%;
-  aspect-ratio: 4 / 3;
-  background: #bbbbbb;
-  border-radius: 12px;
-}
-
-.challengesBottom {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: row;
-  gap: 30px;
-}
-
-.challengesSolutionContent {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 50px;
-}
-
-.challengesSolutionTitle {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  font-family: 'Roboto Flex', sans-serif;
-  font-size: 24px;
-  font-weight: 700;
-  color: #000;
-}
-
-.challengesSolutionTitle .backgroundStarIcon {
-  flex-shrink: 0;
-}
-
-.challengesSolution {
-  font-family: 'Roboto Flex', sans-serif;
-  font-size: 20px;
-  line-height: 132%;
-  font-weight: 400;
-  letter-spacing: -0.4px;
-  color: #000;
-  margin: 0;
-  text-align: left;
-}
-
-/* Promotional Materials section (labelSection과 동일 기능) */
-.promoTitle {
-  font-family: 'Roboto Flex', sans-serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #000;
-  text-align: center;
-  margin: 0 0 45px 0;
-}
-
-.promoLabelSection {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff;
-  border-radius: 20px;
-  border: 2px solid #000;
-  box-shadow: 5px 4px 5px 0 rgba(0, 0, 0, 0.31);
-  padding: 30px;
-  margin: 0 auto;
-}
-
-.promoImageWrap {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 420px;
-  min-height: 420px;
-}
-
-.promoImage {
-  width: 80%;
-  height: 100%;
-  max-height: 480px;
-  object-fit: contain;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.promoImage:hover {
-  transform: scale(1.02);
-}
-
-.promoMaterialItems {
-  display: flex;
-  flex-direction: row;
-  gap: 30px;
-  justify-content: center;
-  align-items: center;
-  margin-top: 24px;
-  flex-wrap: wrap;
-}
-
-.promoMaterialItems span {
-  display: inline-block;
-  cursor: pointer;
-  font-family: 'Roboto Condensed', sans-serif;
-  font-size: 24px;
-  font-weight: 600;
-  line-height: normal;
-  color: #000;
-  transition: color 0.2s ease;
-}
-
-.promoSelectedBrochure,
-.promoSelectedBusinessCard,
-.promoSelectedSticker {
-  color: #fb7da8 !important;
-}
-
-/* Promotional Materials modal */
-.promoModalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: 40px;
-  box-sizing: border-box;
-}
-
-.promoModalContent {
-  position: relative;
-  width: 1200px;
-  height: 750px;
-  background-color: #fff;
-  border-radius: 20px;
-  border: 2px solid #000;
-  box-shadow: 5px 4px 5px 0 rgba(0, 0, 0, 0.31);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px;
-  box-sizing: border-box;
-  gap: 50px;
-}
-
-.promoModalCloseButton {
-  position: absolute;
-  top: 30px;
-  right: 30px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1001;
-  transition: transform 0.2s ease;
-}
-
-.promoModalCloseButton:hover {
-  transform: scale(1.1);
-}
-
-.promoModalImage {
-  width: 100%;
-  height: 560px;
-  max-width: 100%;
-  object-fit: contain;
-  display: block;
-}
-
-.promoModalMaterialItems {
-  display: flex;
-  flex-direction: row;
-  gap: 30px;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.promoModalMaterialItems span {
-  display: inline-block;
-  cursor: pointer;
-  font-family: 'Roboto Condensed', sans-serif;
-  font-size: 24px;
-  font-weight: 600;
-  line-height: normal;
-  color: #000;
-  transition: color 0.2s ease;
-}
-
-/* Promotional Video section */
-.promoVideoTitle {
-  font-family: 'Roboto Flex', sans-serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #000;
-  text-align: center;
-  margin: 0 0 45px 0;
-}
-
-.promoVideoCard {
-  background: #fff;
-  border: 2px solid #000;
-  border-radius: 20px;
-  padding: 32px 40px;
-  box-shadow: 8px 6px 5px 0 rgba(0, 0, 0, 0.15);
-}
-
-.promoVideoContent {
-  display: flex;
-  flex-direction: row;
-  gap: 40px;
-  align-items: flex-start;
-}
-
-.promoVideoPlaceholder {
-  flex: 1;
-  min-width: 0;
-  aspect-ratio: 16 / 9;
-  background: #000;
-  border-radius: 12px;
-}
-
-.promoVideoText {
-  width: 360px;
-  flex-shrink: 0;
-}
-
-.promoVideoText p {
-  color: #000;
-  font-family: 'Roboto Flex';
-  font-size: 18px;
-  line-height: 132%;
-  font-style: normal;
-  font-weight: 400;
-  letter-spacing: -0.36px;
-  text-align: left;
 }

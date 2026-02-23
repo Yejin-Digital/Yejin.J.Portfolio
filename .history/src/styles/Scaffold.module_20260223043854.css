@@ -1043,10 +1043,9 @@
 .promoVideoText p {
   color: #000;
   font-family: 'Roboto Flex';
-  font-size: 18px;
+  font-size: 20px;
   line-height: 132%;
   font-style: normal;
   font-weight: 400;
-  letter-spacing: -0.36px;
-  text-align: left;
+  line-height: normal;
 }
