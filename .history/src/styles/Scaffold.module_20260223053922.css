@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   gap: 80px;
-  margin-bottom: 120px;
+  margin-bottom: 100px;
 }
 
 /* titleSection 아래 영역 전용 패딩 (변수로 조정 가능) */
@@ -60,7 +60,6 @@
 
 .titleSectionWrapper {
   position: relative;
-  margin-bottom: 150px;
 }
 
 .titleSection {

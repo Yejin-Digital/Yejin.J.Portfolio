@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useLayoutEffect } from 'react';
 import style from '../styles/FloatingButton.module.css';
 
 const NAV_ITEMS = [
@@ -24,6 +24,24 @@ function convertLabelToSectionId(label) {
     .replace(/[^a-z0-9-]/g, '');
 }
 
+function updateConstrainedPosition(fixedWrapperRef, containerRef, bottomBoundaryRef) {
+  if (!containerRef?.current || !fixedWrapperRef?.current) return;
+  const containerRect = containerRef.current.getBoundingClientRect();
+  const buttonRect = fixedWrapperRef.current.getBoundingClientRect();
+  const viewportCenter = window.innerHeight / 2;
+  const halfButtonHeight = buttonRect.height / 2;
+  const preferredTop = viewportCenter - halfButtonHeight;
+  const minTop = containerRect.top;
+  const bottomBound = bottomBoundaryRef?.current?.getBoundingClientRect?.();
+  const maxTop = bottomBound
+    ? bottomBound.bottom - buttonRect.height
+    : containerRect.bottom - buttonRect.height;
+  const clampedTop = Math.min(maxTop, Math.max(minTop, preferredTop));
+  const el = fixedWrapperRef.current;
+  el.style.top = `${clampedTop}px`;
+  el.style.transform = 'none';
+}
+
 export default function FloatingButton({
   items = NAV_ITEMS,
   fixedNav = false,
@@ -31,8 +49,23 @@ export default function FloatingButton({
   activeSection = null,
   getSectionId = convertLabelToSectionId,
   onSectionClick,
+  containerRef = null,
+  bottomBoundaryRef = null,
 }) {
   const fixedWrapperRef = useRef(null);
+
+  useLayoutEffect(() => {
+    if (!fixedNav || !containerRef) return;
+    const run = () =>
+      updateConstrainedPosition(fixedWrapperRef, containerRef, bottomBoundaryRef);
+    run();
+    window.addEventListener('scroll', run, { passive: true });
+    window.addEventListener('resize', run);
+    return () => {
+      window.removeEventListener('scroll', run);
+      window.removeEventListener('resize', run);
+    };
+  }, [fixedNav, containerRef, bottomBoundaryRef]);
 
   const handleItemClick = (sectionId) => {
     onSectionClick?.(sectionId);
