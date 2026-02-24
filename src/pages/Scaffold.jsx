@@ -16,6 +16,7 @@ import scaffoldMockup4 from '../assets/scaffold_mockup4.png';
 import brochureImg from '../assets/Brochure.jpg';
 import businessCardImg from '../assets/BusinessCard.jpg';
 import stickerImg from '../assets/Sticker.jpg';
+import scaffoldPromoVideo from '../assets/scaffold_promotionalVideo.mp4';
 
 function StarIcon() {
   return (
@@ -66,6 +67,16 @@ export default function Scaffold() {
   const [selectedPromoMaterial, setSelectedPromoMaterial] =
     useState('Brochure');
   const [isPromoModalOpen, setIsPromoModalOpen] = useState(false);
+  const [isPersonaModalOpen, setIsPersonaModalOpen] = useState(false);
+  const [currentPersonaImageIndex, setCurrentPersonaImageIndex] = useState(0);
+  const [isPromoVideoPlaying, setIsPromoVideoPlaying] = useState(false);
+  const [isPromoVideoModalOpen, setIsPromoVideoModalOpen] = useState(false);
+  const [isPromoVideoModalPlaying, setIsPromoVideoModalPlaying] = useState(false);
+  const promoVideoRef = useRef(null);
+  const promoVideoModalRef = useRef(null);
+  const promoVideoModalOpenIntentRef = useRef({ currentTime: 0, wasPlaying: false });
+
+  const personaImages = [scaffoldPersona1, scaffoldPersona2];
 
   const sectionRefs = {
     summary: summarySectionRef,
@@ -94,6 +105,91 @@ export default function Scaffold() {
   const handleClosePromoModal = () => {
     setIsPromoModalOpen(false);
   };
+
+  const handlePersonaImageClick = (index) => {
+    setCurrentPersonaImageIndex(index);
+    setIsPersonaModalOpen(true);
+  };
+
+  const handleClosePersonaModal = () => {
+    setIsPersonaModalOpen(false);
+  };
+
+  const handlePersonaPrev = () => {
+    setCurrentPersonaImageIndex((prev) =>
+      prev === 0 ? personaImages.length - 1 : prev - 1,
+    );
+  };
+
+  const handlePersonaNext = () => {
+    setCurrentPersonaImageIndex((prev) =>
+      prev === personaImages.length - 1 ? 0 : prev + 1,
+    );
+  };
+
+  const togglePromoVideo = () => {
+    const video = promoVideoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play();
+      setIsPromoVideoPlaying(true);
+    } else {
+      video.pause();
+      setIsPromoVideoPlaying(false);
+    }
+  };
+
+  const openPromoVideoModal = (e) => {
+    e.stopPropagation();
+    const video = promoVideoRef.current;
+    if (video) {
+      promoVideoModalOpenIntentRef.current = {
+        currentTime: video.currentTime,
+        wasPlaying: !video.paused,
+      };
+      if (promoVideoModalOpenIntentRef.current.wasPlaying) {
+        video.pause();
+        setIsPromoVideoPlaying(false);
+      }
+    } else {
+      promoVideoModalOpenIntentRef.current = { currentTime: 0, wasPlaying: false };
+    }
+    setIsPromoVideoModalOpen(true);
+  };
+
+  const closePromoVideoModal = () => {
+    const modalVideo = promoVideoModalRef.current;
+    if (modalVideo) modalVideo.pause();
+    setIsPromoVideoModalPlaying(false);
+    setIsPromoVideoModalOpen(false);
+  };
+
+  const togglePromoVideoModal = () => {
+    const video = promoVideoModalRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play();
+      setIsPromoVideoModalPlaying(true);
+    } else {
+      video.pause();
+      setIsPromoVideoModalPlaying(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!isPromoVideoModalOpen) return;
+    const modalVideo = promoVideoModalRef.current;
+    const { currentTime, wasPlaying } = promoVideoModalOpenIntentRef.current;
+    if (modalVideo) {
+      modalVideo.currentTime = currentTime;
+      if (wasPlaying) {
+        modalVideo.play();
+        setIsPromoVideoModalPlaying(true);
+      } else {
+        setIsPromoVideoModalPlaying(false);
+      }
+    }
+  }, [isPromoVideoModalOpen]);
 
   useEffect(() => {
     const intersecting = new Map();
@@ -312,11 +408,29 @@ export default function Scaffold() {
                 src={scaffoldPersona1}
                 alt="User persona - Talia Redsky"
                 className={style.personaImage}
+                onClick={() => handlePersonaImageClick(0)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handlePersonaImageClick(0);
+                  }
+                }}
               />
               <img
                 src={scaffoldPersona2}
                 alt="User persona - Mateo Alvarez"
                 className={style.personaImage}
+                onClick={() => handlePersonaImageClick(1)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handlePersonaImageClick(1);
+                  }
+                }}
               />
             </div>
           </div>
@@ -744,7 +858,43 @@ export default function Scaffold() {
           <h2 className={style.promoVideoTitle}>Promotional Video</h2>
           <div className={style.promoVideoCard}>
             <div className={style.promoVideoContent}>
-              <div className={style.promoVideoPlaceholder} aria-hidden="true" />
+              <div className={style.promoVideoWrap}>
+                <video
+                  ref={promoVideoRef}
+                  className={style.promoVideoPlayer}
+                  src={scaffoldPromoVideo}
+                  playsInline
+                  onPlay={() => setIsPromoVideoPlaying(true)}
+                  onPause={() => setIsPromoVideoPlaying(false)}
+                  onClick={togglePromoVideo}
+                />
+                <button
+                  type="button"
+                  className={style.promoVideoPlayPause}
+                  onClick={togglePromoVideo}
+                  aria-label={isPromoVideoPlaying ? 'Pause video' : 'Play video'}
+                >
+                  {isPromoVideoPlaying ? (
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                      <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" fill="currentColor" />
+                    </svg>
+                  ) : (
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                      <path d="M8 5v14l11-7L8 5z" fill="currentColor" />
+                    </svg>
+                  )}
+                </button>
+                <button
+                  type="button"
+                  className={style.promoVideoExpand}
+                  onClick={openPromoVideoModal}
+                  aria-label="Expand video"
+                >
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                    <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+              </div>
               <div className={style.promoVideoText}>
                 <p>
                   This promotional video shows the emotional story of a woman in
@@ -765,6 +915,159 @@ export default function Scaffold() {
           </div>
         </section>
       </div>
+
+      {/* Persona Image Modal - same style as Poster imageModalOverlay */}
+      {isPersonaModalOpen && (
+        <div className={style.imageModalOverlay} onClick={handleClosePersonaModal}>
+          <div
+            className={style.imageModalContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button className={style.closeButton} onClick={handleClosePersonaModal}>
+              <svg
+                width="30"
+                height="30"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M18 6L6 18M6 6L18 18"
+                  stroke="#0F0F0E"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+            <div className={style.modalCarouselContainer}>
+              <button
+                className={style.modalArrowButton}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handlePersonaPrev();
+                }}
+                aria-label="Previous image"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="15"
+                  height="27"
+                  viewBox="0 0 15 27"
+                  fill="none"
+                >
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M9.92567 0.82189C11.0217 -0.273995 12.7984 -0.273931 13.8944 0.82189C14.9904 1.9179 14.9904 3.69459 13.8944 4.79064L6.70302 11.9811L13.8944 19.1725C14.9905 20.2685 14.9905 22.0462 13.8944 23.1422C12.7984 24.2379 11.0216 24.2379 9.92567 23.1422L0.820206 14.0358C0.254513 13.47 -0.017407 12.7233 0.000869941 11.982C-0.0174794 11.2407 0.25441 10.4932 0.820206 9.92736L9.92567 0.82189Z"
+                    fill="#0F0F0E"
+                  />
+                </svg>
+              </button>
+              <div className={style.modalFruitImageWrap}>
+                <img
+                  src={personaImages[currentPersonaImageIndex]}
+                  alt={
+                    currentPersonaImageIndex === 0
+                      ? 'User persona - Talia Redsky'
+                      : 'User persona - Mateo Alvarez'
+                  }
+                  className={style.modalCarouselImage}
+                  loading="eager"
+                  decoding="async"
+                />
+              </div>
+              <button
+                className={style.modalArrowButton}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handlePersonaNext();
+                }}
+                aria-label="Next image"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="15"
+                  height="27"
+                  viewBox="0 0 15 27"
+                  fill="none"
+                >
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M4.79087 0.822035C3.69482 -0.274012 1.91817 -0.274012 0.82212 0.822035C-0.273879 1.91809 -0.273911 3.69475 0.82212 4.79079L8.01353 11.9812L0.82212 19.1726C-0.273914 20.2687 -0.273889 22.0453 0.82212 23.1414C1.91817 24.2374 3.69482 24.2374 4.79087 23.1414L13.8963 14.0359C14.4622 13.47 14.7341 12.7227 14.7157 11.9812C14.7339 11.24 14.462 10.4931 13.8963 9.9275L4.79087 0.822035Z"
+                    fill="#0F0F0E"
+                  />
+                </svg>
+              </button>
+              <div className={style.modalCarouselDots}>
+                {personaImages.map((_, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    className={`${style.modalDot} ${index === currentPersonaImageIndex ? style.modalDotActive : ''}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setCurrentPersonaImageIndex(index);
+                    }}
+                    aria-label={`Go to image ${index + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Promo Video Overlay Modal - 크게 보기, 화면 어디든 클릭 시 재생/멈춤 토글 */}
+      {isPromoVideoModalOpen && (
+        <div className={style.imageModalOverlay} onClick={closePromoVideoModal}>
+          <button
+            type="button"
+            className={style.promoVideoModalCloseButton}
+            onClick={(e) => {
+              e.stopPropagation();
+              closePromoVideoModal();
+            }}
+            aria-label="Close video"
+          >
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18 6L6 18M6 6L18 18" stroke="#0F0F0E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          <div
+            className={`${style.imageModalContent} ${style.promoVideoModalContent}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              togglePromoVideoModal();
+            }}
+          >
+            <div className={style.promoVideoModalWrap}>
+              <video
+                ref={promoVideoModalRef}
+                className={style.promoVideoModalPlayer}
+                src={scaffoldPromoVideo}
+                playsInline
+                onPlay={() => setIsPromoVideoModalPlaying(true)}
+                onPause={() => setIsPromoVideoModalPlaying(false)}
+              />
+              {!isPromoVideoModalPlaying && (
+                <div
+                  className={style.promoVideoModalPlayPause}
+                  aria-hidden
+                  role="img"
+                  aria-label="일시정지됨"
+                >
+                  <svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 5v14l11-7L8 5z" fill="currentColor" />
+                  </svg>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
       <Link to="/magazine" className={style.nextProjectLink}>
         <div className={style.nextProjectButton}>
           <Buttons

@@ -1,0 +1,1052 @@
+.page {
+  background: var(--Background, #fff9f3);
+  min-height: 100vh;
+  padding: 70px var(--page-padding-x-80) 0 var(--page-padding-x-80);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
+  margin-bottom: 120px;
+}
+
+/* titleSection 아래 영역 전용 패딩 (변수로 조정 가능) */
+.contentBelowTitle {
+  --content-padding-left: 280px;
+  padding-top: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  padding-left: var(--content-padding-left);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 220px;
+}
+
+.title h1 {
+  color: #000;
+  font-family: 'Alfa Slab One';
+  font-size: 70px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%; /* 80px */
+}
+
+.title h3 {
+  color: #000;
+  text-align: right;
+  font-family: 'Alfa Slab One';
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 100%; /* 50px */
+  margin-bottom: 350px;
+}
+
+.demoButtons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 15px;
+  margin-left: 40px;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  align-items: flex-start;
+}
+
+.titleSectionWrapper {
+  position: relative;
+  margin-bottom: 150px;
+}
+
+.titleSection {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/* 레이아웃 영향 없이 titleSection 위에 겹치는 프리뷰 이미지 */
+.titleSectionMockups {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 90vw;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+.titleSectionMockups .mockupImg1,
+.titleSectionMockups .mockupImg2 {
+  position: absolute;
+  height: auto;
+  width: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+.titleSectionMockups .mockupImg1 {
+  left: 54%;
+  top: 59%;
+  max-height: auto;
+  max-width: 50vw;
+  transform: translate(calc(-50% - 8%), -50%);
+  z-index: 2;
+}
+
+.titleSectionMockups .mockupImg2 {
+  left: 87%;
+  top: 63%;
+  max-height: auto;
+  max-width: 16vw;
+  transform: translate(calc(-50% + 8%), -50%);
+  z-index: 1;
+}
+
+.subTitle h2 {
+  color: var(--Foundation-Blue-Normal, #000);
+  text-align: right;
+  font-family: 'Akira Expanded';
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 99.468%; /* 47.745px */
+}
+
+.subTitle p {
+  color: #000;
+  text-align: right;
+  font-family: 'Roboto Condensed';
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 99.468%; /* 23.872px */
+  margin: 0;
+}
+
+.subTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+/*Summary Section*/
+/* Summary는 줄바꿈 없이 자연 너비 유지, projectOverview는 남은 공간만 사용 */
+
+.summarySection {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 65px;
+  width: 100%;
+}
+
+.summarySection > *:first-child {
+  flex-shrink: 0;
+}
+
+.projectOverviewContent {
+  min-width: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+}
+
+.projectOverviewText {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 55px;
+}
+
+.demoVideo {
+  min-width: 0;
+  width: 100%;
+  max-width: 550px;
+  height: auto;
+  background: #848484;
+  border-radius: 15px;
+  aspect-ratio: 6 / 4;
+  flex-shrink: 0;
+}
+
+.projectOverview {
+  flex: 1;
+  min-width: 0;
+  background: #fff;
+  padding: 20px 20px;
+  border-radius: 20px;
+  border: 2px solid #000;
+  box-shadow: 8px 6px 5px 0 rgba(0, 0, 0, 0.31);
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  font-family: 'Roboto Flex';
+}
+
+.projectTitleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.projectLabel {
+  font-weight: 700;
+  font-size: 22px;
+  color: #000;
+}
+
+.projectName {
+  font-size: 20px;
+  font-weight: 400;
+  color: #000;
+  margin: 0;
+}
+
+.summaryBlock {
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.summaryHeading {
+  font-size: 22px;
+  font-weight: 700;
+  color: #000;
+}
+
+.summaryText {
+  font-size: 18px;
+  line-height: 1.5;
+  color: #333;
+  margin: 0;
+}
+
+.projectMeta {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px 30px;
+}
+
+.metaItem {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.metaLabel {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+}
+
+.metaValue {
+  font-size: 1rem;
+  color: #333;
+}
+
+.metaDivider {
+  width: 1px;
+  min-height: 50px;
+  background: #000;
+  flex-shrink: 0;
+}
+
+.nextProjectLink:link,
+.nextProjectLink:visited,
+.nextProjectLink:hover,
+.nextProjectLink:active {
+  text-decoration: none !important;
+}
+
+.nextProjectLink * {
+  text-decoration: none !important;
+}
+
+.nextProjectButton {
+  margin: 90px 0 0 0;
+}
+
+.contentSection {
+  min-height: 1px;
+  scroll-margin-top: 24px;
+}
+
+/* Background section */
+.backgroundTitle {
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #000;
+  text-align: center;
+  margin: 0 0 45px 0;
+}
+
+.backgroundCard {
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 20px;
+  padding: 32px 40px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  box-shadow: 8px 6px 5px 0 rgba(0, 0, 0, 0.31);
+}
+
+.backgroundCardTop {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 48px;
+}
+
+.backgroundCardText {
+  flex: 1;
+  min-width: 0;
+}
+
+.backgroundCardText p {
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #000;
+  margin: 0 0 16px 0;
+}
+
+.backgroundCardText p:last-child {
+  margin-bottom: 0;
+}
+
+.backgroundChartBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.backgroundGraphImg {
+  width: auto;
+  height: auto;
+  max-width: 320px;
+  max-height: 280px;
+  object-fit: contain;
+}
+
+.backgroundCardBottom {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 32px;
+}
+
+.backgroundBlock {
+  flex: 1;
+
+  min-width: 0;
+}
+
+.backgroundBlockTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #000;
+  margin: 0 0 35px 0;
+}
+
+.backgroundStarIcon {
+  flex-shrink: 0;
+}
+
+.backgroundBlockText {
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 600;
+  color: #000;
+  margin: 0;
+  text-align: center;
+}
+
+.backgroundDivider {
+  width: 2px;
+  min-height: 90px;
+  background: #000;
+  flex-shrink: 0;
+}
+
+/* User Personas section - 이미지로만 표시 */
+.personaTitle {
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #000;
+  text-align: center;
+  margin: 0 0 45px 0;
+}
+
+.personaCard {
+  flex: 1;
+  min-width: 0;
+  background: #fff;
+  padding: 32px 40px 40px;
+  border-radius: 20px;
+  border: 2px solid #000;
+  box-shadow: 8px 6px 5px 0 rgba(0, 0, 0, 0.31);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.personaDescription {
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: #000;
+  text-align: left;
+  line-height: 132%;
+  padding: 0 70px;
+  margin: 0;
+}
+.personaImages {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.personaImage {
+  width: 400px;
+  height: 520px;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 10px;
+  border: 2px solid #000;
+  display: block;
+  flex-shrink: 0;
+  box-shadow: 3px 2px 0 0 rgba(0, 0, 0);
+}
+
+/* User Flow section */
+.userFlowTitle {
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #000;
+  text-align: center;
+  margin: 0 0 45px 0;
+}
+
+.userFlowCard {
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 20px;
+  padding: 32px 40px;
+  box-shadow: 8px 6px 5px 0 rgba(0, 0, 0, 0.31);
+}
+
+.userFlowContent {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  align-items: center;
+}
+
+.userFlowFigma {
+  width: 70%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  background: #bbbbbb;
+  border-radius: 15px;
+}
+
+.userFlowDecisions {
+  width: 320px;
+  flex-shrink: 0;
+}
+
+.userFlowDecisionsTitle {
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #000;
+  margin: 0 0 25px 0;
+}
+
+.userFlowDecisionsList {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 16px;
+  line-height: 132%; /* 21.12px */
+  color: #000;
+}
+
+.userFlowDecisionsList li {
+  margin-bottom: 22px;
+}
+
+.userFlowDecisionsList li:last-child {
+  margin-bottom: 0;
+}
+
+/* Style Guide section */
+.styleGuideTitle {
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #000;
+  text-align: center;
+  margin: 0 0 45px 0;
+}
+
+.styleGuideCard {
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 20px;
+  padding: 50px 65px;
+  box-shadow: 8px 6px 5px 0 rgba(0, 0, 0, 0.31);
+}
+
+.styleGuideImage {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.styleGuideImage img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+.styleGuideContent {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
+
+/* Lo-fi Wireframe section */
+.lofiTitle {
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #000;
+  text-align: center;
+  margin: 0 0 45px 0;
+}
+
+.lofiCard {
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 20px;
+  padding: 30px 30px;
+  box-shadow: 8px 6px 5px 0 rgba(0, 0, 0, 0.31);
+}
+
+.lofiContent {
+  display: flex;
+  flex-direction: row;
+  gap: 35px;
+  align-items: center;
+}
+
+.lofiPlaceholder {
+  width: 50%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  background: #bbbbbb;
+  border-radius: 15px;
+  flex-shrink: 0;
+}
+
+.lofiText {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.lofiIntro {
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #000;
+  margin: 0;
+}
+
+.lofiBlock {
+  margin: 0;
+}
+
+.lofiBlockTitle {
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+  margin: 0 0 4px 0;
+}
+
+.lofiBlock p {
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #000;
+  margin: 0;
+}
+
+/* Final design section */
+.finalDesignTitle {
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #000;
+  text-align: center;
+  margin: 0 0 45px 0;
+}
+
+.finalDesignMockups {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  justify-content: center;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.finalDesignMockupItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  flex: 1;
+  min-width: 0;
+  max-width: 240px;
+}
+
+.finalDesignMockupImg {
+  width: 100%;
+  height: auto;
+  max-height: 480px;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 45px;
+  display: block;
+}
+
+.finalDesignMockupLabel {
+  display: inline-block;
+  padding: 11px 12px;
+  background: #fb7da8;
+  color: #000;
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+  border-radius: 10px;
+  border: 1.5px solid #000;
+  box-shadow: 2px 3px 0 0 #030303;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* App Features section */
+.appFeaturesTitle {
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #000;
+  text-align: center;
+  margin: 0 0 45px 0;
+}
+
+.appFeaturesList {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.appFeatureBlock {
+  display: flex;
+  flex-direction: row;
+  gap: 80px;
+  align-items: center;
+}
+
+.appFeaturePhone {
+  flex-shrink: 0;
+  width: 240px;
+  aspect-ratio: 9 / 19;
+  background: #1a1a1a;
+  border-radius: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.appFeaturePhone span {
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  text-align: center;
+}
+
+.appFeatureCard {
+  flex: 1;
+  min-width: 0;
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 20px;
+  padding: 43px 50px;
+  box-shadow: 8px 6px 5px 0 rgba(0, 0, 0, 0.15);
+}
+
+.appFeatureCardTitle {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #000;
+  margin: 0 0 40px 0;
+}
+
+.appFeatureCardTitle .backgroundStarIcon {
+  flex-shrink: 0;
+}
+
+.appFeatureCardText {
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color: #000;
+  margin: 0;
+}
+
+/* Challenges section */
+.challengesTitle {
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #000;
+  text-align: center;
+  margin: 0 0 45px 0;
+}
+
+.challengesCard {
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 20px;
+  padding: 32px 32px;
+  box-shadow: 8px 6px 5px 0 rgba(0, 0, 0, 0.15);
+}
+
+.challengesContent {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.challengesProblem {
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color: #000;
+  text-align: left;
+  margin: 0;
+  padding: 0 70px;
+}
+
+.challengesBrowser {
+  width: 47%;
+  aspect-ratio: 16 / 9;
+  background: #bbbbbb;
+  border-radius: 12px;
+}
+
+.challengesBottom {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.challengesSolutionContent {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 40px;
+}
+
+.challengesSolutionTitle {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #000;
+}
+
+.challengesSolutionTitle .backgroundStarIcon {
+  flex-shrink: 0;
+}
+
+.challengesSolution {
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color: #000;
+  margin: 0;
+  text-align: left;
+}
+
+/* Promotional Materials section (labelSection과 동일 기능) */
+.promoTitle {
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #000;
+  text-align: center;
+  margin: 0 0 45px 0;
+}
+
+.promoLabelSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 20px;
+  border: 2px solid #000;
+  box-shadow: 5px 4px 5px 0 rgba(0, 0, 0, 0.31);
+  padding: 30px;
+  margin: 0 auto;
+}
+
+.promoImageWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 420px;
+  min-height: 420px;
+}
+
+.promoImage {
+  width: 80%;
+  height: 100%;
+  max-height: 480px;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.promoImage:hover {
+  transform: scale(1.02);
+}
+
+.promoMaterialItems {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.promoMaterialItems span {
+  display: inline-block;
+  cursor: pointer;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: normal;
+  color: #000;
+  transition: color 0.2s ease;
+}
+
+.promoSelectedBrochure,
+.promoSelectedBusinessCard,
+.promoSelectedSticker {
+  color: #fb7da8 !important;
+}
+
+/* Promotional Materials modal */
+.promoModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+.promoModalContent {
+  position: relative;
+  width: 1200px;
+  height: 750px;
+  background-color: #fff;
+  border-radius: 20px;
+  border: 2px solid #000;
+  box-shadow: 5px 4px 5px 0 rgba(0, 0, 0, 0.31);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  box-sizing: border-box;
+  gap: 50px;
+}
+
+.promoModalCloseButton {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  transition: transform 0.2s ease;
+}
+
+.promoModalCloseButton:hover {
+  transform: scale(1.1);
+}
+
+.promoModalImage {
+  width: 100%;
+  height: 560px;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.promoModalMaterialItems {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.promoModalMaterialItems span {
+  display: inline-block;
+  cursor: pointer;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: normal;
+  color: #000;
+  transition: color 0.2s ease;
+}
+
+/* Promotional Video section */
+.promoVideoTitle {
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #000;
+  text-align: center;
+  margin: 0 0 45px 0;
+}
+
+.promoVideoCard {
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 20px;
+  padding: 32px 40px;
+  box-shadow: 8px 6px 5px 0 rgba(0, 0, 0, 0.15);
+}
+
+.promoVideoContent {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.promoVideoPlaceholder {
+  flex: 1;
+  min-width: 0;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 12px;
+}
+
+.promoVideoText {
+  width: 360px;
+  flex-shrink: 0;
+}
+
+.promoVideoText p {
+  color: #000;
+  font-family: 'Roboto Flex';
+  font-size: 1rem;
+  line-height: 1.5;
+  font-style: normal;
+  font-weight: 400;
+
+  text-align: left;
+}
