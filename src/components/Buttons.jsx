@@ -5,6 +5,7 @@ const VARIANTS = ['default', 'home', 'icon', 'round', 'category'];
 export default function NavigationButton({
   label,
   onClick,
+  href,
   variant = 'default',
   icon,
   active = false,
@@ -33,16 +34,30 @@ export default function NavigationButton({
     label
   );
 
+  const className = `${style.navButton} ${variantClass} ${activeClass}`.trim();
+
   return (
     <div className={style.navButtons}>
-      <button
-        className={`${style.navButton} ${variantClass} ${activeClass}`.trim()}
-        onClick={onClick}
-        aria-label={label}
-        aria-pressed={active || undefined}
-      >
-        {content}
-      </button>
+      {href ? (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={className}
+          aria-label={label}
+        >
+          {content}
+        </a>
+      ) : (
+        <button
+          className={className}
+          onClick={onClick}
+          aria-label={label}
+          aria-pressed={active || undefined}
+        >
+          {content}
+        </button>
+      )}
     </div>
   );
 }

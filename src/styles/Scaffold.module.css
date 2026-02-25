@@ -48,7 +48,7 @@
   justify-content: center;
   align-items: flex-start;
   gap: 15px;
-  margin-left: 40px;
+  margin-left: 30px;
 }
 
 .title {
@@ -113,6 +113,64 @@
   max-width: 16vw;
   transform: translate(calc(-50% + 8%), -50%);
   z-index: 1;
+}
+
+/* scaffold_icon1, scaffold_icon2 & shapes: positioned relative to mockupImg1 (mockupImg1 ≈ left 54%, top 59%) */
+.titleSectionMockups .scaffoldIcon1 {
+  position: absolute;
+  left: 32%;
+  top: 55%;
+  transform: translate(-50%, -50%);
+  width: clamp(60px, 8vw, 100px);
+  height: auto;
+  object-fit: contain;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.titleSectionMockups .scaffoldIcon2 {
+  position: absolute;
+  left: 68%;
+  top: 78%;
+  transform: translate(-50%, -50%);
+  width: clamp(50px, 6vw, 85px);
+  height: auto;
+  object-fit: contain;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.titleSectionMockups .sparkleStar1 {
+  position: absolute;
+  left: 49%;
+  top: 17%;
+  transform: translate(-50%, -50%);
+  width: 39px;
+  height: 39px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.titleSectionMockups .sparkleStar2 {
+  position: absolute;
+  left: 47%;
+  top: 20%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 32px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.titleSectionMockups .sparkleStar3 {
+  position: absolute;
+  left: 65%;
+  top: 88%;
+  transform: translate(-50%, -50%);
+  width: 39px;
+  height: 39px;
+  z-index: 3;
+  pointer-events: none;
 }
 
 .subTitle h2 {
@@ -690,28 +748,115 @@
   background: #fff;
   border: 2px solid #000;
   border-radius: 20px;
-  padding: 32px 40px;
+  padding: 30px 30px;
   box-shadow: 8px 6px 5px 0 rgba(0, 0, 0, 0.31);
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .userFlowContent {
   display: flex;
   flex-direction: row;
-  gap: 40px;
+  gap: 20px;
   align-items: center;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .userFlowFigma {
-  width: 70%;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 70%;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.userFlowFigmaImage {
+  width: 100%;
   height: auto;
-  aspect-ratio: 16 / 9;
-  background: #bbbbbb;
-  border-radius: 15px;
+  display: block;
+  object-fit: contain;
+}
+
+.userFlowModalImageWrap {
+  padding-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  max-height: calc(90vh - 140px);
+  user-select: none;
+}
+
+.userFlowModalImageInner {
+  transform-origin: center center;
+  display: inline-flex;
+  will-change: transform;
+}
+
+.userFlowModalImage {
+  max-width: 100%;
+  max-height: calc(90vh - 140px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+}
+
+.userFlowZoomControls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 0 0;
+  margin-top: 8px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.userFlowZoomBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #000;
+  background: #fff;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.userFlowZoomBtn:hover:not(:disabled) {
+  background: #f0f0f0;
+  transform: scale(1.05);
+}
+
+.userFlowZoomBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.userFlowZoomLabel {
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+  min-width: 44px;
+  text-align: center;
 }
 
 .userFlowDecisions {
+  flex: 0 1 320px;
+  min-width: 0;
   width: 320px;
-  flex-shrink: 0;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .userFlowDecisionsTitle {
@@ -732,7 +877,7 @@
 }
 
 .userFlowDecisionsList li {
-  margin-bottom: 22px;
+  margin-bottom: 15px;
 }
 
 .userFlowDecisionsList li:last-child {
@@ -1026,10 +1171,92 @@
 }
 
 .challengesBrowser {
-  width: 47%;
+  position: relative;
+  width: 50%;
   aspect-ratio: 16 / 9;
-  background: #bbbbbb;
-  border-radius: 12px;
+  border-radius: 15px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.challengesBrowserVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  cursor: pointer;
+  border-radius: inherit;
+}
+
+.challengesBrowserPlayPause {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #000;
+  box-shadow: 2px 2px 0 0 rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #000;
+  opacity: 0;
+  transition:
+    opacity 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease;
+  z-index: 2;
+}
+
+.challengesBrowser:hover .challengesBrowserPlayPause {
+  opacity: 0.5;
+}
+
+.challengesBrowserPlayPause:hover {
+  background: #fff;
+  transform: translate(-50%, -50%) scale(1.08);
+  opacity: 0.5;
+}
+
+.challengesBrowserExpand {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #000;
+  box-shadow: 2px 2px 0 0 rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #000;
+  opacity: 0;
+  transition:
+    opacity 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease;
+  z-index: 2;
+}
+
+.challengesBrowser:hover .challengesBrowserExpand {
+  opacity: 0.5;
+}
+
+.challengesBrowserExpand:hover {
+  background: #fff;
+  transform: scale(1.08);
+  opacity: 0.5;
 }
 
 .challengesBottom {
@@ -1123,7 +1350,7 @@
 .promoMaterialItems {
   display: flex;
   flex-direction: row;
-  gap: 30px;
+  gap: 45px;
   justify-content: center;
   align-items: center;
   margin-top: 24px;
@@ -1134,7 +1361,7 @@
   display: inline-block;
   cursor: pointer;
   font-family: 'Roboto Condensed', sans-serif;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 600;
   line-height: normal;
   color: #000;
@@ -1144,7 +1371,7 @@
 .promoSelectedBrochure,
 .promoSelectedBusinessCard,
 .promoSelectedSticker {
-  color: #fb7da8 !important;
+  color: #058cd7 !important;
 }
 
 /* Promotional Materials modal */
@@ -1204,12 +1431,13 @@
   max-width: 100%;
   object-fit: contain;
   display: block;
+  border-radius: 15px;
 }
 
 .promoModalMaterialItems {
   display: flex;
   flex-direction: row;
-  gap: 30px;
+  gap: 45px;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
@@ -1219,7 +1447,7 @@
   display: inline-block;
   cursor: pointer;
   font-family: 'Roboto Condensed', sans-serif;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
   line-height: normal;
   color: #000;
@@ -1257,7 +1485,7 @@
   min-width: 0;
   aspect-ratio: 16 / 9;
   background: #000;
-  border-radius: 12px;
+
   display: flex;
   align-items: center;
   justify-content: center;

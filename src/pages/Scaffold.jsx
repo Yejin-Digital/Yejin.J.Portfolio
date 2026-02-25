@@ -17,6 +17,10 @@ import brochureImg from '../assets/Brochure.jpg';
 import businessCardImg from '../assets/BusinessCard.jpg';
 import stickerImg from '../assets/Sticker.jpg';
 import scaffoldPromoVideo from '../assets/scaffold_promotionalVideo.mp4';
+import scaffoldDesktopVideo from '../assets/scaffold_desktop.mp4';
+import scaffoldIcon1 from '../assets/scaffold_icon1.png';
+import scaffoldIcon2 from '../assets/scaffold_icon2.png';
+import scaffoldUserflow from '../assets/scaffold_userflow.jpg';
 
 function StarIcon() {
   return (
@@ -68,13 +72,39 @@ export default function Scaffold() {
     useState('Brochure');
   const [isPromoModalOpen, setIsPromoModalOpen] = useState(false);
   const [isPersonaModalOpen, setIsPersonaModalOpen] = useState(false);
+  const [isUserFlowImageModalOpen, setIsUserFlowImageModalOpen] =
+    useState(false);
+  const [userFlowZoom, setUserFlowZoom] = useState(1);
+  const [userFlowPan, setUserFlowPan] = useState({ x: 0, y: 0 });
+  const [userFlowIsDragging, setUserFlowIsDragging] = useState(false);
+  const userFlowDragStartRef = useRef({
+    clientX: 0,
+    clientY: 0,
+    panX: 0,
+    panY: 0,
+  });
+  const userFlowModalWrapRef = useRef(null);
   const [currentPersonaImageIndex, setCurrentPersonaImageIndex] = useState(0);
   const [isPromoVideoPlaying, setIsPromoVideoPlaying] = useState(false);
   const [isPromoVideoModalOpen, setIsPromoVideoModalOpen] = useState(false);
-  const [isPromoVideoModalPlaying, setIsPromoVideoModalPlaying] = useState(false);
+  const [isPromoVideoModalPlaying, setIsPromoVideoModalPlaying] =
+    useState(false);
   const promoVideoRef = useRef(null);
   const promoVideoModalRef = useRef(null);
-  const promoVideoModalOpenIntentRef = useRef({ currentTime: 0, wasPlaying: false });
+  const promoVideoModalOpenIntentRef = useRef({
+    currentTime: 0,
+    wasPlaying: false,
+  });
+  const [isDesktopVideoPlaying, setIsDesktopVideoPlaying] = useState(false);
+  const [isDesktopVideoModalOpen, setIsDesktopVideoModalOpen] = useState(false);
+  const [isDesktopVideoModalPlaying, setIsDesktopVideoModalPlaying] =
+    useState(false);
+  const desktopVideoRef = useRef(null);
+  const desktopVideoModalRef = useRef(null);
+  const desktopVideoModalOpenIntentRef = useRef({
+    currentTime: 0,
+    wasPlaying: false,
+  });
 
   const personaImages = [scaffoldPersona1, scaffoldPersona2];
 
@@ -115,6 +145,65 @@ export default function Scaffold() {
     setIsPersonaModalOpen(false);
   };
 
+  const handleOpenUserFlowImageModal = () => {
+    setUserFlowZoom(1);
+    setUserFlowPan({ x: 0, y: 0 });
+    setIsUserFlowImageModalOpen(true);
+  };
+
+  const handleCloseUserFlowImageModal = () => {
+    setIsUserFlowImageModalOpen(false);
+    setUserFlowZoom(1);
+    setUserFlowPan({ x: 0, y: 0 });
+    setUserFlowIsDragging(false);
+  };
+
+  const USER_FLOW_ZOOM_STEP = 0.5;
+  const USER_FLOW_ZOOM_MIN = 0.5;
+  const USER_FLOW_ZOOM_MAX = 4;
+
+  const handleUserFlowZoomIn = () => {
+    setUserFlowZoom((z) => Math.min(USER_FLOW_ZOOM_MAX, z + USER_FLOW_ZOOM_STEP));
+  };
+
+  const handleUserFlowZoomOut = () => {
+    setUserFlowZoom((z) => Math.max(USER_FLOW_ZOOM_MIN, z - USER_FLOW_ZOOM_STEP));
+  };
+
+  const handleUserFlowPanStart = (e) => {
+    if (e.button !== 0) return;
+    e.preventDefault();
+    setUserFlowIsDragging(true);
+    userFlowDragStartRef.current = {
+      clientX: e.clientX,
+      clientY: e.clientY,
+      panX: userFlowPan.x,
+      panY: userFlowPan.y,
+    };
+  };
+
+  useEffect(() => {
+    if (!userFlowIsDragging) return;
+    const onMove = (e) => {
+      const { clientX, clientY, panX, panY } = userFlowDragStartRef.current;
+      setUserFlowPan({
+        x: panX + e.clientX - clientX,
+        y: panY + e.clientY - clientY,
+      });
+    };
+    const onUp = () => {
+      setUserFlowIsDragging(false);
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onUp);
+    };
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
+    return () => {
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onUp);
+    };
+  }, [userFlowIsDragging]);
+
   const handlePersonaPrev = () => {
     setCurrentPersonaImageIndex((prev) =>
       prev === 0 ? personaImages.length - 1 : prev - 1,
@@ -152,7 +241,10 @@ export default function Scaffold() {
         setIsPromoVideoPlaying(false);
       }
     } else {
-      promoVideoModalOpenIntentRef.current = { currentTime: 0, wasPlaying: false };
+      promoVideoModalOpenIntentRef.current = {
+        currentTime: 0,
+        wasPlaying: false,
+      };
     }
     setIsPromoVideoModalOpen(true);
   };
@@ -176,6 +268,58 @@ export default function Scaffold() {
     }
   };
 
+  const toggleDesktopVideo = () => {
+    const video = desktopVideoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play();
+      setIsDesktopVideoPlaying(true);
+    } else {
+      video.pause();
+      setIsDesktopVideoPlaying(false);
+    }
+  };
+
+  const openDesktopVideoModal = (e) => {
+    e.stopPropagation();
+    const video = desktopVideoRef.current;
+    if (video) {
+      desktopVideoModalOpenIntentRef.current = {
+        currentTime: video.currentTime,
+        wasPlaying: !video.paused,
+      };
+      if (desktopVideoModalOpenIntentRef.current.wasPlaying) {
+        video.pause();
+        setIsDesktopVideoPlaying(false);
+      }
+    } else {
+      desktopVideoModalOpenIntentRef.current = {
+        currentTime: 0,
+        wasPlaying: false,
+      };
+    }
+    setIsDesktopVideoModalOpen(true);
+  };
+
+  const closeDesktopVideoModal = () => {
+    const modalVideo = desktopVideoModalRef.current;
+    if (modalVideo) modalVideo.pause();
+    setIsDesktopVideoModalPlaying(false);
+    setIsDesktopVideoModalOpen(false);
+  };
+
+  const toggleDesktopVideoModal = () => {
+    const video = desktopVideoModalRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play();
+      setIsDesktopVideoModalPlaying(true);
+    } else {
+      video.pause();
+      setIsDesktopVideoModalPlaying(false);
+    }
+  };
+
   useEffect(() => {
     if (!isPromoVideoModalOpen) return;
     const modalVideo = promoVideoModalRef.current;
@@ -190,6 +334,44 @@ export default function Scaffold() {
       }
     }
   }, [isPromoVideoModalOpen]);
+
+  useEffect(() => {
+    if (!isDesktopVideoModalOpen) return;
+    const modalVideo = desktopVideoModalRef.current;
+    const { currentTime, wasPlaying } =
+      desktopVideoModalOpenIntentRef.current;
+    if (modalVideo) {
+      modalVideo.currentTime = currentTime;
+      if (wasPlaying) {
+        modalVideo.play();
+        setIsDesktopVideoModalPlaying(true);
+      } else {
+        setIsDesktopVideoModalPlaying(false);
+      }
+    }
+  }, [isDesktopVideoModalOpen]);
+
+  /* challengesBrowserVideo: 섹션이 화면에 들어오면 자동 재생, 나가면 일시정지 */
+  useEffect(() => {
+    const section = sectionRefs.challenges?.current;
+    const video = desktopVideoRef.current;
+    if (!section || !video) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (!entry.isIntersecting) {
+          video.pause();
+          setIsDesktopVideoPlaying(false);
+          return;
+        }
+        video.play().then(() => setIsDesktopVideoPlaying(true)).catch(() => {});
+      },
+      { threshold: 0.25, rootMargin: '0px' }
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const intersecting = new Map();
@@ -238,8 +420,16 @@ export default function Scaffold() {
             <h3>Case Study</h3>
             <div className={style.demoButtons}>
               <Buttons label="Watch the demo" variant="round" />
-              <Buttons label="View Prototype" variant="round" />
-              <Buttons label="GitHub Repository" variant="round" />
+              <Buttons
+                label="View Prototype"
+                variant="round"
+                href="https://www.figma.com/proto/jEskxUqJGAYIVe8f3jvDHF/Scaffold?page-id=4%3A225&node-id=4-3748&p=f&viewport=644%2C292%2C0.09&t=AwX0qFWdP8sNXAzE-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=4%3A3748"
+              />
+              <Buttons
+                label="GitHub Repository"
+                variant="round"
+                href="https://github.com/Yejin-Digital/Scaffold"
+              />
             </div>
           </div>
           <div className={style.subTitle}>
@@ -265,6 +455,66 @@ export default function Scaffold() {
             loading="lazy"
             decoding="async"
           />
+          {/* Icons & shapes positioned relative to mockupImg1 */}
+          <img
+            className={style.scaffoldIcon1}
+            src={scaffoldIcon1}
+            alt=""
+            loading="eager"
+            decoding="async"
+          />
+          <img
+            className={style.scaffoldIcon2}
+            src={scaffoldIcon2}
+            alt=""
+            loading="eager"
+            decoding="async"
+          />
+          <svg
+            className={style.sparkleStar1}
+            xmlns="http://www.w3.org/2000/svg"
+            width="39"
+            height="39"
+            viewBox="0 0 39 39"
+            fill="none"
+          >
+            <path
+              d="M24.2501 14.6696L24.3558 14.9984L24.6748 15.1309L36.8074 20.2009L24.297 24.25L23.9682 24.3556L23.8357 24.6747L18.7657 36.8072L14.7166 24.2969L14.6109 23.968L14.2919 23.8356L2.15837 18.7656L14.6697 14.7164L14.9986 14.6108L15.131 14.2918L20.201 2.15825L24.2501 14.6696Z"
+              fill="#FFC567"
+              stroke="black"
+              stroke-width="1.5"
+            />
+          </svg>
+          <svg
+            className={style.sparkleStar2}
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+            fill="none"
+          >
+            <path
+              d="M19.2989 11.8066L19.4055 12.1345L19.7235 12.2679L29.0795 16.177L19.4323 19.299L19.1043 19.4056L18.9709 19.7236L15.0618 29.0796L11.9399 19.4324L11.8332 19.1044L11.5152 18.971L2.15826 15.0618L11.8065 11.9399L12.1344 11.8333L12.2678 11.5153L16.177 2.15835L19.2989 11.8066Z"
+              fill="#058CD7"
+              stroke="black"
+              stroke-width="1.5"
+            />
+          </svg>
+          <svg
+            className={style.sparkleStar3}
+            xmlns="http://www.w3.org/2000/svg"
+            width="39"
+            height="39"
+            viewBox="0 0 39 39"
+            fill="none"
+          >
+            <path
+              d="M24.2501 14.67L24.3558 14.9989L24.6748 15.1314L36.8074 20.2013L24.297 24.2505L23.9682 24.3561L23.8357 24.6751L18.7657 36.8077L14.7166 24.2974L14.6109 23.9685L14.2919 23.8361L2.15837 18.7661L14.6697 14.7169L14.9986 14.6113L15.131 14.2923L20.201 2.15873L24.2501 14.67Z"
+              fill="#FD5A46"
+              stroke="black"
+              stroke-width="1.5"
+            />
+          </svg>
         </div>
       </div>
       <div ref={contentBelowTitleRef} className={style.contentBelowTitle}>
@@ -443,7 +693,27 @@ export default function Scaffold() {
           <h2 className={style.userFlowTitle}>User Flow</h2>
           <div className={style.userFlowCard}>
             <div className={style.userFlowContent}>
-              <div className={style.userFlowFigma}></div>
+              <div
+                className={style.userFlowFigma}
+                onClick={handleOpenUserFlowImageModal}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleOpenUserFlowImageModal();
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                aria-label="View user flow image larger"
+              >
+                <img
+                  src={scaffoldUserflow}
+                  alt="User Flow"
+                  className={style.userFlowFigmaImage}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
               <div className={style.userFlowDecisions}>
                 <h3 className={style.userFlowDecisionsTitle}>Key decisions</h3>
                 <ul className={style.userFlowDecisionsList}>
@@ -710,7 +980,80 @@ export default function Scaffold() {
               </p>
 
               <div className={style.challengesBottom}>
-                <div className={style.challengesBrowser} aria-hidden="true" />
+                <div className={style.challengesBrowser}>
+                  <video
+                    ref={desktopVideoRef}
+                    className={style.challengesBrowserVideo}
+                    src={scaffoldDesktopVideo}
+                    playsInline
+                    muted
+                    loop
+                    onPlay={() => setIsDesktopVideoPlaying(true)}
+                    onPause={() => setIsDesktopVideoPlaying(false)}
+                    onClick={toggleDesktopVideo}
+                  />
+                  <button
+                    type="button"
+                    className={style.challengesBrowserPlayPause}
+                    onClick={toggleDesktopVideo}
+                    aria-label={
+                      isDesktopVideoPlaying ? 'Pause video' : 'Play video'
+                    }
+                  >
+                    {isDesktopVideoPlaying ? (
+                      <svg
+                        width="48"
+                        height="48"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden
+                      >
+                        <path
+                          d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    ) : (
+                      <svg
+                        width="48"
+                        height="48"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden
+                      >
+                        <path
+                          d="M8 5v14l11-7L8 5z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    )}
+                  </button>
+                  <button
+                    type="button"
+                    className={style.challengesBrowserExpand}
+                    onClick={openDesktopVideoModal}
+                    aria-label="Expand video"
+                  >
+                    <svg
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden
+                    >
+                      <path
+                        d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </button>
+                </div>
                 <div className={style.challengesSolutionContent}>
                   <h3 className={style.challengesSolutionTitle}>
                     <StarIcon />
@@ -872,14 +1215,33 @@ export default function Scaffold() {
                   type="button"
                   className={style.promoVideoPlayPause}
                   onClick={togglePromoVideo}
-                  aria-label={isPromoVideoPlaying ? 'Pause video' : 'Play video'}
+                  aria-label={
+                    isPromoVideoPlaying ? 'Pause video' : 'Play video'
+                  }
                 >
                   {isPromoVideoPlaying ? (
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-                      <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" fill="currentColor" />
+                    <svg
+                      width="48"
+                      height="48"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden
+                    >
+                      <path
+                        d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"
+                        fill="currentColor"
+                      />
                     </svg>
                   ) : (
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                    <svg
+                      width="48"
+                      height="48"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden
+                    >
                       <path d="M8 5v14l11-7L8 5z" fill="currentColor" />
                     </svg>
                   )}
@@ -890,8 +1252,21 @@ export default function Scaffold() {
                   onClick={openPromoVideoModal}
                   aria-label="Expand video"
                 >
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-                    <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <svg
+                    width="28"
+                    height="28"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden
+                  >
+                    <path
+                      d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </button>
               </div>
@@ -918,12 +1293,18 @@ export default function Scaffold() {
 
       {/* Persona Image Modal - same style as Poster imageModalOverlay */}
       {isPersonaModalOpen && (
-        <div className={style.imageModalOverlay} onClick={handleClosePersonaModal}>
+        <div
+          className={style.imageModalOverlay}
+          onClick={handleClosePersonaModal}
+        >
           <div
             className={style.imageModalContent}
             onClick={(e) => e.stopPropagation()}
           >
-            <button className={style.closeButton} onClick={handleClosePersonaModal}>
+            <button
+              className={style.closeButton}
+              onClick={handleClosePersonaModal}
+            >
               <svg
                 width="30"
                 height="30"
@@ -1019,6 +1400,96 @@ export default function Scaffold() {
         </div>
       )}
 
+      {/* User Flow image modal - 크게 보기 */}
+      {isUserFlowImageModalOpen && (
+        <div
+          className={style.imageModalOverlay}
+          onClick={handleCloseUserFlowImageModal}
+        >
+          <div
+            className={style.imageModalContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              className={style.closeButton}
+              onClick={handleCloseUserFlowImageModal}
+              aria-label="Close"
+            >
+              <svg
+                width="30"
+                height="30"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M18 6L6 18M6 6L18 18"
+                  stroke="#0F0F0E"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+            <div
+              ref={userFlowModalWrapRef}
+              className={style.userFlowModalImageWrap}
+              style={{
+                cursor: userFlowIsDragging ? 'grabbing' : 'grab',
+              }}
+            >
+              <div
+                className={style.userFlowModalImageInner}
+                style={{
+                  transform: `translate(${userFlowPan.x}px, ${userFlowPan.y}px) scale(${userFlowZoom})`,
+                }}
+                onMouseDown={handleUserFlowPanStart}
+              >
+                <img
+                  src={scaffoldUserflow}
+                  alt="User Flow"
+                  className={style.userFlowModalImage}
+                />
+              </div>
+            </div>
+            <div className={style.userFlowZoomControls}>
+              <button
+                type="button"
+                className={style.userFlowZoomBtn}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleUserFlowZoomOut();
+                }}
+                disabled={userFlowZoom <= USER_FLOW_ZOOM_MIN}
+                aria-label="축소"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                </svg>
+              </button>
+              <span className={style.userFlowZoomLabel}>
+                {Math.round(userFlowZoom * 100)}%
+              </span>
+              <button
+                type="button"
+                className={style.userFlowZoomBtn}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleUserFlowZoomIn();
+                }}
+                disabled={userFlowZoom >= USER_FLOW_ZOOM_MAX}
+                aria-label="확대"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Promo Video Overlay Modal - 크게 보기, 화면 어디든 클릭 시 재생/멈춤 토글 */}
       {isPromoVideoModalOpen && (
         <div className={style.imageModalOverlay} onClick={closePromoVideoModal}>
@@ -1031,8 +1502,20 @@ export default function Scaffold() {
             }}
             aria-label="Close video"
           >
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M18 6L6 18M6 6L18 18" stroke="#0F0F0E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M18 6L6 18M6 6L18 18"
+                stroke="#0F0F0E"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </button>
           <div
@@ -1058,7 +1541,83 @@ export default function Scaffold() {
                   role="img"
                   aria-label="일시정지됨"
                 >
-                  <svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg
+                    width="56"
+                    height="56"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M8 5v14l11-7L8 5z" fill="currentColor" />
+                  </svg>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Desktop (Web supplement) video expand modal */}
+      {isDesktopVideoModalOpen && (
+        <div
+          className={style.imageModalOverlay}
+          onClick={closeDesktopVideoModal}
+        >
+          <button
+            type="button"
+            className={style.promoVideoModalCloseButton}
+            onClick={(e) => {
+              e.stopPropagation();
+              closeDesktopVideoModal();
+            }}
+            aria-label="Close video"
+          >
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M18 6L6 18M6 6L18 18"
+                stroke="#0F0F0E"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+          <div
+            className={`${style.imageModalContent} ${style.promoVideoModalContent}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleDesktopVideoModal();
+            }}
+          >
+            <div className={style.promoVideoModalWrap}>
+              <video
+                ref={desktopVideoModalRef}
+                className={style.promoVideoModalPlayer}
+                src={scaffoldDesktopVideo}
+                playsInline
+                onPlay={() => setIsDesktopVideoModalPlaying(true)}
+                onPause={() => setIsDesktopVideoModalPlaying(false)}
+              />
+              {!isDesktopVideoModalPlaying && (
+                <div
+                  className={style.promoVideoModalPlayPause}
+                  aria-hidden
+                  role="img"
+                  aria-label="일시정지됨"
+                >
+                  <svg
+                    width="56"
+                    height="56"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <path d="M8 5v14l11-7L8 5z" fill="currentColor" />
                   </svg>
                 </div>
