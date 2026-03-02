@@ -159,7 +159,7 @@ export default function Project() {
     <div className={style.page}>
       <div className={style.section1}>
         <h1>
-          Featured <br /> Project
+          Featured <br /> Projects
         </h1>
         <div className={style.buttons}>
           {filterLabels.map(({ label, value }) => (

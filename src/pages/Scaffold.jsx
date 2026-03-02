@@ -18,6 +18,7 @@ import businessCardImg from '../assets/BusinessCard.jpg';
 import stickerImg from '../assets/Sticker.jpg';
 import scaffoldPromoVideo from '../assets/scaffold_promotionalVideo.mp4';
 import scaffoldDesktopVideo from '../assets/scaffold_desktop.mp4';
+import scaffoldFullDemo from '../assets/scaffold_full_demo.mp4';
 import scaffoldIcon1 from '../assets/scaffold_icon1.png';
 import scaffoldIcon2 from '../assets/scaffold_icon2.png';
 import scaffoldUserflow from '../assets/scaffold_userflow.jpg';
@@ -85,6 +86,15 @@ export default function Scaffold() {
   });
   const userFlowModalWrapRef = useRef(null);
   const [currentPersonaImageIndex, setCurrentPersonaImageIndex] = useState(0);
+  const [isDemoVideoPlaying, setIsDemoVideoPlaying] = useState(false);
+  const [isDemoVideoModalOpen, setIsDemoVideoModalOpen] = useState(false);
+  const [isDemoVideoModalPlaying, setIsDemoVideoModalPlaying] = useState(false);
+  const demoVideoRef = useRef(null);
+  const demoVideoModalRef = useRef(null);
+  const demoVideoModalOpenIntentRef = useRef({
+    currentTime: 0,
+    wasPlaying: false,
+  });
   const [isPromoVideoPlaying, setIsPromoVideoPlaying] = useState(false);
   const [isPromoVideoModalOpen, setIsPromoVideoModalOpen] = useState(false);
   const [isPromoVideoModalPlaying, setIsPromoVideoModalPlaying] =
@@ -163,11 +173,15 @@ export default function Scaffold() {
   const USER_FLOW_ZOOM_MAX = 4;
 
   const handleUserFlowZoomIn = () => {
-    setUserFlowZoom((z) => Math.min(USER_FLOW_ZOOM_MAX, z + USER_FLOW_ZOOM_STEP));
+    setUserFlowZoom((z) =>
+      Math.min(USER_FLOW_ZOOM_MAX, z + USER_FLOW_ZOOM_STEP),
+    );
   };
 
   const handleUserFlowZoomOut = () => {
-    setUserFlowZoom((z) => Math.max(USER_FLOW_ZOOM_MIN, z - USER_FLOW_ZOOM_STEP));
+    setUserFlowZoom((z) =>
+      Math.max(USER_FLOW_ZOOM_MIN, z - USER_FLOW_ZOOM_STEP),
+    );
   };
 
   const handleUserFlowPanStart = (e) => {
@@ -268,6 +282,58 @@ export default function Scaffold() {
     }
   };
 
+  const toggleDemoVideo = () => {
+    const video = demoVideoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play();
+      setIsDemoVideoPlaying(true);
+    } else {
+      video.pause();
+      setIsDemoVideoPlaying(false);
+    }
+  };
+
+  const openDemoVideoModal = (e) => {
+    e.stopPropagation();
+    const video = demoVideoRef.current;
+    if (video) {
+      demoVideoModalOpenIntentRef.current = {
+        currentTime: video.currentTime,
+        wasPlaying: !video.paused,
+      };
+      if (demoVideoModalOpenIntentRef.current.wasPlaying) {
+        video.pause();
+        setIsDemoVideoPlaying(false);
+      }
+    } else {
+      demoVideoModalOpenIntentRef.current = {
+        currentTime: 0,
+        wasPlaying: false,
+      };
+    }
+    setIsDemoVideoModalOpen(true);
+  };
+
+  const closeDemoVideoModal = () => {
+    const modalVideo = demoVideoModalRef.current;
+    if (modalVideo) modalVideo.pause();
+    setIsDemoVideoModalPlaying(false);
+    setIsDemoVideoModalOpen(false);
+  };
+
+  const toggleDemoVideoModal = () => {
+    const video = demoVideoModalRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play();
+      setIsDemoVideoModalPlaying(true);
+    } else {
+      video.pause();
+      setIsDemoVideoModalPlaying(false);
+    }
+  };
+
   const toggleDesktopVideo = () => {
     const video = desktopVideoRef.current;
     if (!video) return;
@@ -336,10 +402,24 @@ export default function Scaffold() {
   }, [isPromoVideoModalOpen]);
 
   useEffect(() => {
+    if (!isDemoVideoModalOpen) return;
+    const modalVideo = demoVideoModalRef.current;
+    const { currentTime, wasPlaying } = demoVideoModalOpenIntentRef.current;
+    if (modalVideo) {
+      modalVideo.currentTime = currentTime;
+      if (wasPlaying) {
+        modalVideo.play();
+        setIsDemoVideoModalPlaying(true);
+      } else {
+        setIsDemoVideoModalPlaying(false);
+      }
+    }
+  }, [isDemoVideoModalOpen]);
+
+  useEffect(() => {
     if (!isDesktopVideoModalOpen) return;
     const modalVideo = desktopVideoModalRef.current;
-    const { currentTime, wasPlaying } =
-      desktopVideoModalOpenIntentRef.current;
+    const { currentTime, wasPlaying } = desktopVideoModalOpenIntentRef.current;
     if (modalVideo) {
       modalVideo.currentTime = currentTime;
       if (wasPlaying) {
@@ -365,9 +445,12 @@ export default function Scaffold() {
           setIsDesktopVideoPlaying(false);
           return;
         }
-        video.play().then(() => setIsDesktopVideoPlaying(true)).catch(() => {});
+        video
+          .play()
+          .then(() => setIsDesktopVideoPlaying(true))
+          .catch(() => {});
       },
-      { threshold: 0.25, rootMargin: '0px' }
+      { threshold: 0.25, rootMargin: '0px' },
     );
     observer.observe(section);
     return () => observer.disconnect();
@@ -409,6 +492,50 @@ export default function Scaffold() {
         if (item) item.observer.disconnect();
       });
     };
+  }, []);
+
+  useEffect(() => {
+    const section = sectionRefs['promotional-video']?.current;
+    const video = promoVideoRef.current;
+    if (!section || !video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.muted = true;
+          video.play().catch(() => {});
+          setIsPromoVideoPlaying(true);
+        } else {
+          video.pause();
+          setIsPromoVideoPlaying(false);
+        }
+      },
+      { threshold: 0.25, rootMargin: '0px 0px -10% 0px' },
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const section = sectionRefs.summary?.current;
+    const video = demoVideoRef.current;
+    if (!section || !video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.muted = true;
+          video.play().catch(() => {});
+          setIsDemoVideoPlaying(true);
+        } else {
+          video.pause();
+          setIsDemoVideoPlaying(false);
+        }
+      },
+      { threshold: 0.25, rootMargin: '0px 0px -10% 0px' },
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -534,7 +661,81 @@ export default function Scaffold() {
         >
           <div className={style.projectOverview}>
             <div className={style.projectOverviewContent}>
-              <div className={style.demoVideo}></div>
+              <div className={style.demoVideo}>
+                <div className={style.demoVideoWrap}>
+                  <video
+                    ref={demoVideoRef}
+                    className={style.demoVideoPlayer}
+                    src={scaffoldFullDemo}
+                    playsInline
+                    muted
+                    onPlay={() => setIsDemoVideoPlaying(true)}
+                    onPause={() => setIsDemoVideoPlaying(false)}
+                    onClick={toggleDemoVideo}
+                  />
+                  <button
+                    type="button"
+                    className={style.demoVideoPlayPause}
+                    onClick={toggleDemoVideo}
+                    aria-label={
+                      isDemoVideoPlaying ? 'Pause video' : 'Play video'
+                    }
+                  >
+                    {isDemoVideoPlaying ? (
+                      <svg
+                        width="48"
+                        height="48"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden
+                      >
+                        <path
+                          d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    ) : (
+                      <svg
+                        width="48"
+                        height="48"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden
+                      >
+                        <path
+                          d="M8 5v14l11-7L8 5z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    )}
+                  </button>
+                  <button
+                    type="button"
+                    className={style.demoVideoExpand}
+                    onClick={openDemoVideoModal}
+                    aria-label="Expand video"
+                  >
+                    <svg
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden
+                    >
+                      <path
+                        d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
               <div className={style.projectOverviewText}>
                 <div className={style.projectTitleBlock}>
                   <span className={style.projectLabel}>Project</span>
@@ -755,15 +956,23 @@ export default function Scaffold() {
           className={style.contentSection}
         >
           <h2 className={style.lofiTitle}>Lo-fi Wireframe</h2>
-          <div className={style.lofiCard}>
-            <div className={style.lofiContent}>
-              <div className={style.lofiPlaceholder} aria-hidden="true" />
-              <div className={style.lofiText}>
-                <p className={style.lofiIntro}>
-                  The initial wireframe design was split into three parts:
-                  Profile, Home (dashboard), and Grant application, each based
-                  on main features.
-                </p>
+
+          <div className={style.lofiContent}>
+            <div className={style.lofiPlaceholder}>
+              <iframe
+                title="Scaffold Lo-fi Wireframe – Figma"
+                className={style.figmaEmbed}
+                src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FjEskxUqJGAYIVe8f3jvDHF%2FScaffold%3Fnode-id%3D1-280"
+                allowFullScreen
+              />
+            </div>
+            <div className={style.lofiText}>
+              <p className={style.lofiIntro}>
+                The initial wireframe design was split into three parts:
+                Profile, Home (dashboard), and Grant application, each based on
+                main features.
+              </p>
+              <div className={style.lofiCard}>
                 <div className={style.lofiBlock}>
                   <h3 className={style.lofiBlockTitle}>Home</h3>
                   <p>
@@ -810,7 +1019,14 @@ export default function Scaffold() {
           <h2 className={style.lofiTitle}>Hi-fi Wireframe</h2>
           <div className={style.lofiCard}>
             <div className={style.lofiContent}>
-              <div className={style.lofiPlaceholder} aria-hidden="true" />
+              <div className={style.lofiPlaceholder}>
+                <iframe
+                  title="Scaffold Hi-fi Wireframe – Figma"
+                  className={style.figmaEmbed}
+                  src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FjEskxUqJGAYIVe8f3jvDHF%2FScaffold%3Fnode-id%3D4-225"
+                  allowFullScreen
+                />
+              </div>
               <div className={style.lofiText}>
                 <div className={style.lofiBlock}>
                   <p>
@@ -1023,10 +1239,7 @@ export default function Scaffold() {
                         xmlns="http://www.w3.org/2000/svg"
                         aria-hidden
                       >
-                        <path
-                          d="M8 5v14l11-7L8 5z"
-                          fill="currentColor"
-                        />
+                        <path d="M8 5v14l11-7L8 5z" fill="currentColor" />
                       </svg>
                     )}
                   </button>
@@ -1207,6 +1420,7 @@ export default function Scaffold() {
                   className={style.promoVideoPlayer}
                   src={scaffoldPromoVideo}
                   playsInline
+                  muted
                   onPlay={() => setIsPromoVideoPlaying(true)}
                   onPause={() => setIsPromoVideoPlaying(false)}
                   onClick={togglePromoVideo}
@@ -1464,8 +1678,19 @@ export default function Scaffold() {
                 disabled={userFlowZoom <= USER_FLOW_ZOOM_MIN}
                 aria-label="축소"
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M5 12h14"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
                 </svg>
               </button>
               <span className={style.userFlowZoomLabel}>
@@ -1481,10 +1706,91 @@ export default function Scaffold() {
                 disabled={userFlowZoom >= USER_FLOW_ZOOM_MAX}
                 aria-label="확대"
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 5v14M5 12h14"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
                 </svg>
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Demo Video (Summary) Overlay Modal */}
+      {isDemoVideoModalOpen && (
+        <div className={style.imageModalOverlay} onClick={closeDemoVideoModal}>
+          <button
+            type="button"
+            className={style.promoVideoModalCloseButton}
+            onClick={(e) => {
+              e.stopPropagation();
+              closeDemoVideoModal();
+            }}
+            aria-label="Close video"
+          >
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M18 6L6 18M6 6L18 18"
+                stroke="#0F0F0E"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+          <div
+            className={`${style.imageModalContent} ${style.promoVideoModalContent}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleDemoVideoModal();
+            }}
+          >
+            <div className={style.promoVideoModalWrap}>
+              <video
+                ref={demoVideoModalRef}
+                className={style.promoVideoModalPlayer}
+                src={scaffoldFullDemo}
+                playsInline
+                onPlay={() => setIsDemoVideoModalPlaying(true)}
+                onPause={() => setIsDemoVideoModalPlaying(false)}
+              />
+              {!isDemoVideoModalPlaying && (
+                <div
+                  className={style.promoVideoModalPlayPause}
+                  aria-hidden
+                  role="img"
+                  aria-label="Paused"
+                >
+                  <svg
+                    width="56"
+                    height="56"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M8 5v14l11-7L8 5z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+              )}
             </div>
           </div>
         </div>

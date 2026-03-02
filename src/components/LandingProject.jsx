@@ -50,7 +50,7 @@ const CARDS = [
 export default function LandingProject() {
   return (
     <div className={style.landingProject}>
-      <h3>Featured Project</h3>
+      <h3>Featured Projects</h3>
       <div className={style.grid}>
         {CARDS.map((card) => (
           <div key={card.id} className={`${style.cardWrap} ${card.gridClass}`}>

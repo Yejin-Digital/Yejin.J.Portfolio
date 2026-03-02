@@ -236,11 +236,95 @@
   min-width: 0;
   width: 100%;
   max-width: 550px;
-  height: auto;
-  background: #848484;
-  border-radius: 15px;
-  aspect-ratio: 6 / 4;
   flex-shrink: 0;
+}
+
+.demoVideoWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.demoVideoPlayer {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.demoVideoPlayPause {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #000;
+  box-shadow: 2px 2px 0 0 rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #000;
+  opacity: 0;
+  transition:
+    opacity 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease;
+  z-index: 2;
+}
+
+.demoVideoWrap:hover .demoVideoPlayPause {
+  opacity: 0.5;
+}
+
+.demoVideoPlayPause:hover {
+  background: #fff;
+  transform: translate(-50%, -50%) scale(1.08);
+  opacity: 0.5;
+}
+
+.demoVideoExpand {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #000;
+  box-shadow: 2px 2px 0 0 rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #000;
+  opacity: 0;
+  transition:
+    opacity 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease;
+  z-index: 2;
+}
+
+.demoVideoWrap:hover .demoVideoExpand {
+  opacity: 0.5;
+}
+
+.demoVideoExpand:hover {
+  background: #fff;
+  transform: scale(1.08);
+  opacity: 0.5;
 }
 
 .projectOverview {
@@ -352,7 +436,7 @@
 /* Background section */
 .backgroundTitle {
   font-family: 'Roboto Flex', sans-serif;
-  font-size: 2rem;
+  font-size: 26px;
   font-weight: 700;
   color: #000;
   text-align: center;
@@ -459,7 +543,7 @@
 /* User Personas section - 이미지로만 표시 */
 .personaTitle {
   font-family: 'Roboto Flex', sans-serif;
-  font-size: 2rem;
+  font-size: 26px;
   font-weight: 700;
   color: #000;
   text-align: center;
@@ -737,14 +821,14 @@
 /* User Flow section */
 .userFlowTitle {
   font-family: 'Roboto Flex', sans-serif;
-  font-size: 2rem;
+  font-size: 26px;
   font-weight: 700;
   color: #000;
   text-align: center;
   margin: 0 0 45px 0;
 }
 
-.userFlowCard {
+/*.userFlowCard {
   background: #fff;
   border: 2px solid #000;
   border-radius: 20px;
@@ -752,7 +836,7 @@
   box-shadow: 8px 6px 5px 0 rgba(0, 0, 0, 0.31);
   box-sizing: border-box;
   overflow: hidden;
-}
+}*/
 
 .userFlowContent {
   display: flex;
@@ -765,18 +849,27 @@
 
 .userFlowFigma {
   flex: 1 1 0;
-  min-width: 0;
-  max-width: 70%;
+  width: 100%;
+  min-height: 420px;
   cursor: pointer;
   overflow: hidden;
   border-radius: 12px;
+  background: #fff;
+  border: 2px solid #000;
+  padding: 30px 30px;
+  box-shadow: 8px 6px 5px 0 rgba(0, 0, 0, 0.31);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .userFlowFigmaImage {
-  width: 100%;
+  max-width: 100%;
+  width: auto;
   height: auto;
   display: block;
   object-fit: contain;
+  object-position: center;
 }
 
 .userFlowModalImageWrap {
@@ -829,7 +922,9 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .userFlowZoomBtn:hover:not(:disabled) {
@@ -857,6 +952,11 @@
   width: 320px;
   max-width: 100%;
   box-sizing: border-box;
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 20px;
+  padding: 30px 30px;
+  box-shadow: 8px 6px 5px 0 rgba(0, 0, 0, 0.31);
 }
 
 .userFlowDecisionsTitle {
@@ -887,7 +987,7 @@
 /* Style Guide section */
 .styleGuideTitle {
   font-family: 'Roboto Flex', sans-serif;
-  font-size: 2rem;
+  font-size: 26px;
   font-weight: 700;
   color: #000;
   text-align: center;
@@ -927,41 +1027,64 @@
 /* Lo-fi Wireframe section */
 .lofiTitle {
   font-family: 'Roboto Flex', sans-serif;
-  font-size: 2rem;
+  font-size: 26px;
   font-weight: 700;
   color: #000;
   text-align: center;
   margin: 0 0 45px 0;
 }
 
-.lofiCard {
+/*.lofiCard {
   background: #fff;
   border: 2px solid #000;
   border-radius: 20px;
   padding: 30px 30px;
   box-shadow: 8px 6px 5px 0 rgba(0, 0, 0, 0.31);
+}*/
+
+.lofiCard {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
 }
 
 .lofiContent {
   display: flex;
-  flex-direction: row;
-  gap: 35px;
+  flex-direction: column;
+  gap: 25px;
   align-items: center;
 }
 
 .lofiPlaceholder {
-  width: 50%;
-  height: auto;
-  aspect-ratio: 4 / 3;
-  background: #bbbbbb;
+  width: 100%;
+  min-height: 400px;
   border-radius: 15px;
   flex-shrink: 0;
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 20px;
+  padding: 0;
+  box-shadow: 8px 6px 5px 0 rgba(0, 0, 0, 0.31);
+  overflow: hidden;
+}
+
+.figmaEmbed {
+  width: 100%;
+  height: 100%;
+  min-height: 390px;
+  border: none;
+  border-radius: 14px;
 }
 
 .lofiText {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 20px;
+  padding: 30px 30px;
+  box-shadow: 8px 6px 5px 0 rgba(0, 0, 0, 0.31);
 }
 
 .lofiIntro {
@@ -970,6 +1093,7 @@
   line-height: 1.5;
   color: #000;
   margin: 0;
+  text-align: center;
 }
 
 .lofiBlock {
@@ -995,7 +1119,7 @@
 /* Final design section */
 .finalDesignTitle {
   font-family: 'Roboto Flex', sans-serif;
-  font-size: 2rem;
+  font-size: 26px;
   font-weight: 700;
   color: #000;
   text-align: center;
@@ -1052,7 +1176,7 @@
 /* App Features section */
 .appFeaturesTitle {
   font-family: 'Roboto Flex', sans-serif;
-  font-size: 2rem;
+  font-size: 26px;
   font-weight: 700;
   color: #000;
   text-align: center;
@@ -1068,7 +1192,7 @@
 .appFeatureBlock {
   display: flex;
   flex-direction: row;
-  gap: 80px;
+  gap: 50px;
   align-items: center;
 }
 
@@ -1136,7 +1260,7 @@
 /* Challenges section */
 .challengesTitle {
   font-family: 'Roboto Flex', sans-serif;
-  font-size: 2rem;
+  font-size: 26px;
   font-weight: 700;
   color: #000;
   text-align: center;
@@ -1305,7 +1429,7 @@
 /* Promotional Materials section (labelSection과 동일 기능) */
 .promoTitle {
   font-family: 'Roboto Flex', sans-serif;
-  font-size: 2rem;
+  font-size: 26px;
   font-weight: 700;
   color: #000;
   text-align: center;
@@ -1457,7 +1581,7 @@
 /* Promotional Video section */
 .promoVideoTitle {
   font-family: 'Roboto Flex', sans-serif;
-  font-size: 2rem;
+  font-size: 26px;
   font-weight: 700;
   color: #000;
   text-align: center;

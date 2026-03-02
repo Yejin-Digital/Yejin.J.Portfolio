@@ -51,7 +51,7 @@ export default function NavigationBar() {
           icon={null}
         />
         <Buttons
-          label="PROJECT"
+          label="PROJECTS"
           onClick={() => navigate('/projects')}
           variant="default"
           icon={null}
