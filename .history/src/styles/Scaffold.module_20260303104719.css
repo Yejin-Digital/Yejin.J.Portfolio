@@ -1196,6 +1196,19 @@
   align-items: center;
 }
 
+.appFeaturePhone {
+  flex-shrink: 0;
+  width: 240px;
+  aspect-ratio: 9 / 19;
+  background: #1a1a1a;
+  border-radius: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
 .appFeaturePhone span {
   font-family: 'Roboto Flex', sans-serif;
   font-size: 1rem;
@@ -1212,7 +1225,7 @@
   width: 240px;
   height: auto;
   display: block;
-  border-radius: 42px;
+  border-radius: 45px;
   object-fit: cover;
 }
 

@@ -19,6 +19,9 @@ import stickerImg from '../assets/Sticker.jpg';
 import scaffoldPromoVideo from '../assets/scaffold_promotionalVideo.mp4';
 import scaffoldDesktopVideo from '../assets/scaffold_desktop.mp4';
 import scaffoldFullDemo from '../assets/scaffold_full_demo.mp4';
+import scaffoldProfileDemo from '../assets/scaffold_profile_demo.mp4';
+import scaffoldEligibilityDemo from '../assets/scaffold_eligibility_demo.mp4';
+import scaffoldProgressDemo from '../assets/scaffold_progress_demo.mp4';
 import scaffoldIcon1 from '../assets/scaffold_icon1.png';
 import scaffoldIcon2 from '../assets/scaffold_icon2.png';
 import scaffoldUserflow from '../assets/scaffold_userflow.jpg';
@@ -115,6 +118,9 @@ export default function Scaffold() {
     currentTime: 0,
     wasPlaying: false,
   });
+  const appFeatureVideo1Ref = useRef(null);
+  const appFeatureVideo2Ref = useRef(null);
+  const appFeatureVideo3Ref = useRef(null);
 
   const personaImages = [scaffoldPersona1, scaffoldPersona2];
 
@@ -154,6 +160,33 @@ export default function Scaffold() {
   const handleClosePersonaModal = () => {
     setIsPersonaModalOpen(false);
   };
+
+  // App feature videos: play when ≥50% visible
+  useEffect(() => {
+    const refs = [appFeatureVideo1Ref, appFeatureVideo2Ref, appFeatureVideo3Ref];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target;
+          if (!video) return;
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.5, rootMargin: '0px' }
+    );
+    const observed = [];
+    refs.forEach((ref) => {
+      if (ref.current) {
+        observer.observe(ref.current);
+        observed.push(ref.current);
+      }
+    });
+    return () => observed.forEach((el) => observer.unobserve(el));
+  }, []);
 
   const handleOpenUserFlowImageModal = () => {
     setUserFlowZoom(1);
@@ -546,7 +579,16 @@ export default function Scaffold() {
             <h1>UX/UI Design</h1>
             <h3>Case Study</h3>
             <div className={style.demoButtons}>
-              <Buttons label="Watch the demo" variant="round" />
+              <Buttons
+                label="Watch the demo"
+                variant="round"
+                onClick={() => {
+                  summarySectionRef.current?.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center',
+                  });
+                }}
+              />
               <Buttons
                 label="View Prototype"
                 variant="round"
@@ -1106,8 +1148,15 @@ export default function Scaffold() {
           <h2 className={style.appFeaturesTitle}>App Features</h2>
           <div className={style.appFeaturesList}>
             <div className={style.appFeatureBlock}>
-              <div className={style.appFeaturePhone}>
-                <span>App Demo Video</span>
+              <div className={`${style.appFeaturePhone} ${style.appFeaturePhoneWithVideo}`}>
+                <video
+                  ref={appFeatureVideo1Ref}
+                  className={style.appFeaturePhoneVideo}
+                  src={scaffoldProfileDemo}
+                  playsInline
+                  muted
+                  loop
+                />
               </div>
               <div className={style.appFeatureCard}>
                 <h3 className={style.appFeatureCardTitle}>
@@ -1149,13 +1198,27 @@ export default function Scaffold() {
                   including deadlines and eligibility requirements, at a glance.
                 </p>
               </div>
-              <div className={style.appFeaturePhone}>
-                <span>App Demo Video</span>
+              <div className={`${style.appFeaturePhone} ${style.appFeaturePhoneWithVideo}`}>
+                <video
+                  ref={appFeatureVideo2Ref}
+                  className={style.appFeaturePhoneVideo}
+                  src={scaffoldEligibilityDemo}
+                  playsInline
+                  muted
+                  loop
+                />
               </div>
             </div>
             <div className={style.appFeatureBlock}>
-              <div className={style.appFeaturePhone}>
-                <span>App Demo Video</span>
+              <div className={`${style.appFeaturePhone} ${style.appFeaturePhoneWithVideo}`}>
+                <video
+                  ref={appFeatureVideo3Ref}
+                  className={style.appFeaturePhoneVideo}
+                  src={scaffoldProgressDemo}
+                  playsInline
+                  muted
+                  loop
+                />
               </div>
               <div className={style.appFeatureCard}>
                 <h3 className={style.appFeatureCardTitle}>
