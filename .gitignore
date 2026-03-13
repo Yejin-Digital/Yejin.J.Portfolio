@@ -23,7 +23,3 @@ dist-ssr
 *.sln
 *.sw?
 node_modules/
-
-# Large video files (GitHub limit 100MB)
-src/assets/motion_full.mp4
-src/assets/motion_preview.mp4
