@@ -11,6 +11,7 @@ import Poster from './pages/Poster.jsx';
 import Resume from './pages/Resume.jsx';
 import Magazine from './pages/Magazine.jsx';
 import Scaffold from './pages/Scaffold.jsx';
+import Motion from './pages/Motion.jsx';
 
 function Home() {
   return (
@@ -58,6 +59,7 @@ function App() {
             <Route path="/resume" element={<Resume />} />
             <Route path="/magazine" element={<Magazine />} />
             <Route path="/scaffold" element={<Scaffold />} />
+            <Route path="/motion" element={<Motion />} />
           </Routes>
         </main>
         <Footer />

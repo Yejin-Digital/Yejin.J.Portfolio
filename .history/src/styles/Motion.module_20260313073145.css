@@ -1,0 +1,325 @@
+/* 다른 페이지(Project 등)와 동일: 배경·패딩·최소 높이 */
+.page {
+  background: var(--Background, #fff9f3);
+  min-height: 100vh;
+  padding: 64px var(--page-padding-x-80) 0 var(--page-padding-x-80);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 230px;
+  margin-bottom: 100px;
+}
+
+.titleSection h1 {
+  color: #000;
+  font-family: 'Alfa Slab One';
+  font-size: 70px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%; /* 80px */
+}
+
+.titleSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+  align-items: flex-start;
+  /* 이미지 프리뷰가 absolute라서 공간을 미리 확보 */
+  min-height: 680px;
+}
+
+.subTitle p {
+  color: #000;
+  text-align: right;
+  font-family: 'Roboto Condensed';
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 99.468%; /* 23.872px */
+}
+
+.subTitle {
+  display: flex;
+  flex-direction: column;
+}
+
+.imageSection {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 90vw;
+  height: 560px;
+  pointer-events: none;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+.imageSection .mockupImg1,
+.imageSection .mockupImg2,
+.imageSection .mockupVideo,
+.imageSection .mockupImg3 {
+  position: absolute;
+  height: auto;
+  width: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+.imageSection .mockupImg1 {
+  left: 53%;
+  top: 68%;
+  max-height: auto;
+  max-width: 45vw;
+  transform: translate(calc(-50% - 8%), -50%);
+  z-index: 2;
+}
+
+.imageSection .mockupImg2 {
+  left: 72%;
+  top: 90%;
+  max-height: auto;
+  max-width: 30vw;
+  transform: translate(calc(-50% + 8%), -50%);
+  z-index: 5;
+}
+
+.imageSection .mockupVideo {
+  left: 52%;
+  top: 57%;
+  max-height: auto;
+  max-width: 43vw;
+  transform: translate(calc(-50% - 8%), -50%);
+  z-index: 1;
+}
+
+.imageSection .mockupImg3 {
+  left: 76%;
+  top: 67%;
+  max-height: auto;
+  max-width: 22vw;
+  transform: translate(calc(-50% + 8%), -50%);
+  aspect-ratio: 16 / 10;
+  z-index: 4;
+}
+/* ========== Content (Magazine 스타일 동일) ========== */
+.content {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  align-items: stretch;
+  width: 100%;
+  margin: 0;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+/* ========== Label Section (왼쪽, 영상 영역) ========== */
+.labelSection {
+  display: flex;
+  flex: 0 1 629px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 20px;
+  border: 2px solid #000;
+  box-shadow: 10px 8px 5px 0 rgba(0, 0, 0, 0.31);
+  overflow: hidden;
+}
+
+.videoPlaceholder {
+  width: 100%;
+  min-height: 399px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e5e5e5;
+}
+
+.videoPlaceholderText {
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: #888;
+}
+
+/* ========== Info Section (오른쪽) ========== */
+.infoSection {
+  flex: 1 1 0;
+  min-width: 280px;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.conceptTextWrap {
+  position: relative;
+  flex: 1 1 0%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  padding: 40px 40px;
+  padding-top: 50px;
+  border-radius: 20px;
+  border: 2px solid #000;
+  background: #fff;
+  box-shadow: 10px 8px 5px 0 rgba(0, 0, 0, 0.31);
+  box-sizing: border-box;
+}
+
+.projectDescriptionLabel {
+  position: absolute;
+  top: -20px;
+  left: 20px;
+  width: fit-content;
+  padding: 20px 30px;
+  border-radius: 10px;
+  border: 2px solid #000;
+  background: #fd5a46;
+  box-shadow: 4px 6px 0 0 #000;
+  color: #000;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
+  z-index: 2;
+}
+
+.conceptTextBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.conceptTextWrap .conceptText {
+  text-align: left;
+  color: #000;
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.tools {
+  flex: 0 1 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 40px;
+  border-radius: 20px;
+  border: 2px solid #000;
+  background: #fff;
+  box-shadow: 10px 8px 5px 0 rgba(0, 0, 0, 0.31);
+  box-sizing: border-box;
+}
+
+.toolsTitle {
+  color: #000;
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.toolIcons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toolIcon {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+/* ========== Responsive (Magazine과 동일 패턴) ========== */
+@media (max-width: 1000px) {
+  .content {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    max-width: 100%;
+  }
+
+  .labelSection {
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .infoSection {
+    flex: 1 1 100%;
+    width: 100%;
+    min-width: 100%;
+    padding-top: 0;
+  }
+
+  .projectDescriptionLabel {
+    font-size: 20px;
+  }
+
+  .conceptTextWrap .conceptText {
+    font-size: 16px;
+  }
+
+  .tools {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .content {
+    gap: 25px;
+  }
+
+  .infoSection {
+    gap: 25px;
+  }
+
+  .tools {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .projectDescriptionLabel {
+    font-size: 18px;
+    padding: 15px 20px;
+  }
+
+  .conceptTextWrap .conceptText {
+    font-size: 16px;
+  }
+
+  .conceptTextWrap {
+    padding: 32px 24px;
+    padding-top: 44px;
+  }
+
+  .toolsTitle {
+    font-size: 18px;
+  }
+
+  .toolIcon {
+    width: 40px;
+    height: 40px;
+  }
+}

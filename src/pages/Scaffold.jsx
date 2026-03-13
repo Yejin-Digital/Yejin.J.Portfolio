@@ -25,6 +25,11 @@ import scaffoldProgressDemo from '../assets/scaffold_progress_demo.mp4';
 import scaffoldIcon1 from '../assets/scaffold_icon1.png';
 import scaffoldIcon2 from '../assets/scaffold_icon2.png';
 import scaffoldUserflow from '../assets/scaffold_userflow.jpg';
+import participateSvg from '../assets/participate.svg';
+import ageSvg from '../assets/age.svg';
+import experienceSvg from '../assets/experience.svg';
+import tradesSvg from '../assets/trades.svg';
+import arrowSvg from '../assets/arrow.svg';
 
 function StarIcon() {
   return (
@@ -880,7 +885,175 @@ export default function Scaffold() {
           id="user-research"
           ref={sectionRefs['user-research']}
           className={style.contentSection}
-        />
+        >
+          <h2 className={style.userResearchTitle}>User Research</h2>
+          <div className={style.userResearchInner}>
+            <div className={style.userResearchCard}>
+              <h3 className={style.userResearchCardTitle}>Overview</h3>
+              <p className={style.userResearchCardText}>
+                To identify challenges tradespeople face in accessing financial
+                support, our team conducted interviews and surveys with trades
+                professionals in British Columbia and reviewed secondary
+                research on apprenticeship grants and training programs.
+                <br aria-hidden="true" />
+                Participants were trades workers aged 22–49 with 1–10 years of
+                experience, including plumbers, landscapers, and apprentices.
+                We aimed to understand how users find financial resources, the
+                challenges they encounter when applying for grants, and barriers
+                to using support programs.
+                <br aria-hidden="true" />
+                Combining primary research with government and industry reports,
+                we found key barriers in awareness, accessibility, and
+                application complexity.
+              </p>
+            </div>
+            <div className={style.userResearchCard}>
+              <h3 className={style.userResearchCardTitle}>
+                Survey Participants
+              </h3>
+              <div className={style.userResearchParticipants}>
+                <div className={style.userResearchParticipantItem}>
+                  <div className={style.userResearchParticipantIcon}>
+                    <img src={participateSvg} alt="" aria-hidden />
+                  </div>
+                  <p className={style.userResearchParticipantLabel}>
+                    Participants: 4 people
+                  </p>
+                </div>
+                <div className={style.userResearchParticipantDivider} aria-hidden />
+                <div className={style.userResearchParticipantItem}>
+                  <div className={style.userResearchParticipantIcon}>
+                    <img src={ageSvg} alt="" aria-hidden />
+                  </div>
+                  <p className={style.userResearchParticipantLabel}>
+                    Age: 22 – 49
+                  </p>
+                </div>
+                <div className={style.userResearchParticipantDivider} aria-hidden />
+                <div className={style.userResearchParticipantItem}>
+                  <div className={style.userResearchParticipantIcon}>
+                    <img src={experienceSvg} alt="" aria-hidden />
+                  </div>
+                  <p className={style.userResearchParticipantLabel}>
+                    Experience: 1 – 10 years
+                  </p>
+                </div>
+                <div className={style.userResearchParticipantDivider} aria-hidden />
+                <div className={style.userResearchParticipantItem}>
+                  <div className={style.userResearchParticipantIcon}>
+                    <img src={tradesSvg} alt="" aria-hidden />
+                  </div>
+                  <p className={style.userResearchParticipantLabel}>
+                    Plumber, Landscaper, Gardener, Apprentice
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={style.userResearchInsightGrid}>
+              <div className={style.userResearchInsightCard}>
+                <div className={style.userResearchInsightContent}>
+                  <p className={style.userResearchInsightTitle}>
+                    Low awareness of available grants
+                  </p>
+                  <p className={style.userResearchInsightDesc}>
+                    Many apprentices learn about financial support programs only
+                    after starting training, often through informal sources like
+                    coworkers or employers.
+                  </p>
+                  <p className={style.userResearchInsightQuote}>
+                    &ldquo;I didn&apos;t know these grants existed until someone
+                    at work mentioned them.&rdquo;
+                  </p>
+                </div>
+                <div className={style.userResearchInsightArrow}>
+                  <img src={arrowSvg} alt="" aria-hidden />
+                </div>
+                <p className={style.userResearchInsightSolution}>
+                  Develop a centralized platform to help users discover
+                  available funding early in their training.
+                </p>
+              </div>
+              <div className={style.userResearchInsightCard}>
+                <div className={style.userResearchInsightContent}>
+                  <p className={style.userResearchInsightTitle}>
+                    Application processes are confusing and time-consuming
+                  </p>
+                  <p className={style.userResearchInsightDesc}>
+                    Participants described grant applications as bureaucratic
+                    and difficult to navigate, citing unclear eligibility
+                    requirements and the demand for multiple supporting
+                    documents.
+                  </p>
+                  <p className={style.userResearchInsightQuote}>
+                    &ldquo;The application steps are confusing, and it&apos;s
+                    hard to know if you even qualify.&rdquo;
+                  </p>
+                </div>
+                <div className={style.userResearchInsightArrow}>
+                  <img src={arrowSvg} alt="" aria-hidden />
+                </div>
+                <p className={style.userResearchInsightSolution}>
+                  Simplify the application process by dividing it into smaller,
+                  guided steps.
+                </p>
+              </div>
+              <div className={style.userResearchInsightCard}>
+                <div className={style.userResearchInsightContent}>
+                  <p className={style.userResearchInsightTitle}>
+                    Information is scattered across multiple sources
+                  </p>
+                  <p className={style.userResearchInsightDesc}>
+                    Users commonly rely on Google searches, forums, or word of
+                    mouth to find financial resources, resulting in inconsistent
+                    or outdated information.
+                  </p>
+                </div>
+                <div className={style.userResearchInsightArrow}>
+                  <img src={arrowSvg} alt="" aria-hidden />
+                </div>
+                <p className={style.userResearchInsightSolution}>
+                  Provide a single location where grants, requirements, and
+                  deadlines are clearly organized.
+                </p>
+              </div>
+              <div className={style.userResearchInsightCard}>
+                <div className={style.userResearchInsightContent}>
+                  <p className={style.userResearchInsightTitle}>
+                    Non-financial barriers discourage applications
+                  </p>
+                  <p className={style.userResearchInsightDesc}>
+                    Even when financial support is available, deadlines,
+                    paperwork requirements, and a lack of guidance prevent many
+                    apprentices from applying.
+                  </p>
+                </div>
+                <div className={style.userResearchInsightArrow}>
+                  <img src={arrowSvg} alt="" aria-hidden />
+                </div>
+                <p className={style.userResearchInsightSolution}>
+                  Provide reminders, guidance, and step-by-step assistance
+                  throughout the application process.
+                </p>
+              </div>
+            </div>
+            <div className={style.userResearchCard}>
+              <h3 className={style.userResearchCardTitle}>Research Impact</h3>
+              <p className={style.userResearchCardText}>
+                The research findings prompted a major shift in the project
+                direction. The initial concept was a networking platform for
+                trades professionals, but interviews showed that networking was
+                not a primary need. Instead, participants pointed out the
+                difficulty of finding and applying for financial support
+                programs.
+                <br aria-hidden="true" />
+                <br aria-hidden="true" />
+                As a result, the project pivoted to develop Scaffold, a platform
+                that helps apprentices discover relevant grants and simplifies
+                the application process.
+              </p>
+            </div>
+          </div>
+        </section>
         <section
           id="user-persona"
           ref={sectionRefs['user-persona']}

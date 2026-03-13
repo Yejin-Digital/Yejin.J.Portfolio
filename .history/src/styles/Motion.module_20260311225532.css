@@ -1,0 +1,110 @@
+/* 다른 페이지(Project 등)와 동일: 배경·패딩·최소 높이 */
+.page {
+  background: var(--Background, #fff9f3);
+  min-height: 100vh;
+  padding: 64px var(--page-padding-x-80) 0 var(--page-padding-x-80);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 230px;
+  margin-bottom: 100px;
+}
+
+.titleSection h1 {
+  color: #000;
+  font-family: 'Alfa Slab One';
+  font-size: 70px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%; /* 80px */
+}
+
+.titleSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.subTitle p {
+  color: #000;
+  text-align: right;
+  font-family: 'Roboto Condensed';
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 99.468%; /* 23.872px */
+}
+
+.subTitle {
+  display: flex;
+  flex-direction: column;
+}
+
+.previewSection {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 90vw;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+.previewSection .mockupImg1,
+.previewSection .mockupImg2,
+.previewSection .mockupVideo,
+.previewSection .mockupImg3 {
+  position: absolute;
+  height: auto;
+  width: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+.previewSection .mockupImg1 {
+  left: 52%;
+  top: 54%;
+  max-height: auto;
+  max-width: 45vw;
+  transform: translate(calc(-50% - 8%), -50%);
+  z-index: 2;
+}
+
+.previewSection .mockupImg2 {
+  left: 77%;
+  top: 64%;
+  max-height: auto;
+  max-width: 34.7vw;
+  transform: translate(calc(-50% + 8%), -50%);
+  z-index: 5;
+}
+
+.previewSection .mockupVideo {
+  left: 54%;
+  top: 48%;
+  max-height: auto;
+  max-width: 45vw;
+  transform: translate(calc(-50% - 8%), -50%);
+  z-index: 1;
+}
+
+.previewSection .mockupImg3 {
+  left: 82.6%;
+  top: 64%;
+  max-height: auto;
+  max-width: 27.5vw;
+  aspect-ratio: 16 / 10;
+  transform: translate(calc(-50% - 8%), -50%);
+  z-index: 4;
+}
+.content {
+  width: 100%;
+  max-width: var(--content-max-w-200, 1112px);
+  margin: 0 auto;
+}

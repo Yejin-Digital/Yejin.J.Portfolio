@@ -1,0 +1,619 @@
+/* 다른 페이지(Project 등)와 동일: 배경·패딩·최소 높이 */
+.page {
+  background: var(--Background, #fff9f3);
+  min-height: 100vh;
+  padding: 64px var(--page-padding-x-80) 0 var(--page-padding-x-80);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 230px;
+  margin-bottom: 100px;
+}
+
+.titleSection h1 {
+  color: #000;
+  font-family: 'Alfa Slab One';
+  font-size: 70px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%; /* 80px */
+}
+
+.titleSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+  align-items: flex-start;
+  /* 이미지 프리뷰가 absolute라서 공간을 미리 확보 */
+  min-height: 680px;
+}
+
+.subTitle p {
+  color: #000;
+  text-align: right;
+  font-family: 'Roboto Condensed';
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 99.468%; /* 23.872px */
+}
+
+.subTitle {
+  display: flex;
+  flex-direction: column;
+}
+
+.imageSection {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 90vw;
+  height: 560px;
+  pointer-events: none;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+.imageSection .mockupImg1,
+.imageSection .mockupImg2,
+.imageSection .mockupVideo,
+.imageSection .mockupImg3 {
+  position: absolute;
+  height: auto;
+  width: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+.imageSection .mockupImg1 {
+  left: 53%;
+  top: 68%;
+  max-height: auto;
+  max-width: 45vw;
+  transform: translate(calc(-50% - 8%), -50%);
+  z-index: 2;
+}
+
+.imageSection .mockupImg2 {
+  left: 72%;
+  top: 90%;
+  max-height: auto;
+  max-width: 30vw;
+  transform: translate(calc(-50% + 8%), -50%);
+  z-index: 5;
+}
+
+.imageSection .mockupVideo {
+  left: 52%;
+  top: 57%;
+  max-height: auto;
+  max-width: 43vw;
+  transform: translate(calc(-50% - 8%), -50%);
+  z-index: 1;
+}
+
+.imageSection .mockupImg3 {
+  left: 72.5%;
+  top: 90%;
+  max-height: auto;
+  max-width: 23.8vw;
+  transform: translate(calc(-50% + 8%), -50%);
+  aspect-ratio: 16 / 10;
+  z-index: 4;
+}
+/* ========== Content (Magazine 스타일 동일) ========== */
+.content {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  align-items: stretch;
+  width: 100%;
+  margin: 0;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+/* ========== Label Section (왼쪽, 영상 영역) ========== */
+.labelSection {
+  display: flex;
+  flex: 0 1 629px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 20px;
+  border: 2px solid #000;
+  box-shadow: 10px 8px 5px 0 rgba(0, 0, 0, 0.31);
+  overflow: hidden;
+}
+
+.carouselContainer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0 40px 0;
+  box-sizing: border-box;
+}
+
+.arrowButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 37px;
+  height: 37px;
+  background: #fff;
+  border-radius: 50%;
+  border: 2px solid #000;
+  box-shadow: 1.5px 3px 0 0 #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+  padding: 0;
+}
+
+.arrowButton:hover {
+  background: #f4f4f4;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.arrowButton:first-of-type {
+  left: 24px;
+}
+
+.arrowButton:last-of-type {
+  right: 24px;
+}
+
+.videoWrap {
+  position: relative;
+  width: 100%;
+  min-height: 399px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.carouselVideo {
+  width: 100%;
+  height: auto;
+  max-height: 399px;
+  object-fit: contain;
+  display: block;
+}
+
+.carouselDots {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 1px solid #000;
+  background: #fff;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.dot:hover {
+  background: rgba(0, 0, 0, 0.5);
+  transform: scale(1.2);
+}
+
+.dotActive {
+  background: #000;
+  width: 7px;
+  height: 7px;
+}
+
+/* ========== Video Modal (확대 보기) ========== */
+.videoModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.videoModalContent {
+  position: relative;
+  background-color: #fff;
+  border-radius: 20px;
+  border: 2px solid #000;
+  box-shadow: 5px 4px 5px 0 rgba(0, 0, 0, 0.31);
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  box-sizing: border-box;
+  gap: 20px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  transition: transform 0.2s ease;
+}
+
+.closeButton:hover {
+  transform: scale(1.1);
+}
+
+.modalVideoContainer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.modalArrowButton {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  background: #fff;
+  border-radius: 50%;
+  border: 2px solid #000;
+  box-shadow: 1.5px 3px 0 0 #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+  padding: 0;
+}
+
+.modalArrowButton:hover {
+  background: #f4f4f4;
+  transform: scale(1.05);
+}
+
+.modalVideoWrap {
+  flex: 1;
+  min-width: 0;
+  max-width: 70vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalVideo {
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  object-fit: contain;
+  display: block;
+}
+
+.videoModalContent .carouselDots {
+  position: static;
+  transform: none;
+  margin-top: 8px;
+}
+
+/* ========== Info Section (오른쪽) ========== */
+.infoSection {
+  flex: 1 1 0;
+  min-width: 280px;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.conceptTextWrap {
+  position: relative;
+  flex: 1 1 0%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  padding: 40px 40px;
+  padding-top: 50px;
+  border-radius: 20px;
+  border: 2px solid #000;
+  background: #fff;
+  box-shadow: 10px 8px 5px 0 rgba(0, 0, 0, 0.31);
+  box-sizing: border-box;
+}
+
+.projectDescriptionLabel {
+  position: absolute;
+  width: fit-content;
+  height: auto;
+  padding: 15px 25px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  border: 2px solid #000;
+  background: var(--Retro-yellow, #fd5a46);
+  box-shadow: 4px 6px 0 0 #000;
+  color: #000;
+  text-align: center;
+  font-family: 'Roboto Condensed';
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  top: var(--label-top, -30px);
+  right: var(--label-right, auto);
+  left: var(--label-left, 20px);
+  bottom: var(--label-bottom, auto);
+  z-index: 2;
+  margin: 0;
+}
+
+.conceptTextBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.conceptTextWrap .conceptText {
+  text-align: left;
+  color: #000;
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.tools {
+  flex: 0 1 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 40px;
+  border-radius: 20px;
+  border: 2px solid #000;
+  background: #fff;
+  box-shadow: 10px 8px 5px 0 rgba(0, 0, 0, 0.31);
+  box-sizing: border-box;
+}
+
+.toolsTitle {
+  color: #000;
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.toolIcons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toolIcon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+/* ========== Mockup Section (그래픽만: 대시 라인, 별, 화면 프레임 + 영상 1개) ========== */
+.mockupSection {
+  width: 100%;
+  max-width: var(--content-max-w-200, 1112px);
+  margin: 0 auto;
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.mockupSectionLineRow {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 12px;
+}
+
+.mockupSectionLineRow:last-of-type {
+  flex-direction: row-reverse;
+}
+
+.mockupSectionLineRow:last-of-type .mockupSectionStar {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.mockupSectionDashed {
+  flex: 1;
+  height: 0;
+  border: none;
+  border-top: 2px dashed #333;
+  min-width: 0;
+}
+
+.mockupSectionStar {
+  width: 50px;
+  height: 50px;
+  display: block;
+  flex-shrink: 0;
+  display: inline-flex;
+  line-height: 0;
+}
+
+.mockupSectionFrame {
+  width: 100%;
+  max-width: 900px;
+  aspect-ratio: 16 / 9;
+  background: #fff;
+  border-radius: 20px;
+  border: 2px solid #000;
+  box-shadow: 10px 8px 5px 0 rgba(0, 0, 0, 0.31);
+  overflow: hidden;
+  padding: 12px 12px;
+  margin: 16px 0;
+}
+
+.mockupSectionVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: 16px;
+}
+
+/* ========== Responsive (Magazine과 동일 패턴) ========== */
+@media (max-width: 1000px) {
+  .content {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    max-width: 100%;
+  }
+
+  .labelSection {
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .mockupSection {
+    margin-top: 60px;
+  }
+
+  .mockupSectionFrame {
+    max-width: 100%;
+  }
+
+  .infoSection {
+    flex: 1 1 100%;
+    width: 100%;
+    min-width: 100%;
+    padding-top: 0;
+  }
+
+  .projectDescriptionLabel {
+    font-size: 20px;
+  }
+
+  .conceptTextWrap .conceptText {
+    font-size: 16px;
+  }
+
+  .tools {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .content {
+    gap: 25px;
+  }
+
+  .infoSection {
+    gap: 25px;
+  }
+
+  .tools {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .projectDescriptionLabel {
+    font-size: 18px;
+    padding: 15px 20px;
+  }
+
+  .conceptTextWrap .conceptText {
+    font-size: 16px;
+  }
+
+  .conceptTextWrap {
+    padding: 32px 24px;
+    padding-top: 44px;
+  }
+
+  .toolsTitle {
+    font-size: 18px;
+  }
+
+  .toolIcon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .arrowButton:first-of-type {
+    left: 12px;
+  }
+
+  .arrowButton:last-of-type {
+    right: 12px;
+  }
+
+  .videoModalContent {
+    padding: 24px;
+  }
+
+  .modalVideoWrap {
+    max-width: 85vw;
+  }
+
+  .modalArrowButton {
+    width: 40px;
+    height: 40px;
+  }
+
+  .mockupSection {
+    margin-top: 48px;
+  }
+}
