@@ -1,0 +1,174 @@
+.logoAnimation {
+  background-color: #fff9f3;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Logo + texts share the same coordinate system */
+.stage {
+  position: relative;
+  width: min(820px, 92vw);
+  aspect-ratio: 434 / 225;
+}
+
+.logoWrap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(560px, 78vw);
+  aspect-ratio: 434 / 225;
+}
+
+.logoSvg {
+  position: absolute;
+  inset: 0;
+  width: 70%;
+  height: 70%;
+  display: block;
+  margin: 0 auto;
+}
+
+.logoSvg path {
+  stroke: #0f0f0e;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill-opacity: 0;
+  stroke-dasharray: var(--path-length, 1);
+  stroke-dashoffset: var(--path-length, 1);
+  animation:
+    logoDraw 1.8s ease forwards,
+    logoFill 0.7s ease forwards;
+  animation-delay: var(--draw-delay, 0s), calc(var(--draw-delay, 0s) + 1.5s);
+}
+
+.landingText {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  color: #000;
+  font-family: 'Alfa Slab One';
+  font-size: clamp(16px, 2.2vw, 30px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(6px);
+  animation: dissolveIn 0.7s ease forwards;
+  animation-delay: 2.8s;
+}
+
+.landingText p {
+  margin: 0;
+  position: absolute;
+  white-space: nowrap;
+}
+
+.textOne {
+  /* top-left of the logo box */
+  left: -60%;
+  top: 12%;
+}
+
+.textTwo {
+  /* top-right */
+  right: -18%;
+  top: -35%;
+  text-align: right;
+}
+
+.textThree {
+  /* bottom-left */
+  left: -8%;
+  bottom: 5%;
+}
+
+.textFour {
+  /* bottom-right */
+  right: -70%;
+  bottom: 14%;
+  text-align: right;
+}
+
+.landingShapes {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(6px);
+  animation: dissolveIn 0.7s ease forwards;
+  animation-delay: 2.8s;
+}
+
+.landingShapes > div {
+  position: absolute;
+}
+
+.shapeYellowStar {
+  right: -54%;
+  top: -30%;
+}
+
+.shapeRedStar {
+  right: -5%;
+  bottom: 18%;
+  transform: rotate(8deg);
+}
+
+.shapePinkStar {
+  left: -45%;
+  top: -18%;
+}
+
+.shapeGreenStar {
+  left: -20%;
+  bottom: -42%;
+  transform: rotate(-10deg);
+}
+
+.shapePurpleStar {
+  left: 25%;
+  top: -62%;
+  transform: translateX(-50%) rotate(14deg);
+}
+
+@keyframes logoDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes logoFill {
+  to {
+    fill-opacity: 1;
+  }
+}
+
+@keyframes dissolveIn {
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landingText,
+  .landingShapes,
+  .logoSvg path {
+    animation: none !important;
+    opacity: 1;
+    filter: none;
+    transform: none;
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    fill-opacity: 1;
+  }
+}

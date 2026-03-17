@@ -12,7 +12,8 @@ import Resume from './pages/Resume.jsx';
 import Magazine from './pages/Magazine.jsx';
 import Scaffold from './pages/Scaffold.jsx';
 import Motion from './pages/Motion.jsx';
-
+import LogoAnimation from './components/LogoAnimation.jsx';
+import { useEffect, useState } from 'react';
 function Home() {
   return (
     <div className="home-page">
@@ -45,24 +46,54 @@ function Home() {
 }
 
 function App() {
+  const [showIntro, setShowIntro] = useState(() => {
+    try {
+      return sessionStorage.getItem('fp_intro_played') !== '1';
+    } catch {
+      return true;
+    }
+  });
+
+  useEffect(() => {
+    if (!showIntro) return;
+    const prev = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = 'hidden';
+    return () => {
+      document.documentElement.style.overflow = prev;
+    };
+  }, [showIntro]);
+
   return (
     <BrowserRouter>
       <div className="app">
         <ScrollToTop />
-        <NavigationBar />
+        {!showIntro && <NavigationBar />}
         <main className="app-main">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/projects" element={<Project />} />
-            <Route path="/packaging" element={<Packaging />} />
-            <Route path="/poster" element={<Poster />} />
-            <Route path="/resume" element={<Resume />} />
-            <Route path="/magazine" element={<Magazine />} />
-            <Route path="/scaffold" element={<Scaffold />} />
-            <Route path="/motion" element={<Motion />} />
-          </Routes>
+          {showIntro ? (
+            <LogoAnimation
+              onComplete={() => {
+                try {
+                  sessionStorage.setItem('fp_intro_played', '1');
+                } catch {
+                  // ignore
+                }
+                window.setTimeout(() => setShowIntro(false), 2000);
+              }}
+            />
+          ) : (
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/projects" element={<Project />} />
+              <Route path="/packaging" element={<Packaging />} />
+              <Route path="/poster" element={<Poster />} />
+              <Route path="/resume" element={<Resume />} />
+              <Route path="/magazine" element={<Magazine />} />
+              <Route path="/scaffold" element={<Scaffold />} />
+              <Route path="/motion" element={<Motion />} />
+            </Routes>
+          )}
         </main>
-        <Footer />
+        {!showIntro && <Footer />}
       </div>
     </BrowserRouter>
   );
