@@ -1,3 +1,4 @@
+import { useRef, useState } from 'react';
 import style from '../styles/LandingProject.module.css';
 import image1 from '../assets/poster_image1.jpg';
 import image2 from '../assets/magazine_mockup4.jpg';
@@ -11,6 +12,123 @@ import { Link } from 'react-router-dom';
 import Buttons from './Buttons.jsx';
 import Label from './Label.jsx';
 import { preloadImage } from '../utils/preloadImage.js';
+import { animate } from 'animejs';
+import * as svg from 'animejs/svg';
+
+// 8-point star (current) and alternate 8-point star (different inner radius) for morphTo
+const STAR_PATH_1 =
+  'M30.415 16.1357L30.5645 16.4355L30.8643 16.585L44.7549 23.5L30.8643 30.415L30.5645 30.5645L30.415 30.8643L23.5 44.7549L16.585 30.8643L16.4355 30.5645L16.1357 30.415L2.24414 23.5L16.1357 16.585L16.4355 16.4355L16.585 16.1357L23.5 2.24414L30.415 16.1357Z';
+const STAR_PATH_2 =
+  'M23.5 1L31.5 15.5L46 23.5L31.5 31.5L23.5 46L15.5 31.5L1 23.5L15.5 15.5Z';
+
+function StarWithMorph({ className, fill, label }) {
+  const pathMainRef = useRef(null);
+  const pathOriginalRef = useRef(null);
+  const pathAltRef = useRef(null);
+  const [morphToAlt, setMorphToAlt] = useState(true);
+
+  const handleClick = () => {
+    if (!pathMainRef.current || (!pathOriginalRef.current && !pathAltRef.current)) return;
+    const target = morphToAlt ? pathAltRef.current : pathOriginalRef.current;
+    if (!target) return;
+    animate(pathMainRef.current, {
+      d: svg.morphTo(target, 0.33),
+      ease: 'inOutCirc',
+      duration: 500,
+      onComplete: () => setMorphToAlt((prev) => !prev),
+    });
+  };
+
+  return (
+    <div
+      className={className}
+      onClick={handleClick}
+      onKeyDown={(e) => e.key === 'Enter' && handleClick()}
+      role="button"
+      tabIndex={0}
+      aria-label={label}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 47 47"
+        fill="none"
+        aria-hidden
+      >
+        <path
+          ref={pathMainRef}
+          d={STAR_PATH_1}
+          fill={fill}
+          stroke="black"
+          strokeWidth="2"
+        />
+        <path
+          ref={pathOriginalRef}
+          d={STAR_PATH_1}
+          fill={fill}
+          stroke="black"
+          strokeWidth="2"
+          className={style.morphTarget}
+          aria-hidden
+        />
+        <path
+          ref={pathAltRef}
+          d={STAR_PATH_2}
+          fill={fill}
+          stroke="black"
+          strokeWidth="2"
+          className={style.morphTarget}
+          aria-hidden
+        />
+      </svg>
+    </div>
+  );
+}
+
+function BlueStarSpin({ className }) {
+  const svgRef = useRef(null);
+  const animRef = useRef(null);
+
+  const spin = () => {
+    const el = svgRef.current;
+    if (!el) return;
+
+    if (animRef.current?.cancel) {
+      animRef.current.cancel();
+    }
+
+    animRef.current = animate(el, {
+      rotate: [0, 900], // 2.5 turns
+      ease: 'outExpo', // fast start, slow finish
+      duration: 1600,
+    });
+  };
+
+  return (
+    <div
+      className={className}
+      onClick={spin}
+      onKeyDown={(e) => e.key === 'Enter' && spin()}
+      role="button"
+      tabIndex={0}
+      aria-label="Spin blue star"
+    >
+      <svg
+        ref={svgRef}
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 67 67"
+        fill="none"
+        aria-hidden
+      >
+        <path
+          d="M41.958 11.8516L42.2969 12.2627L42.8271 12.2109L56.0742 10.9248L54.7891 24.1729L54.7373 24.7031L55.1484 25.042L65.4248 33.5L55.1484 41.958L54.7373 42.2969L54.7891 42.8271L56.0742 56.0742L42.8271 54.7891L42.2969 54.7373L41.958 55.1484L33.5 65.4248L25.042 55.1484L24.7031 54.7373L24.1729 54.7891L10.9248 56.0742L12.2109 42.8271L12.2627 42.2969L11.8516 41.958L1.57422 33.5L11.8516 25.042L12.2627 24.7031L12.2109 24.1729L10.9248 10.9248L24.1729 12.2109L24.7031 12.2627L25.042 11.8516L33.5 1.57422L41.958 11.8516Z"
+          fill="#058CD7"
+          stroke="black"
+          strokeWidth="2"
+        />
+      </svg>
+    </div>
+  );
+}
 
 const CARDS = [
   {
@@ -97,70 +215,30 @@ export default function LandingProject() {
             )}
 
             {card.id === 'packaging' && (
-              <div className={style.shapeYellowStar}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 47 47"
-                  fill="none"
-                >
-                  <path
-                    d="M30.415 16.1357L30.5645 16.4355L30.8643 16.585L44.7549 23.5L30.8643 30.415L30.5645 30.5645L30.415 30.8643L23.5 44.7549L16.585 30.8643L16.4355 30.5645L16.1357 30.415L2.24414 23.5L16.1357 16.585L16.4355 16.4355L16.585 16.1357L23.5 2.24414L30.415 16.1357Z"
-                    fill="#FFC567"
-                    stroke="black"
-                    stroke-width="2"
-                  />
-                </svg>
-              </div>
+              <StarWithMorph
+                className={style.shapeYellowStar}
+                fill="#FFC567"
+                label="Morph yellow star"
+              />
             )}
 
             {card.id === 'graphic' && (
               <>
-                <div className={style.shapeGreenStar}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 47 47"
-                    fill="none"
-                  >
-                    <path
-                      d="M30.415 16.1357L30.5645 16.4355L30.8643 16.585L44.7549 23.5L30.8643 30.415L30.5645 30.5645L30.415 30.8643L23.5 44.7549L16.585 30.8643L16.4355 30.5645L16.1357 30.415L2.24414 23.5L16.1357 16.585L16.4355 16.4355L16.585 16.1357L23.5 2.24414L30.415 16.1357Z"
-                      fill="#00995E"
-                      stroke="black"
-                      stroke-width="2"
-                    />
-                  </svg>
-                </div>
-                <div className={style.shapePinkStar}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 47 47"
-                    fill="none"
-                  >
-                    <path
-                      d="M30.415 16.1357L30.5645 16.4355L30.8643 16.585L44.7549 23.5L30.8643 30.415L30.5645 30.5645L30.415 30.8643L23.5 44.7549L16.585 30.8643L16.4355 30.5645L16.1357 30.415L2.24414 23.5L16.1357 16.585L16.4355 16.4355L16.585 16.1357L23.5 2.24414L30.415 16.1357Z"
-                      fill="#FB7DA8"
-                      stroke="black"
-                      stroke-width="2"
-                    />
-                  </svg>
-                </div>
+                <StarWithMorph
+                  className={style.shapeGreenStar}
+                  fill="#00995E"
+                  label="Morph green star"
+                />
+                <StarWithMorph
+                  className={style.shapePinkStar}
+                  fill="#FB7DA8"
+                  label="Morph pink star"
+                />
               </>
             )}
 
             {card.id === 'editorial' && (
-              <div className={style.shapeBlueStar}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 67 67"
-                  fill="none"
-                >
-                  <path
-                    d="M41.958 11.8516L42.2969 12.2627L42.8271 12.2109L56.0742 10.9248L54.7891 24.1729L54.7373 24.7031L55.1484 25.042L65.4248 33.5L55.1484 41.958L54.7373 42.2969L54.7891 42.8271L56.0742 56.0742L42.8271 54.7891L42.2969 54.7373L41.958 55.1484L33.5 65.4248L25.042 55.1484L24.7031 54.7373L24.1729 54.7891L10.9248 56.0742L12.2109 42.8271L12.2627 42.2969L11.8516 41.958L1.57422 33.5L11.8516 25.042L12.2627 24.7031L12.2109 24.1729L10.9248 10.9248L24.1729 12.2109L24.7031 12.2627L25.042 11.8516L33.5 1.57422L41.958 11.8516Z"
-                    fill="#058CD7"
-                    stroke="black"
-                    stroke-width="2"
-                  />
-                </svg>
-              </div>
+              <BlueStarSpin className={style.shapeBlueStar} />
             )}
 
             <Link

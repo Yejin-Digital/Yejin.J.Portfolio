@@ -140,14 +140,41 @@
   height: auto;
 }
 
-/* 작은 도형들 - card 기준으로 배치 */
-.shapePurpleHex,
-.shapeYellowStar,
-.shapeGreenStar,
-.shapePinkStar,
+/* shapes' positions */
+.shapePurpleHex {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* clickable spin */
 .shapeBlueStar {
   position: absolute;
   z-index: 5;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.shapeBlueStar svg {
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+/* morphTo clickable */
+.shapeYellowStar,
+.shapeGreenStar,
+.shapePinkStar {
+  position: absolute;
+  z-index: 5;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* morphTo target path hidden (only in DOM, visually hidden) */
+.morphTarget {
+  visibility: hidden;
+  position: absolute;
+  opacity: 0;
   pointer-events: none;
 }
 

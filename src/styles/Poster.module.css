@@ -16,6 +16,11 @@
   font-style: normal;
   font-weight: 400;
   line-height: 100%; /* 80px */
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateX(-18vw);
+  animation: titleSlideDissolve 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation-delay: 0.1s;
 }
 
 .titleSection {
@@ -37,6 +42,29 @@
 .subTitle {
   display: flex;
   flex-direction: column;
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateX(18vw);
+  animation: titleSlideDissolve 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation-delay: 0.2s;
+}
+
+@keyframes titleSlideDissolve {
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .titleSection h1,
+  .subTitle {
+    animation: none !important;
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
 }
 
 .imageSection {
