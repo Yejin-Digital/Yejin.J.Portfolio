@@ -13,7 +13,7 @@ import Magazine from './pages/Magazine.jsx';
 import Scaffold from './pages/Scaffold.jsx';
 import Motion from './pages/Motion.jsx';
 import LogoAnimation from './components/LogoAnimation.jsx';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 function Home() {
   return (
     <div className="home-page">
@@ -54,6 +54,15 @@ function App() {
     }
   });
 
+  const handleIntroComplete = useCallback(() => {
+    try {
+      sessionStorage.setItem('fp_intro_played', '1');
+    } catch {
+      // ignore
+    }
+    setShowIntro(false);
+  }, []);
+
   useEffect(() => {
     if (!showIntro) return;
     const prev = document.documentElement.style.overflow;
@@ -70,16 +79,7 @@ function App() {
         {!showIntro && <NavigationBar />}
         <main className="app-main">
           {showIntro ? (
-            <LogoAnimation
-              onComplete={() => {
-                try {
-                  sessionStorage.setItem('fp_intro_played', '1');
-                } catch {
-                  // ignore
-                }
-                window.setTimeout(() => setShowIntro(false), 2000);
-              }}
-            />
+            <LogoAnimation onComplete={handleIntroComplete} />
           ) : (
             <Routes>
               <Route path="/" element={<Home />} />
