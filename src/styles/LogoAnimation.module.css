@@ -63,32 +63,33 @@
   animation-delay: 2.8s;
 }
 
-.landingText p {
+/* Base for each line; position variants stay on separate modifiers */
+.landing-text__paragraph {
   margin: 0;
   position: absolute;
   white-space: nowrap;
 }
 
-.textOne {
+.landingText_UxUi {
   /* top-left of the logo box */
   left: -60%;
   top: 12%;
 }
 
-.textTwo {
+.landingText_MotionGraphic {
   /* top-right */
   right: -18%;
   top: -35%;
   text-align: right;
 }
 
-.textThree {
+.landingText_ProductDesign {
   /* bottom-left */
   left: -8%;
   bottom: 5%;
 }
 
-.textFour {
+.landingText_GraphicDesign {
   /* bottom-right */
   right: -70%;
   bottom: 14%;

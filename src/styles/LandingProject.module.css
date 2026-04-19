@@ -140,34 +140,24 @@
   height: auto;
 }
 
-/* shapes' positions */
-.shapePurpleHex {
-  position: absolute;
-  z-index: 5;
-  pointer-events: none;
-}
-
-/* clickable spin */
-.shapeBlueStar {
+/* common animated element */
+.animatedElement {
   position: absolute;
   z-index: 5;
   pointer-events: auto;
   cursor: pointer;
 }
 
+.animatedElement svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* blue star spin */
 .shapeBlueStar svg {
   transform-origin: center;
   transform-box: fill-box;
-}
-
-/* morphTo clickable */
-.shapeYellowStar,
-.shapeGreenStar,
-.shapePinkStar {
-  position: absolute;
-  z-index: 5;
-  pointer-events: auto;
-  cursor: pointer;
 }
 
 /* morphTo target path hidden (only in DOM, visually hidden) */
@@ -176,16 +166,6 @@
   position: absolute;
   opacity: 0;
   pointer-events: none;
-}
-
-.shapePurpleHex svg,
-.shapeYellowStar svg,
-.shapeGreenStar svg,
-.shapePinkStar svg,
-.shapeBlueStar svg {
-  width: 100%;
-  height: 100%;
-  display: block;
 }
 
 /* UI/UX Design - 보라색 육각형 (라벨 위쪽 오른쪽) */

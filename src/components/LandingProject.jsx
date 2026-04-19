@@ -196,7 +196,9 @@ export default function LandingProject() {
 
             {/* decoration shapes */}
             {card.id === 'uiux' && (
-              <div className={style.shapePurpleHex}>
+              <div
+                className={`${style.animatedElement} ${style.shapePurpleHex}`}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="30"
@@ -216,7 +218,7 @@ export default function LandingProject() {
 
             {card.id === 'packaging' && (
               <StarWithMorph
-                className={style.shapeYellowStar}
+                className={`${style.animatedElement} ${style.shapeYellowStar}`}
                 fill="#FFC567"
                 label="Morph yellow star"
               />
@@ -225,12 +227,12 @@ export default function LandingProject() {
             {card.id === 'graphic' && (
               <>
                 <StarWithMorph
-                  className={style.shapeGreenStar}
+                  className={`${style.animatedElement} ${style.shapeGreenStar}`}
                   fill="#00995E"
                   label="Morph green star"
                 />
                 <StarWithMorph
-                  className={style.shapePinkStar}
+                  className={`${style.animatedElement} ${style.shapePinkStar}`}
                   fill="#FB7DA8"
                   label="Morph pink star"
                 />
@@ -238,7 +240,9 @@ export default function LandingProject() {
             )}
 
             {card.id === 'editorial' && (
-              <BlueStarSpin className={style.shapeBlueStar} />
+              <BlueStarSpin
+                className={`${style.animatedElement} ${style.shapeBlueStar}`}
+              />
             )}
 
             <Link
